@@ -8,61 +8,37 @@
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true });
     </script>
-    <style>
-        /* 페이지 전체 정렬 및 크기 설정 */
-        body {
-            display: flex;
-            justify-content: center;   /* 가로 중앙 정렬 */
-            align-items: center;       /* 세로 중앙 정렬 */
-            height: 100vh;             /* 전체 높이 100% */
-            width: 100vw;              /* 전체 너비 100% */
-            margin: 0;
-            background-color: #f9f9f9; /* 배경색 */
-            flex-direction: column;    /* 세로 방향 정렬 */
-        }
-
-        /* Mermaid 다이어그램 전체 크기 조정 */
-        .mermaid {
-            width: 100%;              /* 가로 전체 크기 */
-            height: 100%;             /* 세로 전체 크기 */
-            max-width: 100%;          /* 최대 너비 100% */
-            background-color: white;  /* 배경색 */
-            padding: 20px;
-            border-radius: 8px;       /* 모서리 둥글게 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-            overflow: hidden;         /* 내용이 넘칠 경우 숨김 */
-        }
-    </style>
 </head>
-<body>
-    <div class="mermaid">
-      flowchart TD
-          A[AX Platform] --> B1(Hybrid xLM Concept/Core/Engine)
-          A --> B2(AI NCLC Concept/Core/Engine)
-          A --> B3(AI Lake Concept/Core/Engine)
-          A --> B4(Digital Worker Concept/Core/Engine)
-          A --> B5(Digital DNA Concept/Core/Engine)
-          B1 --> D{Digital AI Workplace}
-          B2 --> D
-          B3 --> D
-          B4 --> D
-          B5 --> D
-          D -->|Python| E[AI Analysis Service]
-          D --> F[AI Learning Service]
-          D -->|Hybrid xLM| G[AI Optimizing]    
-          D -->|LangChain| H[AI Orchestration]
-          E -->|Numpy| E1[Low-level Template]
-          E -->|PyTorch| E2[Middle-level Template]
-          F -->|Transformer| F1[Learning Sytem 1]
-          F -->|Tensorflow| F2[Learning Sytem 2]
-          F -->|Fine Tuning| F3[Learning Sytem 3]
-          G --> G1[PLM]
-          G --> G2[SLM]
-          G --> G3[LLM]
-          G --> G4[DLM]        
-          H --> G2
-          H --> G3
-          H --> G4
+<body style="margin: 0; padding: 0; width: 100vw; height: 100vh; display: table; text-align: center;">
+    <div style="display: table-cell; vertical-align: middle;">
+        <div class="mermaid" style="width: 90vw; height: auto; max-width: 100%; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+          flowchart TD
+              A[AX Platform] --> B1(Hybrid xLM Concept/Core/Engine)
+              A --> B2(AI NCLC Concept/Core/Engine)
+              A --> B3(AI Lake Concept/Core/Engine)
+              A --> B4(Digital Worker Concept/Core/Engine)
+              A --> B5(Digital DNA Concept/Core/Engine)
+              B1 --> D{Digital AI Workplace}
+              B2 --> D
+              B3 --> D
+              B4 --> D
+              B5 --> D
+              D -->|Python| E[AI Analysis Service]
+              D --> F[AI Learning Service]
+              D -->|Hybrid xLM| G[AI Optimizing]    
+              D -->|LangChain| H[AI Orchestration]
+              E -->|Numpy| E1[Low-level Template]
+              E -->|PyTorch| E2[Middle-level Template]
+              F -->|Transformer| F1[Learning Sytem 1]
+              F -->|Tensorflow| F2[Learning Sytem 2]
+              F -->|Fine Tuning| F3[Learning Sytem 3]
+              G --> G1[PLM]
+              G --> G2[SLM]
+              G --> G3[LLM]
+              G --> G4[DLM]        
+              H --> G2
+              H --> G3
+              H --> G4
      </div>
 </body>
 </html>
