@@ -64,46 +64,41 @@
               B1 --> D[Digital AI Workplace]
               B2 --> D
               B3 --> D
-              D -->|Python| E[AI Analysis Service]
-              D -->|Hugging Face| F[AI Learning Service]
-              D -->|Hybrid xLM| G[AI Optimizing]    
-              D -->|LangChain| H[AI Orchestration]
-              E -->|Numpy| E1[Low-level Template]
-              E -->|PyTorch| E2[Middle-level Template]
-              F -->|Transformer| F1[Learning Sytem 1]
-              F -->|Tensorflow| F2[Learning Sytem 2]
-              F -->|Fine Tuning| F3[Learning Sytem 3]
-              F1 --> G1
-              F2 --> G2
-              F3 --> G2
-              G --> G1[Primitive Language Model]
-              G -->|File Tuning| G2[Small Language Model]
-              G -->|ChatGPT| G3[Large Language Model]
-              G --> G4[Diffusion Language Model]        
-              H --> G2
-              H --> G3
-              H --> G4
-              E1 --> I
-              E2 --> I
-              F1 --> I
-              F2 --> I
-              F3 --> I
-              G1 --> I
+              D -->|Python| D1[AI Analysis Service]
+              D -->|Hugging Face| D2[AI Learning Service]
+              D -->|Hybrid xLM| D3[AI Optimizing]    
+              D -->|LangChain| D4[I Orchestration]
+              D1 -->|Numpy| D11[Low-level Template]
+              D1 -->|PyTorch| D12[Middle-level Template]
+              D2 -->|Transformer| D21[Learning Sytem 1]
+              D2 -->|Tensorflow| D22[Learning Sytem 2]
+              D2 -->|Fine Tuning| D23[Learning Sytem 3]
+              D3 --> G1[Primitive Language Model]
+              D3 -->|File Tuning| G2[Small Language Model]
+              D3 -->|ChatGPT| G3[Large Language Model]
+              D3 --> G4[Diffusion Language Model]
+              D4 --> G1
+              D4 --> G2
+              D4 --> G3
+              D4 --> G4            
+              D21 --> D3
+              D22 --> D3
+              D21 --> I
+              D22 --> I
+              D23 --> I
+              G1 --> I[AI Repository]
               G2 --> I
-              I[AI Repository]
               I --> I1[Pre-processing]
               I --> I2[Post-processing]
 
               click A "https://github.com/hycse89/PSSLAB_AX_Strategy.git" _blank
 
               %% 🎨 노드별 색상 지정 %%
-              style A fill:#44ff44,stroke:#333,stroke-width:2px
+              style A fill:#22ff22,stroke:#333,stroke-width:2px
               style B1 fill:#99ff99,stroke:#333
               style B2 fill:#99ff99,stroke:#333
               style B3 fill:#99ff99,stroke:#333
-              style B4 fill:#ffcc99,stroke:#333
-              style B5 fill:#cc99ff,stroke:#333
-              style D fill:#ffff99,stroke:#333
+              style D fill:#66ccff,stroke:#333
               style E fill:#ff9966,stroke:#333
               style F fill:#66ccff,stroke:#333
               style G fill:#ff6666,stroke:#333
@@ -112,7 +107,7 @@
               style G2 fill:#ccccff,stroke:#333
               style G3 fill:#ffccff,stroke:#333
               style G4 fill:#ccffcc,stroke:#333
-              style X fill:#44ff44,stroke:#333,stroke-width:2px
+              style X fill:#22ff22,stroke:#333,stroke-width:2px
               style X1 fill:#99ff99,stroke:#333
               style X2 fill:#99ff99,stroke:#333
               style X3 fill:#99ff99,stroke:#333
