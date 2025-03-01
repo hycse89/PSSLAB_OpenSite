@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Gantt Chart</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <div class="mermaid">
+        sequenceDiagram
+            participant User
+            participant AX Platform
+            participant Digital AI Workplace
+            participant AI Analysis
+            participant AI Learning
+            participant AI Optimizing
+            participant AI Orchestration
+        
+            User->>AX Platform: 요청 (AI 분석 & 학습)
+            AX Platform->>Digital AI Workplace: 작업 요청 전달
+            Digital AI Workplace->>AI Analysis: 데이터 분석 실행
+            AI Analysis-->>Digital AI Workplace: 분석 결과 반환
+            Digital AI Workplace->>AI Learning: AI 모델 학습 요청
+            AI Learning-->>Digital AI Workplace: 학습 완료
+            Digital AI Workplace->>AI Optimizing: 모델 최적화
+            AI Optimizing-->>Digital AI Workplace: 최적화 완료
+            Digital AI Workplace->>AI Orchestration: 모델 배포 요청
+            AI Orchestration-->>User: 결과 반환
+    </div>
+</body>
+</html>
