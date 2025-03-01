@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX Dashboard</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        /* 페이지 전체 스타일 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 버튼 스타일 */
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .nav-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mermaid 다이어그램 스타일 */
+        .mermaid {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AX Dashboard</h1>
+
+    <!-- Mermaid 다이어그램 -->
+    <div class="mermaid">
+        graph TD;
+        A[AX Dashboard] -->|Flowchart| B[AX Flow]
+        A -->|Class Diagram| C[AX Class]
+        A -->|Gantt Chart| D[AX Gantt]
+        A -->|Sequence Diagram| E[AX Sequence]
+        B -->|Open| F[ax_flow.html]
+        C -->|Open| G[ax_class.html]
+        D -->|Open| H[ax_gantt.html]
+        E -->|Open| I[ax_seq.html]
+    </div>
+
+    <!-- 네비게이션 버튼 -->
+    <div class="button-container">
+        <a href="ax_flow.html" class="nav-button">AX Flow</a>
+        <a href="ax_class.html" class="nav-button">AX Class</a>
+        <a href="ax_gantt.html" class="nav-button">AX Gantt</a>
+        <a href="ax_seq.html" class="nav-button">AX Sequence</a>
+    </div>
+
+</body>
+</html>
