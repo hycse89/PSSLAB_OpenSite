@@ -3,49 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mermaid Center Align</title>
+    <title>Full-Screen Mermaid</title>
     <script type="module">
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true });
     </script>
     <style>
-        /* 전체 페이지 중앙 정렬 */
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        /* 전체 페이지 크기 설정 */
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             background-color: #f4f4f4;
-            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
-        /* Mermaid 다이어그램 컨테이너 */
+        /* Mermaid 다이어그램 전체 크기 설정 */
         .mermaid-container {
+            width: 100vw;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 90vw;
-            max-width: 800px;
             background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Mermaid 내부 SVG 중앙 정렬 */
+        /* Mermaid 내부 다이어그램 조정 */
         .mermaid {
-            text-align: center;  /* 텍스트 정렬 */
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 100%;          /* 전체 박스를 차지하도록 설정 */
         }
 
-        /* Mermaid 다이어그램 내부 요소 정렬 */
+        /* Mermaid 내부 SVG 크기 조정 */
         .mermaid svg {
-            display: block;
-            margin: auto;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -63,4 +62,5 @@
 
 </body>
 </html>
+
 
