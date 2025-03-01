@@ -72,8 +72,9 @@
               F -->|Transformer| F1[Learning Sytem 1]
               F -->|Tensorflow| F2[Learning Sytem 2]
               F -->|Fine Tuning| F3[Learning Sytem 3]
+              F3 --> G2
               G --> G1[Primitive LM]
-              G -->|BERT| G2[Small LM]
+              G -->|File Tuning| G2[Small LM]
               G -->|ChatGPT| G3[Large LM]
               G --> G4[Diffusion LM]        
               H --> G2
