@@ -81,8 +81,8 @@
             
               D1 --> |Numpy| D11[Low-level Template]
               D1 --> |PyTorch| D12[Middle-level Template]
-              D2 --> |Transformer| D21[Language Sytem 1]
-              D2 --> |Fine Tuning| D22[Language Sytem 2]
+              D2 --> |Transformer| D21[Middle-level Template]
+              D2 --> |Fine Tuning| D22[Private SLM]
               D3 --> D31[Primitive Language Model]
               D3 --> |Fine Tuning| D32[Public SLM]
               D3 --> |ChatGPT| D33[Large Language Model]
@@ -90,16 +90,14 @@
               D5 --> |Digital Worker/Digital DNA| D51[AI Agent]
               D5 --> |Digital Worker/Digital LCT| D52[AI Avatar]
               D5 --> |Digital Worker/Digital LCT| D53[AI Persona]
-              D21 --> D211[Middle-level Template]
-              D22 --> D221[Private SLM]
               D4 --> D31
               D4 --> D32
               D4 --> D33
               D4 --> D34           
               D11 --> I
               D12 --> I
-              D211 --> I
-              D221 --> I
+              D21 --> I
+              D22 --> I
             
               D31 --> I[AI Repository with AI Lake]
               D32 --> I
