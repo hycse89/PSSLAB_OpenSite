@@ -82,20 +82,20 @@
               D1 --> |PyTorch| D12[Middle-level Template]
               D2 --> |Transformer| D21[Middle-level Template]
               D2 --> |Fine Tuning| D22[Private Small Language Model]
-              D3 --> D31[Primitive Language Model]
-              D3 --> |Fine Tuning| D32[Public Small Language Model]
-              D3 --> |ChatGPT| D33[Large Language Model]
-              D3 --> D34[Diffusion Language Model]
-              D4 --> |Digital Worker/Digital DNA| D51[AI Agent]
-              D4 --> |Digital Worker/Digital LCT| D52[AI Avatar]
-              D4 --> |Digital Worker/Digital LCT| D53[AI Persona]
+              D2 --> D23[Primitive Language Model]            
+              D3 --> D31[Public Small Language Model]
+              D3 --> |ChatGPT| D32[Large Language Model]
+              D3 --> D33[Diffusion Language Model]
+              D4 --> |Digital Worker/Digital DNA| D41[AI Agent]
+              D4 --> |Digital Worker/Digital LCT| D42[AI Avatar]
+              D4 --> |Digital Worker/Digital LCT| D43[AI Persona]
               D11 --> I
               D12 --> I
               D21 --> I
               D22 --> I
-            
+              D23 --> I            
               D31 --> I[AI Repository with AI Lake]
-              D32 --> I
+
               I --> I1(AI Dam with AI Lake)
               I --> I2(Pre-processing)
               I --> I3(Mid-processing)
@@ -132,14 +132,14 @@
               style D11 fill:#ffffcc,stroke:#333            
               style D12 fill:#ffffcc,stroke:#333                        
               style D21 fill:#ffffcc,stroke:#333            
-              style D22 fill:#ffffcc,stroke:#333            
+              style D22 fill:#ffffcc,stroke:#333
+              style D23 fill:#ffffcc,stroke:#333
               style D31 fill:#ffffcc,stroke:#333 
               style D32 fill:#ffffcc,stroke:#333
               style D33 fill:#ffffcc,stroke:#333
-              style D34 fill:#ffffcc,stroke:#333
-              style D51 fill:#ffffcc,stroke:#333
-              style D52 fill:#ffffcc,stroke:#333
-              style D53 fill:#ffffcc,stroke:#333
+              style D41 fill:#ffffcc,stroke:#333
+              style D42 fill:#ffffcc,stroke:#333
+              style D43 fill:#ffffcc,stroke:#333
 
               style I fill:#ff6666,stroke:#333,stroke-width:4px            
               style I1 fill:#ffcccc,stroke:#333                        
