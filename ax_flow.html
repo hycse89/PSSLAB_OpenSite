@@ -58,12 +58,12 @@
               X4(Digital Philosophy) --> X
               X5(Digital Workplace) --> X 
               X[DX] --> A  
-              A[AX] --> B1(Hybrid xLM)
-              A --> B2(AI NCLC)
-              A --> B3(AI Lake)
-              B1 --> D[Digital AI Workplace]
-              B2 --> D
-              B3 --> D
+              A[AX] --> A1(Hybrid xLM)
+              A --> A2(AI NCLC)
+              A --> A3(AI Lake)
+              A1 --> D[Digital AI Workplace]
+              A2 --> D
+              A3 --> D
               D -->|Python| D1[AI Analysis Service]
               D -->|Hugging Face| D2[AI Learning Service]
               D -->|Hybrid xLM| D3[AI Optimizing]    
@@ -73,46 +73,61 @@
               D2 -->|Transformer| D21[Learning Sytem 1]
               D2 -->|Tensorflow| D22[Learning Sytem 2]
               D2 -->|Fine Tuning| D23[Learning Sytem 3]
-              D3 --> G1[Primitive Language Model]
-              D3 -->|File Tuning| G2[Small Language Model]
-              D3 -->|ChatGPT| G3[Large Language Model]
-              D3 --> G4[Diffusion Language Model]
-              D4 --> G1
-              D4 --> G2
-              D4 --> G3
-              D4 --> G4            
-              D21 --> D3
-              D22 --> D3
+              D3 --> D31[Primitive Language Model]
+              D3 -->|File Tuning| D32[Small Language Model]
+              D3 -->|ChatGPT| D33[Large Language Model]
+              D3 --> D34[Diffusion Language Model]
+              D4 --> D31
+              D4 --> D32
+              D4 --> D33
+              D4 --> D34           
+              D21 --> D31
+              D22 --> D31
               D21 --> I
               D22 --> I
               D23 --> I
-              G1 --> I[AI Repository]
-              G2 --> I
+              D31 --> I[AI Repository]
+              D32 --> I
               I --> I1[Pre-processing]
               I --> I2[Post-processing]
 
               click A "https://github.com/hycse89/PSSLAB_AX_Strategy.git" _blank
 
               %% 🎨 노드별 색상 지정 %%
-              style A fill:#22ff22,stroke:#333,stroke-width:2px
               style B1 fill:#99ff99,stroke:#333
               style B2 fill:#99ff99,stroke:#333
               style B3 fill:#99ff99,stroke:#333
-              style D fill:#66ccff,stroke:#333
-              style E fill:#ff9966,stroke:#333
-              style F fill:#66ccff,stroke:#333
-              style G fill:#ff6666,stroke:#333
-              style H fill:#66ff66,stroke:#333
-              style G1 fill:#ffcccc,stroke:#333
-              style G2 fill:#ccccff,stroke:#333
-              style G3 fill:#ffccff,stroke:#333
-              style G4 fill:#ccffcc,stroke:#333
-              style X fill:#22ff22,stroke:#333,stroke-width:2px
+
               style X1 fill:#99ff99,stroke:#333
               style X2 fill:#99ff99,stroke:#333
               style X3 fill:#99ff99,stroke:#333
               style X4 fill:#99ff99,stroke:#333
               style X5 fill:#99ff99,stroke:#333            
+              style X fill:#22ff22,stroke:#333,stroke-width:2px
+
+              style A fill:#66ccff,stroke:#333,stroke-width:2px
+              style A1 fill:#3399ff,stroke:#333
+              style A2 fill:#3399fF,stroke:#333
+              style A3 fill:#3399ff,stroke:#333
+            
+              style D fill:#66ccff,stroke:#333
+              style D1 fill:#4499ff,stroke:#333
+              style D2 fill:#4499fF,stroke:#333
+              style D3 fill:#4499ff,stroke:#333
+              style D4 fill:#4499ff,stroke:#333
+              style D11 fill:#2266ff,stroke:#333            
+              style D12 fill:#2266ff,stroke:#333                        
+              style D21 fill:#2266ff,stroke:#333            
+              style D22 fill:#2266ff,stroke:#333            
+              style D23 fill:#2266ff,stroke:#333
+              style D31 fill:#2266ff,stroke:#333 
+              style D32 fill:#2266ff,stroke:#333
+              style D33 fill:#2266ff,stroke:#333
+              style D34 fill:#2266ff,stroke:#333
+
+              style I fill:#ff6666,stroke:#333            
+              style I1 fill:#ffcccc,stroke:#333                        
+              style I2 fill:#ffcccc,stroke:#333                        
          </div>            
      </div>
 </body>
