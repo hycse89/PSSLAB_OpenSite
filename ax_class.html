@@ -12,44 +12,45 @@
 <body style="margin: 0; padding: 0; width: 100vw; height: 100vh; display: table; text-align: center;">
     <div style="display: table-cell; vertical-align: middle;">
         <div class="mermaid" style="width: 90vw; height: auto; max-width: 100%; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        classDiagram
-            class AX_Platform {
-                - Hybrid_xLM
-                - AI_NCLC
-                - AI_Lake
-                - Digital_Worker
-                - Digital_DNA
-            }
-            class Digital_AI_Workplace {
-                - AI_Analysis_Service
-                - AI_Learning_Service
-                - AI_Optimizing_Service
-                - AI_Orchestration_Service
-            }
-            class AI_Analysis_Service {
-                +Numpy()
-                +PyTorch()
-            }
-            class AI_Learning_Service {
-                +Transformer()
-                +TensorFlow()
-                +Fine_Tuning()
-            }
-            class AI_Optimizing_Service {
-                +PLM()
-                +SLM()
-                +LLM()
-                +DLM()
-            }
-            class AI_Orchestration_Service {
-                +LangChain()
-            }
-        
-            AX_Platform --> Digital_AI_Workplace
-            Digital_AI_Workplace --> AI_Analysis_Service
-            Digital_AI_Workplace --> AI_Learning_Service
-            Digital_AI_Workplace --> AI_Optimizing_Service
-            Digital_AI_Workplace --> AI_Orchestration_Service
+            classDiagram
+                class AX_Platform {
+                    - Hybrid_xLM
+                    - AI_NCLC
+                    - AI_Lake
+                    - Digital_Worker
+                    - Digital_DNA
+                }
+                class Digital_AI_Workplace {
+                    - AI_Analysis_Service
+                    - AI_Learning_Service
+                    - AI_Optimizing_Service
+                    - AI_Orchestration_Service
+                }
+                class AI_Analysis_Service {
+                    +Numpy()
+                    +PyTorch()
+                }
+                class AI_Learning_Service {
+                    +Transformer()
+                    +TensorFlow()
+                    +Fine_Tuning()
+                }
+                class AI_Optimizing_Service {
+                    +PLM()
+                    +SLM()
+                    +LLM()
+                    +DLM()
+                }
+                class AI_Orchestration_Service {
+                    +LangChain()
+                }
+            
+                AX_Platform --> Digital_AI_Workplace
+                Digital_AI_Workplace --> AI_Analysis_Service
+                Digital_AI_Workplace --> AI_Learning_Service
+                Digital_AI_Workplace --> AI_Optimizing_Service
+                Digital_AI_Workplace --> AI_Orchestration_Service
+        </div>
     </div>
 </body>
 </html>
