@@ -54,15 +54,13 @@
           flowchart LR
               X1(Digital Worker) --> X
               X2(Digital DNA) --> X              
-              X[DX Platform] --> A  
-              A[AX Platform] --> B1(Hybrid xLM)
+              X[DX] --> A  
+              A[AX] --> B1(Hybrid xLM)
               A --> B2(AI NCLC)
               A --> B3(AI Lake)
               B1 --> D{Digital AI Workplace}
               B2 --> D
               B3 --> D
-              B4 --> D
-              B5 --> D
               D -->|Python| E[AI Analysis Service]
               D -->|Hugging Face| F[AI Learning Service]
               D -->|Hybrid xLM| G[AI Optimizing]    
