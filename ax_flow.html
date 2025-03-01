@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Gantt Chart</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <div class="mermaid">
+      flowchart TD
+          A[AX Platform] --> B1(Hybrid xLM Concept/Core/Engine)
+          A --> B2(AI NCLC Concept/Core/Engine)
+          A --> B3(AI Lake Concept/Core/Engine)
+          A --> B4(Digital Worker Concept/Core/Engine)
+          A --> B5(Digital DNA Concept/Core/Engine)
+          B1 --> D{Digital AI Workplace}
+          B2 --> D
+          B3 --> D
+          B4 --> D
+          B5 --> D
+          D -->|Python| E[AI Analysis Service]
+          D --> F[AI Learning Service]
+          D -->|Hybrid xLM| G[AI Optimizing]    
+          D -->|LangChain| H[AI Orchestration]
+          E -->|Numpy| E1[Low-level Template]
+          E -->|PyTorch| E2[Middle-level Template]
+          F -->|Transformer| F1[Learning Sytem 1]
+          F -->|Tensorflow| F2[Learning Sytem 2]
+          F -->|Fine Tuning| F3[Learning Sytem 3]
+          G --> G1[PLM]
+          G --> G2[SLM]
+          G --> G3[LLM]
+          G --> G4[DLM]        
+          H --> G2
+          H --> G3
+          H --> G4
+     </div>
+</body>
+</html>
+
+    
