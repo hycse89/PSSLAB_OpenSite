@@ -66,14 +66,13 @@
               A1 --> D[Digital AI Platform]
               A2 --> D
               A3 --> D
-              A4 --> D
+              A4 --> D            
               D -->|Python| D1[AI Analysis Service]            
               D -->|Hugging Face| D2[AI Language Service]
               D -->|Hybrid xLM| D3[AI Optimizing Service]    
               D -->|LangChain| D4[AI Orchestration Service]
-              D -->|LangChain| D5[AI Deep Learning Service]
-              D -->|LangChain| D6[AI Tool Service]
-            
+              D -->|Tensorflow| D5[AI Deep Learning Service]
+              D -->|Huggning Face| D6[AI Tool Service]            
               D1 -->|Numpy| D11[Low-level Template]
               D1 -->|PyTorch| D12[Middle-level Template]
               D2 -->|Transformer| D21[Learning Sytem 1]
@@ -95,8 +94,9 @@
               D21 --> I
               D22 --> I
               D23 --> I
+            
               D31 --> I[AI Repository]
-              D32 --> I
+              D32 --> I            
               I --> I1(Pre-processing)
               I --> I2(Mid-processing)
               I --> I3(Post-processing)
