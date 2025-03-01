@@ -8,10 +8,43 @@
         import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
         mermaid.initialize({ startOnLoad: true });
     </script>
+    <style>
+        /* 전체 화면을 활용한 중앙 정렬 */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;  /* 수평 중앙 정렬 */
+            align-items: center;      /* 수직 중앙 정렬 */
+            height: 100vh;            /* 전체 높이 */
+            width: 100vw;             /* 전체 너비 */
+            background-color: #f9f9f9;
+        }
+
+        /* Mermaid 다이어그램 컨테이너 */
+        .mermaid-container {
+            width: 100%;
+            max-width: 100%;
+            display: flex;
+            justify-content: center;  /* 내부 요소 수평 중앙 정렬 */
+            align-items: center;
+        }
+
+        .mermaid {
+            width: 90vw;              /* 화면 가로 90% 사용 */
+            height: auto;
+            max-width: 100%;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
 </head>
-<body style="margin: 0; padding: 0; width: 100vw; height: 100vh; display: table; text-align: center;">
-    <div style="display: table-cell; vertical-align: middle;">
-        <div class="mermaid" style="width: 90vw; height: auto; max-width: 100%; background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+<body>
+
+    <div class="mermaid-container">
+        <div class="mermaid">
             sequenceDiagram
                 participant User
                 participant AX Platform
