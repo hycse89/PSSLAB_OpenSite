@@ -72,8 +72,8 @@
               F -->|Tensorflow| F2[Learning Sytem 2]
               F -->|Fine Tuning| F3[Learning Sytem 3]
               G --> G1[PLM]
-              G --> G2[SLM]
-              G --> G3[LLM]
+              G -->|BERT| G2[SLM]
+              G -->|Fine Tuning| G3[LLM]
               G --> G4[DLM]        
               H --> G2
               H --> G3
