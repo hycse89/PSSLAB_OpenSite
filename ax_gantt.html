@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mermaid Gantt Chart</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <div class="mermaid">
+        gantt
+            title AX Strategy Timeline
+            dateFormat  YYYY-MM-DD
+            section Core Development
+            Hybrid xLM         :done,    task1, 2024-12-01, 2025-03-01
+            AI NCLC            :active,  task2, 2025-01-01, 2025-04-01
+            AI Lake            :active,  task3, 2025-02-01, 2025-05-01
+            Digital Worker     :active,  task4, 2025-03-01, 2025-06-01
+            Digital DNA        :planned, task5, 2025-04-01, 2025-07-01
+
+            section AI Services
+            AI Analysis Service    :done,   task6, 2025-01-01, 2025-03-15
+            AI Learning Service    :active, task7, 2025-02-01, 2025-04-15
+            AI Optimizing Service  :planned, task8, 2025-03-01, 2025-05-01
+            AI Orchestration       :planned, task9, 2025-04-01, 2025-06-15
+    </div>
+</body>
+</html>
+
