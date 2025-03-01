@@ -67,28 +67,28 @@
               A2 --> D
               A3 --> D
               A4 --> D            
-              D -->|Python| D1[AI Analysis Service]            
-              D -->|Hugging Face| D2[AI Language Service]
-              D -->|Hybrid xLM| D3[AI Optimizing Service]    
-              D -->|LangChain| D4[AI Orchestration Service]
-              D -->|Digital Worker| D5[AI Advanced Service]
+              D --> |Python| D1[AI Analysis Service]            
+              D --> |Hugging Face| D2[AI Language Service]
+              D --> |Hybrid xLM| D3[AI Optimizing Service]    
+              D --> |LangChain| D4[AI Orchestration Service]
+              D --> D5[AI Advanced Service]
             
-              D -->|Huggning Face| D6[AI Vision&Generation Service-TBD]
-              D -->|Huggning Face| D7[AI Generation Service-TBD]
-              D -->|Huggning Face| D8[AI Automation Service-TBD]  
+              D --> |Huggning Face| D6[AI Vision&Generation Service-TBD]
+              D --> |Huggning Face| D7[AI Generation Service-TBD]
+              D --> |Huggning Face| D8[AI Automation Service-TBD]  
             
-              D1 -->|Numpy| D11[Low-level Template]
-              D1 -->|PyTorch| D12[Middle-level Template]
-              D2 -->|Transformer| D21[Language Sytem 1]
-              D2 -->|Tensorflow| D22[Language Sytem 2]
-              D2 -->|Fine Tuning| D23[Language Sytem 3]
+              D1 --> |Numpy| D11[Low-level Template]
+              D1 --> |PyTorch| D12[Middle-level Template]
+              D2 --> |Transformer| D21[Language Sytem 1]
+              D2 --> |Tensorflow| D22[Language Sytem 2]
+              D2 --> |Fine Tuning| D23[Language Sytem 3]
               D3 --> D31[Primitive Language Model]
-              D3 -->|Fine Tuning| D32[Small Language Model]
-              D3 -->|ChatGPT| D33[Large Language Model]
+              D3 --> |Fine Tuning| D32[Small Language Model]
+              D3 --> |ChatGPT| D33[Large Language Model]
               D3 --> D34[Diffusion Language Model]
-              D5 --> D51[AI Agent]
-              D5 --> D52[AI Avatar]
-              D5 --> D53[AI Persona]
+              D5 --> |Digital Worker| D51[AI Agent]
+              D5 --> |Digital Worker| D52[AI Avatar]
+              D5 --> |Digital Worker| D53[AI Persona]
               D23 --> D32
               D4 --> D31
               D4 --> D32
