@@ -3,82 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AX Dashboard</title>
-    <script type="module">
-        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-        mermaid.initialize({ startOnLoad: true });
-    </script>
+    <title>PSSLAB MultiVerse Dashboard</title>
     <style>
-        /* 페이지 전체 스타일 */
+        /* 전체 페이지 스타일 */
         body {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            margin: 0;
             background-color: #f4f4f4;
             font-family: Arial, sans-serif;
         }
 
-        /* 버튼 스타일 */
-        .button-container {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
         }
 
-        .nav-button {
-            padding: 12px 20px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
             text-align: center;
         }
 
-        .nav-button:hover {
-            background-color: #0056b3;
+        .link-button {
+            display: block;
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 350px;
+            text-align: center;
         }
 
-        /* Mermaid 다이어그램 스타일 */
-        .mermaid {
-            background-color: white;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 80%;
-            max-width: 600px;
+        .link-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-    <h1>AX Dashboard</h1>
+    <h1>PSSLAB Dashboard</h1>
 
-    <!-- Mermaid 다이어그램 -->
-    <div class="mermaid">
-        graph TD;
-        A[AX Dashboard] -->|Flowchart| B[AX Flow]
-        A -->|Class Diagram| C[AX Class]
-        A -->|Gantt Chart| D[AX Gantt]
-        A -->|Sequence Diagram| E[AX Sequence]
-        B -->|Open| F[ax_flow.html]
-        C -->|Open| G[ax_class.html]
-        D -->|Open| H[ax_gantt.html]
-        E -->|Open| I[ax_seq.html]
-    </div>
-
-    <!-- 네비게이션 버튼 -->
-    <div class="button-container">
-        <a href="ax_flow.html" class="nav-button">AX Flow</a>
-        <a href="ax_class.html" class="nav-button">AX Class</a>
-        <a href="ax_gantt.html" class="nav-button">AX Gantt</a>
-        <a href="ax_seq.html" class="nav-button">AX Sequence</a>
+    <div class="link-container">
+        <a href="http://www.psslab.co.kr" class="link-button" target="_blank">PSSLAB Web Home Page</a>
+        <a href="https://github.com/hycse89" class="link-button" target="_blank">PSSLAB Digital Lab</a>
+        <a href="https://github.com/users/hycse89/projects/1" class="link-button" target="_blank">PSSLAB Project Dashboard</a>
+        <a href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" class="link-button" target="_blank">PSSLAB AX Vision to Strategy</a>
+        <a href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" class="link-button" target="_blank">PSSLAB Digital MultiVerse Architecture</a>
     </div>
 
 </body>
 </html>
+
