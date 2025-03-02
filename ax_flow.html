@@ -101,8 +101,6 @@
               D3 --> |Hugging Face| D31[Public Small Language Model]
               D3 --> |ChatGPT| D32[Large Language Model]
               D4 --> |Digital Worker/Digital DNA| D41[AI Agent]
-              D4 --> |Digital Worker/Digital LCT| D42[AI Avatar]
-              D4 --> |Digital Worker/Digital LCT| D43[AI Persona]
               D5 --> |TesserAct-PCR| D51[OCR]
               D5 --> |OpenCV| D52[Report Recognition-Image]
               D6 --> D61[Report Generation]
@@ -114,6 +112,7 @@
               D23 --> I            
               D31 --> I[Digital AX Lake]
               D32 --> I
+              D41 --> I
               D81 --> I
               D61 --> I
 
@@ -122,8 +121,8 @@
               I4 --> D42            
               I4 --> D43        
               D41 --> J[Digital AX MultiVerse]
-              D42 --> J
-              D43 --> J
+              J --> |Digital Worker/Digital LCT| J1[Digital AI Avatar]
+              J --> |Digital Worker/Digital LCT| j2[Digital AI Persona]
             
               %% 노드별 이동 링크 %%
               click A "https://github.com/hycse89/PSSLAB_AX_Strategy.git" _blank
