@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSSLAB MultiVerse Dashboard</title>
+    <style>
+        /* 전체 페이지 스타일 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* 이미지 스타일 */
+        .campus-map {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 링크 목록 스타일 */
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .link-button {
+            display: block;
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 350px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 타이틀 -->
+    <h1>PSSLAB MultiVerse Dashboard</h1>
+
+    <!-- 캠퍼스 지도 이미지 -->
+    <img src="campus.png" usemap="#campusmap" alt="Campus Map" class="campus-map">
+    
+    <!-- 이미지 맵 -->
+    <map name="campusmap">
+        <!-- 건물 1 (좌측 상단) → PSSLAB Web Home Page -->
+        <area shape="rect" coords="150,100,250,200" href="http://www.psslab.co.kr" alt="Building 1">
+        <!-- 건물 2 (우측 상단) → PSSLAB Digital Lab -->
+        <area shape="rect" coords="650,120,750,220" href="https://github.com/hycse89" alt="Building 2">
+        <!-- 건물 3 (좌측 하단) → PSSLAB Project Dashboard -->
+        <area shape="rect" coords="120,500,220,600" href="https://github.com/users/hycse89/projects/1" alt="Building 3">
+        <!-- 건물 4 (우측 하단) → PSSLAB Digital MultiVerse Architecture -->
+        <area shape="rect" coords="670,520,770,620" href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" alt="Building 4">
+    </map>
+
+    <!-- 하단 링크 목록 -->
+    <div class="link-container">
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Web Home Page</a>
+        <a href="https://github.com/hycse89" class="link-button">PSSLAB Digital Lab</a>
+        <a href="https://github.com/users/hycse89/projects/1" class="link-button">PSSLAB Project Dashboard</a>
+        <a href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" class="link-button">PSSLAB AX Vision to Strategy</a>
+        <a href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" class="link-button">PSSLAB Digital MultiVerse Architecture</a>
+    </div>
+
+</body>
+</html>
