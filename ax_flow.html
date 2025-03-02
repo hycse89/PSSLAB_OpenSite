@@ -106,7 +106,6 @@
               D5 --> |TesserAct-PCR| D51[OCR]
               D5 --> |OpenCV| D52[Report Recognition-Image]
               D6 --> D61[Report Generation]
-              D7 --> D71[AX MultiVerse]
               D8 --> D81[AI Chat DB]
               D11 --> I
               D12 --> I
@@ -116,6 +115,7 @@
               D31 --> I[Digital AX Lake]
               D32 --> I
               D81 --> I
+              D7 --> J[Digital AX MultiVerse]            
 
               I --> I4(Digital AX Dam)
               I4 --> D41
@@ -123,9 +123,9 @@
               I4 --> D43
               I4 --> D61           
               I4 --> D71
-              D41 --> D71
-              D42 --> D71
-              D43 --> D71
+              D41 --> J
+              D42 --> J
+              D43 --> J
             
               %% 노드별 이동 링크 %%
               click A "https://github.com/hycse89/PSSLAB_AX_Strategy.git" _blank
@@ -168,11 +168,11 @@
               style D51 fill:#ffffcc,stroke:#333
               style D52 fill:#ffffcc,stroke:#333
               style D61 fill:#ffffcc,stroke:#333
-              style D71 fill:#ffffcc,stroke:#333
               style D81 fill:#ffffcc,stroke:#333
             
               style I fill:#ff6666,stroke:#333,stroke-width:4px            
               style I4 fill:#ffcccc,stroke:#333
+              style J fill:#6d14b8,stroke:#333,stroke-width:4px                        
          </div>            
      </div>
 </body>
