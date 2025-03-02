@@ -72,11 +72,10 @@
               D --> |Python| D1[AI Analysis Service]            
               D --> D2[AI Language Service]
               D --> |Hybrid xLM/LangChain| D3[AI Optimizing&Orchestration Service]    
-              D --> D4[AI Advanced Service]
-            
-              D --> |Huggning Face| D6[AI Vision&Generation Service-TBD]
-              D --> |Huggning Face| D7[AI Generation Service-TBD]
-              D --> |Huggning Face| D8[AI Automation Service-TBD]  
+              D --> D4[AI Advanced Service]            
+              D --> |Huggning Face| D5[AI Vision Service-TBD]           
+              D --> |Huggning Face| D6[AI Generation Service-TBD]
+              D --> |Huggning Face| D7[AI Automation Service-TBD]  
             
               D1 --> |Numpy| D11[Low-level Template]
               D1 --> |PyTorch| D12[Middle-level Template]
@@ -90,6 +89,9 @@
               D4 --> |Digital Worker/Digital DNA| D41[AI Agent]
               D4 --> |Digital Worker/Digital LCT| D42[AI Avatar]
               D4 --> |Digital Worker/Digital LCT| D43[AI Persona]
+              D5 --> D51[OCR]
+              D5 --> D52[Report Recognition-Image]
+              D6 --> D61[Report Generation]
               D11 --> I
               D12 --> I
               D21 --> I
@@ -125,10 +127,9 @@
               style D2 fill:#ffff77,stroke:#333,stroke-width:2px
               style D3 fill:#ffff77,stroke:#333,stroke-width:2px
               style D4 fill:#ffff77,stroke:#333,stroke-width:2px
-
-              style D6 fill:#aaaaaa,stroke:#333,stroke-width:2px
+              style D5 fill:#aaaaaa,stroke:#333,stroke-width:2px
+              style D6 fill:#aaaaaa,stroke:#333,stroke-width:2px            
               style D7 fill:#aaaaaa,stroke:#333,stroke-width:2px
-              style D8 fill:#aaaaaa,stroke:#333,stroke-width:2px
             
               style D11 fill:#ffffcc,stroke:#333            
               style D12 fill:#ffffcc,stroke:#333                        
@@ -140,7 +141,10 @@
               style D41 fill:#ffffcc,stroke:#333
               style D42 fill:#ffffcc,stroke:#333
               style D43 fill:#ffffcc,stroke:#333
-
+              style D51 fill:#ffffcc,stroke:#333
+              style D52 fill:#ffffcc,stroke:#333
+              style D61 fill:#ffffcc,stroke:#333
+            
               style I fill:#ff6666,stroke:#333,stroke-width:4px            
               style I1 fill:#ffcccc,stroke:#333                        
               style I2 fill:#ffcccc,stroke:#333
