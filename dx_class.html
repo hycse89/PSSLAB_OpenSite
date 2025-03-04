@@ -73,10 +73,15 @@
                     +작업처리()
                 }
                 class Digital_Deliverable {
+                    +결과_보관()
+                    +결과_전달()
+                    +결과_서비스()            
+                }
+                class Digital_Document {
                     +자동생성()
                     +실시간_빈영()
                     +보기_서비스()            
-                }
+                }            
                 class Digital_Workplace {
                     +작업공간()
                     +작업자원()
@@ -99,9 +104,11 @@
                 Digital_Workplace --> Digital_Platform
                 Digital_Worker --> Digital_Platform
                 Digital_Deliverable --> Digital_Platform
+                Digital_Document --> Digital_Platform
+                Digital_Deliverable -->Digital_Document            
                 Digital_Object --> Digital_Workplace
                 Digital_Object --> Digital_Worker
-                Digital_Object -->Digital_Deliverable            
+                Digital_Object -->Digital_Deliverable
                 Digital_DNA --> Digital_Object            
         </div>
     </div>
