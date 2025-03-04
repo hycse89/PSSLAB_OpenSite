@@ -53,43 +53,58 @@
     <div class="mermaid-container">
         <div class="mermaid">
             classDiagram
-                class AX_Platform {
+                class Digital_MultiVerse {
                     - Hybrid_xLM
                     - AI_NCLC
                     - AI_Lake
                     - Digital_Worker
                     - Digital_DNA
                 }
-                class Digital_AI_Workplace {
+                class Digital_Platfornm {
+                    - Hybrid_xLM
+                    - AI_NCLC
+                    - AI_Lake
+                    - Digital_Worker
+                    - Digital_DNA
+                }            
+                class Digital_Worker {
                     - AI_Analysis_Service
                     - AI_Learning_Service
                     - AI_Optimizing_Service
                     - AI_Orchestration_Service
                 }
-                class AI_Analysis_Service {
+                class Digital_Document {
                     +Numpy()
                     +PyTorch()
                 }
-                class AI_Learning_Service {
+                class Digital_Workplace {
                     +Transformer()
                     +TensorFlow()
                     +Fine_Tuning()
                 }
-                class AI_Optimizing_Service {
+                class Digital_Object {
                     +PLM()
                     +SLM()
                     +LLM()
                     +DLM()
                 }
-                class AI_Orchestration_Service {
+                class Digital_DNA {
                     +LangChain()
                 }
             
-                AX_Platform --> Digital_AI_Workplace
-                Digital_AI_Workplace --> AI_Analysis_Service
-                Digital_AI_Workplace --> AI_Learning_Service
-                Digital_AI_Workplace --> AI_Optimizing_Service
-                Digital_AI_Workplace --> AI_Orchestration_Service
+                Digital_MultiVerse --> Digital_Workplace
+                Digital_MultiVerse --> Digital_Worker
+                Digital_MultiVerse --> Digital_Document
+                Digital_Platform --> Digital_Workplace
+                Digital_Platform --> Digital_Worker
+                Digital_Platform --> Digital_Document            
+                Digital_Object --> Digital_Workplace
+                Digital_Object --> Digital_Worker
+                Digital_Object --> Digital_Document            
+                Digital_DNA --> Digital_Workplace
+                Digital_DNA --> Digital_Workplace
+                Digital_DNA --> Digital_Worker
+            
         </div>
     </div>
 </body>
