@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PSSLAB AX UX Class Map</title>
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">   
+    
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+    <style>
+        /* 전체 페이지 크기 설정 */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            overflow: hidden;
+        }
+
+        /* Mermaid 다이어그램 전체 크기 설정 */
+        .mermaid-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+        }
+
+        /* Mermaid 내부 다이어그램 조정 */
+        .mermaid {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Mermaid 내부 SVG 크기 조정 */
+        .mermaid svg {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="mermaid-container">
+        <div class="mermaid">
+            classDiagram
+                direction LR
+                class AI_DIGITIZING {
+                    +결과_DIGITIZING_IN_LAKE()
+                    +요소_DIGITIZING_IN_LAKE()
+                }
+                class AI_DECOMPOSITION {
+                    +텍스트_분리()
+                    +이미지_분리()
+                    +메타정보_분리()
+                }            
+                class AI_DOCUMENT {
+                    +문서_작성()
+                    +문서_템플릿()
+                    +자동_문서()
+                }
+                class AI_INFORMATION {
+                    +분석결과_정보화()
+                    +분석결과_디지털화()            
+                }
+                class AI_ANALYSIS {
+                    +정성적_분석()
+                    +정량적_분석()
+                    +자동_분석()            
+                }            
+                class AI_OUTPUT {
+                    +결과_처리()
+                    +결과_가공()
+                }
+                class AI_CODE {
+                    +Python()
+                }
+                class AI_DATA {
+                    +JSON()
+                    +CSV()            
+                    +DB()
+                    +FILE()
+                }
+
+                AI_DECOMPOSITION --> AI_DIGITIZING
+                AI_DOCUMENT --> AI_DECOMPOSITION
+                AI_INFORMATION --> AI_DOCUMENT
+                AI_ANALYSIS --> AI_INFORMATION
+                AI_OUTPUT --> AI_ANALYSIS
+                AI_CODE --> AI_OUTPUT
+                AI_DATA --> AI_CODE
+          
+        </div>
+    </div>
+</body>
+</html>
