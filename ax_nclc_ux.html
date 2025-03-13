@@ -70,18 +70,22 @@
                     +메타정보_분리()
                 }            
                 class AI_DOCUMENT {
-                    +문서_작성()
-                    +문서_템플릿()
-                    +자동_문서()
-                }
-                class AI_INFORMATION {
-                    +분석결과_정보화()
-                    +분석결과_디지털화()            
+                    -Javascript            
+                    -Json
+                    -Text
+                    -PDF
+                    +문서 템플릿 선택()            
+                    +문서 기초정보 작성()
+                    +문서 생성()
+                    +문서 요약()
+                    +문서 변형(DOC->PPT)
                 }
                 class AI_ANALYSIS {
                     +정성적_분석()
                     +정량적_분석()
-                    +자동_분석()            
+                    +자동_분석()      
+                    +분석결과_정보화()
+                    +분석결과_디지털화()
                 }            
                 class AI_OUTPUT {
                     -Jason
@@ -118,8 +122,7 @@
 
                 AI_DECOMPOSITION --> AI_DIGITIZING
                 AI_DOCUMENT --> AI_DECOMPOSITION
-                AI_INFORMATION --> AI_DOCUMENT
-                AI_ANALYSIS --> AI_INFORMATION
+                AI_ANALYSIS --> AI_DOCUMENT
                 AI_OUTPUT --> AI_ANALYSIS
                 AI_DATA --> AI_OUTPUT
                 AI_CODE --> AI_DATA
