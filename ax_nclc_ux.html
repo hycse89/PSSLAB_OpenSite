@@ -104,9 +104,10 @@
                     +Fine Tuning()
                     +Algorithm Chaning()                    
                 }
-                class AI_SUBJECT {
+                class AI_SUBJECT { 
+                    +AI_3대_DILEMA()
                     +주제_타당성_점검()
-                    +데이터_확보_점검()            
+                    +데이터_확보_점검()
                     +데이터_유효성_점검()
                 }
 
@@ -116,7 +117,8 @@
                 AI_ANALYSIS --> AI_INFORMATION
                 AI_OUTPUT --> AI_ANALYSIS
                 AI_CODE --> AI_OUTPUT
-                AI_DATA --> AI_CODE
+                AI_CODE --> AI_DATA
+                AI_SUBJECT --> AI_CODE            
           
         </div>
     </div>
