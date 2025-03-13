@@ -68,12 +68,14 @@
                     +텍스트_분리()
                     +이미지_분리()
                     +메타정보_분리()
+                    +벡터정보_분리()
                 }            
                 class AI_DOCUMENT {
                     -Javascript            
                     -Json
                     -Text
                     -PDF
+            
                     +문서 템플릿 선택()            
                     +문서 기초정보 작성()
                     +문서 생성()
@@ -92,22 +94,25 @@
                     -Text
                     -Image
                     -PDF
+            
                     +Post_Processing()
                 }
                 class AI_DATA {
+                    -Data Type - JSON
+                    -Data Type - CSV            
+                    -Data Type - DB
+                    -Data Type - FILE
+            
                     +Collection and Combining()
                     +Sanitizng()
                     +Pre_Processing()            
                     +Formatting()
                     +Segmentation()
-                    -Data Type - JSON
-                    -Data Type - CSV            
-                    -Data Type - DB
-                    -Data Type - FILE
                 }            
                 class AI_CODE {
                     -High Portabe Code - Python
-                    -High Portabe Code - Javascript            
+                    -High Portabe Code - Javascript 
+            
                     +Code Selection in Lake()
                     +Parameter Tuning()            
                     +Fine Tuning()
