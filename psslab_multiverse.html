@@ -12,6 +12,7 @@
     <style>
         /* 전체 페이지 스타일 */
         body {
+            margin: 0; /* 이게 가장 중요합니다 */            
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -24,7 +25,8 @@
         h1 {
             font-size: 28px;
             color: #333;
-            margin-bottom: 20px;
+            margin-top: 0; 
+            margin: 0 0 20px 0; /* 위쪽 margin 제거 */
             text-align: center;
         }
 
@@ -47,16 +49,17 @@
 
         .link-button {
             display: block;
-            padding: 12px 20px;
+            padding: 8px 20px;
             font-size: 15px;
             background-color: #007bff;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s;
-            width: 350px;
+            width: 350px;         
             text-align: center;
             margin: 0 auto;
+            /* font-weight: bold; 텍스트를 굵게 */            
         }
 
         .link-button:hover {
@@ -65,7 +68,6 @@
     </style>
 </head>
 <body>
-
     <!-- 상단 타이틀 -->
     <h1>PSSLAB MultiVerse Campus</h1>
 
@@ -90,13 +92,17 @@
 
     <!-- 하단 링크 목록 -->
     <div class="link-container">
-        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Home Page</a>
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Homepage</a>
         <a href="https://github.com/hycse89" class="link-button">Digital Laboratory Workplace</a>
-        <a href="https://github.com/users/hycse89/projects/1" class="link-button">Digital Project Workplace</a>
         <a href="http://localhost:8001/ax_design/index.html" class="link-button">AX&DX System Design Workplace</a>
-        <a href="http://localhost:8001/ax_presentation/index.html" class="link-button">AX&DX Presentation Workplace</a>        
+        <a href="http://localhost:8001/ax_presentation/index.html" class="link-button">AX&DX Presentation Workplace</a>
         <a href="http://localhost:5173" class="link-button">Digital AX System (Code Test Ver.)</a>
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Groupware</a>
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Knowledge Database</a>        
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Contents Database</a>        
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Working Drive</a>                
     </div>
 
 </body>
 </html>
+
