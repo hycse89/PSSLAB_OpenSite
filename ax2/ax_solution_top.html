@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² System - Solution Book</title>
+    <style>
+        /* FONT & BASIC SETUP */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+
+        :root {
+            --primary-color: #00529b;
+            --secondary-color: #002d57;
+            --background-color: #f4f7f9;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --header-gradient: linear-gradient(135deg, #00529b, #002d57);
+            --message-bg-color: #e9f5ff;
+            --nav-height: 70px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            margin: 0;
+            padding-top: var(--nav-height); /* Give space for the fixed nav */
+        }
+
+        /* TOP NAVIGATION BAR */
+        header.top-nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: var(--nav-height);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-sizing: border-box;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--secondary-color);
+        }
+
+        .logo span {
+            font-weight: 300;
+        }
+
+        .top-nav nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .top-nav nav ul li a {
+            padding: 10px 15px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            font-size: 15px;
+            transition: color 0.3s, background-color 0.3s;
+            border-radius: 6px;
+        }
+
+        .top-nav nav ul li a:hover {
+            color: var(--primary-color);
+            background-color: #f0f0f0;
+        }
+
+        .top-nav nav ul li a.active {
+            color: white;
+            background-color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* MAIN CONTENT AREA & SECTIONS */
+        main {
+            padding: 40px;
+        }
+        
+        section.page-content {
+            max-width: 1000px;
+            margin: 0 auto 40px auto; /* Add margin between sections */
+            scroll-margin-top: calc(var(--nav-height) + 20px); /* Offset for anchor links */
+        }
+        
+        /* PAGE & CARD STYLES (Re-used from previous CSS) */
+        .solution-page {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 77, 153, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--header-gradient);
+            color: white;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .header .page-number {
+            font-size: 16px;
+            font-weight: 300;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .representative-message {
+            background-color: var(--message-bg-color);
+            color: var(--primary-color);
+            padding: 25px 50px;
+            font-size: 22px;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 1px solid #d1e8ff;
+        }
+
+        .content {
+            padding: 40px 50px;
+        }
+
+        .content h2 {
+            font-size: 24px;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .content ul { padding-left: 20px; }
+        .content ul li { font-size: 16px; line-height: 1.8; margin-bottom: 10px; }
+
+        .roles-container, .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .role-card, .info-card {
+            background-color: #f8fafc;
+            border: 1px solid #e1e8f0;
+            border-radius: 8px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .role-card:hover, .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 77, 153, 0.08);
+        }
+
+        .role-card h3, .info-card h3 { font-size: 20px; color: var(--primary-color); margin-top: 0; margin-bottom: 12px; font-weight: 700; }
+        .role-card p, .info-card p { font-size: 15px; line-height: 1.7; margin-bottom: 0; }
+
+        /* ======================= FOOTER STYLES ======================= */
+        .contact-footer {
+            background-color: var(--secondary-color);
+            color: #e0e0e0;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .footer-content h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .footer-content p {
+            font-size: 16px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-info {
+            margin: 30px 0;
+        }
+
+        .contact-info p {
+            margin: 8px 0;
+        }
+
+        .contact-info a {
+            color: #66b2ff; /* 밝은 파란색으로 링크 강조 */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .copyright {
+            font-size: 14px;
+            color: #aaa;
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+
+        /* FOOTER */
+        footer.site-footer {
+            padding: 25px 40px; /* 상하좌우 여백 */
+            border-top: 1px solid #e0e0e0; /* 상단 구분선 */
+            text-align: center; /* 텍스트 중앙 정렬 */
+            background-color: #ffffff; /* 배경색 */
+        }
+
+        footer.site-footer p {
+            margin: 0; /* 단락 기본 여백 제거 */
+            font-size: 14px; /* 글자 크기 */
+            color: #888; /* 글자 색상 */
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="top-nav">
+        <div class="logo">AX²<span> SYSTEM</span> - SOLUTION BOOK</div>
+        <nav>
+            <ul id="nav-links">
+                <li><a href="#page1" class="active">Overview</a></li>
+                <li><a href="#page2">AI-Ware</a></li>
+                <li><a href="#page3">Lake</a></li>
+                <li><a href="#page4">Agent</a></li>
+                <li><a href="#page5">Hybrid xLM</a></li>
+                <li><a href="#page6">Virtual xLM</a></li>
+                <li><a href="#page7">Hybrid RAG</a></li>
+                <li><a href="#page8">AX Team</a></li>
+                <li><a href="#page9">Scanner</a></li>
+                <li><a href="#page10">Zero SW</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="page1" class="page-content">
+            <div class="solution-page">
+                <header class="header">
+                    <div class="page-number">Overview</div>
+                    <h1>AX² System 소개</h1>
+                </header>
+                <div class="representative-message">AI 시대를 항해하는 새로운 철학, 인간을 위한 최적의 시스템</div>
+                <div class="content">
+                    <h2>AX² System이란?</h2>
+                    <p>AX²는 <strong>AI Transformation and Experience</strong>의 약자입니다. 인간의 성공적인 AI 전환과, 인간과 AI가 융합된 경험을 제공하는 시스템이자 AI 시대를 살아가기 위한 핵심 철학입니다.</p>
+                    <h2>AX²의 세 가지 원칙</h2>
+                    <p>저희는 AI판 '포스트모더니즘'을 선언하며 다음과 같은 원칙을 지킵니다.</p>
+                    <ul>
+                        <li><strong>인간을 위한 AI:</strong> AI는 인간을 위해 존재하고 쓰여야 합니다.</li>
+                        <li><strong>인간의 이익 보호:</strong> AI는 인간의 이익을 증진시킬 수는 있어도, 결코 손상시켜서는 안 됩니다.</li>
+                        <li><strong>인간 보호:</strong> AI는 언제나 인간을 보호해야 합니다.</li>
+                    </ul>
+                    <h2>핵심 구성 요소</h2>
+                    <p>AX² System은 다음과 같은 혁신적인 구성 요소들이 유기적으로 결합되어 있습니다.</p>
+                    <div class="cards-container">
+                        <div class="info-card"><h3>AX² Lake</h3><p>AI를 위한 최상의 데이터를 제공하는 데이터 허브</p></div>
+                        <div class="info-card"><h3>AX² Agent</h3><p>인간의 이익을 위해 행동하는 충실한 디지털 가디언</p></div>
+                        <div class="info-card"><h3>AX² AI-Ware</h3><p>인간과 AI 모두의 능력을 극대화하는 진화된 도구</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page2" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Sub System</div><h1>AI-Ware</h1></header>
+                <div class="representative-message">인간과 AI, 모두를 위한 진화의 도구</div>
+                <div class="content">
+                    <h2>AI-Ware: 두 가지 의미, 하나의 목표</h2>
+                    <p>AI-Ware는 두 가지 중요한 의미를 담고 있습니다.</p>
+                    <div class="cards-container">
+                        <div class="info-card"><h3>AI를 위한 도구</h3><p>언어 모델(LLM/SLM)이 디지털 세상을 넘어 현실 세계와 상호작용할 수 있게 만드는 강력한 도구입니다.</p></div>
+                        <div class="info-card"><h3>인간을 위한 도구</h3><p>인간이 AI의 지능을 뛰어넘어 더 높은 생산성과 창의력을 발휘하도록 돕는 혁신적인 도구입니다.</p></div>
+                    </div>
+                    <p style="margin-top: 25px;">AI-Ware는 AI에게는 더 넓은 세상으로 나아갈 수 있는 잠재력을, 인간에게는 AI 시대를 주도할 수 있는 경쟁력을 제공합니다. AX² AI-Ware와 함께 인간과 AI의 능력을 모두 극대화하십시오.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page3" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Sub System</div><h1>Lake System</h1></header>
+                <div class="representative-message">AI의 지능을 결정하는 데이터, 그 근원을 혁신합니다.</div>
+                <div class="content">
+                    <h2>데이터의 패러다임 전환: "Software is a servant of Data"</h2>
+                    <p>"Garbage-In, Garbage-Out"이라는 IT 분야의 오랜 격언처럼, AI의 성능은 데이터의 품질에 의해 결정됩니다. AX² Lake System은 AI 시대에 맞춰 '소프트웨어는 데이터를 위해 존재한다'는 코페르니쿠스적 전환을 선언합니다.</p>
+                    <h2>AI-Ready 데이터 허브</h2>
+                    <p>아날로그 세상의 수많은 데이터를 AI가 즉시 활용할 수 있도록, AX² Lake System은 최적의 환경을 제공합니다. 낮은 품질의 데이터로 만든 저지능 AI는 재앙일 뿐입니다. 우리는 AI의 지능을 최고 수준으로 끌어올릴 'AI-Ready' 데이터를 만듭니다.</p>
+                    <h2>AX² Lake의 구성</h2>
+                    <p>여러 강물이 호수로 모여 정화되듯, 다양한 데이터를 한곳에 모아 AI에 최적화된 형태로 제공합니다.</p>
+                    <ul><li>전통적인 파일, 콘텐츠, 데이터베이스 서버</li><li>최신 Vector DB 서버 및 GPU Ready 데이터 오케스트레이터</li><li>학습 데이터와 결합된 소규모 언어 모델(SLM)</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="page4" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Sub System</div><h1>Agent System</h1></header>
+                <div class="representative-message">단순한 비서를 넘어, 당신의 디지털 가디언</div>
+                <div class="content">
+                    <h2>AI Agent의 새로운 기준</h2>
+                    <p>AI Agent는 단순히 명령을 수행하는 도구가 아닙니다. AX² Agent는 사람처럼 바로 곁에서 당신의 이익을 최우선으로 생각하고 행동합니다.</p>
+                    <h2>디지털 상황인식을 통한 가디언 역할</h2>
+                    <p>AX² Agent의 핵심은 <strong>디지털 상황인식</strong> 능력입니다. 이를 바탕으로 보이지 않는 위험을 감지하고, 필요한 대비를 하도록 도우며, 위기 상황에 효과적으로 대응하는 충실한 <strong>가디언</strong>의 역할을 수행합니다.</p>
+                    <p>물론, AX² AI-Ware를 활용하여 업무 생산성을 높이는 등 다양한 부가 기능도 훌륭하게 수행하지만, AX² Agent의 본질은 당신의 안전과 성공을 지키는 것입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page5" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Solution</div><h1>Hybrid xLM</h1></header>
+                <div class="representative-message">거대 언어모델과 소형 언어모델의 완벽한 오케스트라</div>
+                <div class="content">
+                    <h2>목적에 맞는 최적의 언어모델(LM) 활용</h2>
+                    <p>Hybrid xLM은 특정 작업에 가장 적합한 언어모델을 선택적, 전략적으로 사용하는 솔루션입니다. ChatGPT와 같은 거대 언어모델(LLM)부터 기업 내부의 소규모 언어모델(SLM)까지, 각 모델의 장점을 극대화하는 완벽한 오케스트레이션을 제공합니다.</p>
+                    <h2>PLM: 더 작고, 더 특화된 모델</h2>
+                    <p>AX²는 LLM/SLM의 조율을 넘어, <strong>PLM(Primitive/Personal/Pseudo Language Model)</strong>이라는 새로운 개념을 제시합니다. PLM은 특정 목적에 맞춰 SLM을 미세 조정(Tuning)하거나 재구성한 경량화 모델로, 더 높은 효율성과 정확성을 제공합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page6" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Solution</div><h1>VLM (Virtual Language Model)</h1></header>
+                <div class="representative-message">기업의 LLM/SLM 고민, VLM으로 해결합니다.</div>
+                <div class="content">
+                    <h2>기업 맞춤형 'LM 해결사'</h2>
+                    <p>AX² VLM은 기존 언어모델(LLM/SLM)의 한계를 극복하고 유연성을 극대화하는 솔루션입니다. 기업이 겪는 <strong>보안, 경험, 자원</strong> 문제를 한 번에 해결하는 'LM 해결사' 역할을 합니다.</p>
+                    <h2>VLM의 핵심 가치</h2>
+                    <div class="cards-container">
+                        <div class="info-card"><h3>강력한 보안</h3><p>모든 직원에게 보안이 확보된 개인화된 가상 언어모델을 제공합니다.</p></div>
+                        <div class="info-card"><h3>지식 자산화</h3><p>각 직원의 VLM은 그 자체로 회사의 중요한 지식과 경험을 담는 보관소가 됩니다.</p></div>
+                        <div class="info-card"><h3>All-in-one 지향</h3><p>다양한 기능을 통합한 All-in-one SLM을 지향하여 사용자 편의성을 극대화합니다.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="page7" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Solution</div><h1>Hybrid RAG</h1></header>
+                <div class="representative-message">잠자는 데이터베이스를 깨워 AI와 대화하게 하십시오.</div>
+                <div class="content">
+                    <h2>정형 데이터와 AI의 만남</h2>
+                    <p>AX² Hybrid RAG는 Text위주의 RAG에서 한발 더 나아가 <strong>데이터베이스 안의 정형 데이터</strong>를 LLM/SLM이 직접 활용할 수 있는 길을 엽니다. 이를 통해 AI의 환각(Hallucination)을 줄이고 답변의 정확성을 획기적으로 높입니다.</p>
+
+                    <h2>Multimodal 데이터의 인식과 활용</h2>
+                    <p><strong>동영상, 이미지, 음성</strong>까지 LLM/SLM의 결과에 포함시킬 수 있도록 기존의 RAG 체계를 확장합니다.</p>
+                    
+                    <h2>GPU 프로그래밍의 장벽 제거</h2>
+                    <p>복잡한 GPU 프로그래밍(CUDA 등) 지식 없이도 누구나 데이터베이스의 데이터를 GPU 기반으로 빠르게 분석하고 검색할 수 있도록 지원하는 것입니다. AI가 이 모든 과정을 자동으로 처리하여, 개발자와 일반 사용자 모두 데이터 분석의 전문가가 될 수 있습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page8" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Methodology</div><h1>AX Organization</h1></header>
+                <div class="representative-message">AI 시대, 조직과 인재를 새롭게 정의합니다.</div>
+                <div class="content">
+                    <h2>미래를 위한 AI 조직 설계</h2>
+                    <p>AX² Organization은 AX² System에 기반한 차세대 AI 조직 구축 방법론입니다. AI 시대에 필요한 새로운 직무(Role)를 정의하고, 각 역할에 맞는 R&R(역할과 책임), 직무 기술서(JD), 그리고 인재 육성 방안까지 종합적으로 제시합니다.</p>
+                    <h2>AI 시대의 새로운 직업들</h2>
+                    <div class="roles-container">
+                        <div class="role-card"><h3>AX Developer</h3><p>언어모델을 직접 개발하는 대신, 이를 활용하여 기존 IT 시스템과 융합하고 새로운 가치를 창출하는 개발자입니다.</p></div>
+                        <div class="role-card"><h3>AX Worker</h3><p>LLM/SLM을 중심으로 인간과 동일한 업무를 수행하는 AI 직원입니다.</p></div>
+                        <div class="role-card"><h3>AI Manager</h3><p>인간 직원을 관리하는 AI 관리자이거나, 반대로 AI 직원(AX Worker)을 관리하는 인간 관리자를 의미합니다.</p></div>
+                        <div class="role-card"><h3>AX Manager</h3><p>AX System의 도입과 성과를 책임지며, AX Developer, AX Worker, AI Manager 등 모든 구성원을 이끄는 리더입니다.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="page9" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Methodology</div><h1>Scanner for AI Cancer</h1></header>
+                <div class="representative-message">AI 산출물의 치명적 오류, 'AI 암(Cancer)'을 조기에 진단합니다.</div>
+                <div class="content">
+                    <h2>환각을 넘어선 치명적 오류, 'AI Cancer'</h2>
+                    <p>LLM/SLM 활용이 복잡해지면 단순한 환각(Hallucination)을 넘어, AI가 생성한 산출물 전체를 오염시키는 치명적인 오류가 발생할 수 있습니다. 우리는 이를 <strong>'AI 암(Cancer)'</strong>이라 부릅니다. 이 오류는 한번 발생하면 단순 수정이 거의 불가능하며, 찾아내기도 극히 어렵습니다.</p>
+                    <h2>조기 진단과 대응 솔루션</h2>
+                    <p>AX² Scanner는 이러한 'AI 암'의 발생을 조기에 탐지하는 독자적인 방법론과 도구를 함께 제공합니다. 단순히 도구만으로는 해결이 어려운 복잡한 문제이기에, 체계적인 방법론을 통해 근본적인 원인을 찾아내고 대응할 수 있도록 돕습니다. AI 시스템의 신뢰성을 확보하기 위한 필수 솔루션입니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page10" class="page-content">
+            <div class="solution-page">
+                <header class="header"><div class="page-number">Methodology</div><h1>Zero Software</h1></header>
+                <div class="representative-message">소프트웨어는 일회용품처럼, 데이터와 당신의 의도만이 남습니다.</div>
+                <div class="content">
+                    <h2>소프트웨어의 종말, 데이터 중심 시대의 시작</h2>
+                    <p>AX² Zero Software는 소프트웨어에 대한 기존의 관념을 완전히 뒤바꾸는 혁신적인 개념입니다.</p>
+                    <h2>Zero Software의 두 가지 의미</h2>
+                    <div class="cards-container">
+                        <div class="info-card"><h3>On-Demand Software</h3><p>사용자가 자신의 요구사항이나 의도만 전달하면, AI가 즉시 필요한 소프트웨어를 개발하여 제공합니다.</p></div>
+                        <div class="info-card"><h3>Disposable Software</h3><p>소프트웨어는 필요할 때만 생성되어 사용되고, 목적이 달성되면 즉시 삭제됩니다. 데이터 유출을 원천적으로 차단하는 강력한 보안 모델입니다.</p></div>
+                    </div>
+                    <p style="margin-top: 25px;">이제 중요한 것은 소프트웨어 자체가 아니라, 사용자의 <strong>'의도'</strong>와 그 결과물인 <strong>'데이터'</strong>뿐입니다. AX² Zero Software는 소프트웨어를 일회용품처럼 만들어, 가장 본질적인 것에만 집중하게 합니다.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">        
+        <p>© 2025 AX² System. PSSLAB Inc. [Contact:hycse89@psslab.co.kr]</p>
+    </footer>
+
+
+
+    <script>
+        const sections = document.querySelectorAll('section.page-content');
+        const navLinks = document.querySelectorAll('.top-nav nav ul li a');
+
+        const options = {
+            root: null, // it is the viewport
+            threshold: 0.5, // 50% of the item is visible
+            rootMargin: "-70px 0px 0px 0px" // Adjust for the fixed nav height
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+
+</body>
+</html>
