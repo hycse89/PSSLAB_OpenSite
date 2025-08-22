@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+
+:root {
+    --primary-color: #00529b;
+    --secondary-color: #002d57;
+    --background-color: #f4f7f9;
+    --text-color: #333;
+    --card-bg-color: #ffffff;
+    --header-gradient: linear-gradient(135deg, #00529b, #002d57);
+    --message-bg-color: #e9f5ff;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+nav.sidebar {
+    width: 280px;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 30px 0;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto;
+}
+
+nav.sidebar .logo {
+    text-align: center;
+    padding: 0 20px 30px 20px;
+    font-size: 28px;
+    font-weight: 900;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav.sidebar .logo span {
+    font-weight: 300;
+}
+
+nav.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0 0 0;
+}
+
+nav.sidebar ul .category-title {
+    padding: 10px 30px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #a0c8e8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+nav.sidebar ul li a {
+    display: block;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s, padding-left 0.3s;
+    border-left: 4px solid transparent;
+}
+
+nav.sidebar ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding-left: 35px;
+}
+
+nav.sidebar ul li a.active {
+    background-color: var(--primary-color);
+    border-left: 4px solid #66b2ff;
+    font-weight: 700;
+}
+
+main.content-area {
+    margin-left: 280px;
+    flex-grow: 1;
+    padding: 40px;
+}
+
+.solution-page {
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 77, 153, 0.1);
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.header {
+    background: var(--header-gradient);
+    color: white;
+    padding: 40px 50px;
+    text-align: center;
+}
+
+.header .page-number {
+    font-size: 16px;
+    font-weight: 300;
+    opacity: 0.8;
+    margin-bottom: 8px;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.representative-message {
+    background-color: var(--message-bg-color);
+    color: var(--primary-color);
+    padding: 25px 50px;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #d1e8ff;
+}
+
+.content {
+    padding: 40px 50px;
+}
+
+.content h2 {
+    font-size: 24px;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+.content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.content ul {
+    padding-left: 20px;
+}
+
+.content ul li {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 10px;
+}
+
+.roles-container, .cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.role-card, .info-card {
+    background-color: #f8fafc;
+    border: 1px solid #e1e8f0;
+    border-radius: 8px;
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.role-card:hover, .info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 77, 153, 0.08);
+}
+
+.role-card h3, .info-card h3 {
+    font-size: 20px;
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.role-card p, .info-card p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
