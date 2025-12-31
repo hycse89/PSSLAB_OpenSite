@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Full Chapter</title>
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="btn" href="javascript:history.back()">← Back</a>
+      <div>
+        <h1 id="pageTitle">Full</h1>
+        <div class="meta" id="meta"></div>
+      </div>
+    </header>
+
+    <section class="card">
+      <div class="small" id="pathInfo"></div>
+      <hr />
+      <article id="content">Loading…</article>
+    </section>
+  </div>
+
+<script>
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// tiny markdown renderer
+function mdToHtml(md){
+  md = md.replace(/```([\s\S]*?)```/g, (m,code)=>`@@CODE@@${escapeHtml(code)}@@ENDCODE@@`);
+  md = md.replace(/^>\s?(.*)$/gm, '<blockquote>$1</blockquote>');
+  md = md.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+  md = md.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+  md = md.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+
+  md = md.replace(/(?:^-\s+.*(?:\n|$))+?/gm, (block)=>{
+    const items = block.trim().split('\n').map(l=>l.replace(/^-+\s+/,'').trim()).filter(Boolean);
+    return '<ul>' + items.map(it=>`<li>${it}</li>`).join('') + '</ul>\n';
+  });
+
+  md = md.replace(/`([^`]+)`/g, '<code>$1</code>');
+  md = md.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  md = md.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  md = md.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noreferrer">$1</a>');
+
+  const lines = md.split('\n');
+  const out = [];
+  let buf = [];
+  function flush(){
+    if (!buf.length) return;
+    const text = buf.join(' ').trim();
+    if (text) out.push(`<p>${text}</p>`);
+    buf = [];
+  }
+  for (const raw of lines){
+    const line = raw.trim();
+    if (!line){ flush(); continue; }
+    if (line.startsWith('<h') || line.startsWith('<ul') || line.startsWith('<li') || line.startsWith('<blockquote') || line.startsWith('@@CODE@@')){
+      flush(); out.push(line); continue;
+    }
+    buf.push(line);
+  }
+  flush();
+  let html = out.join('\n');
+  html = html.replace(/@@CODE@@([\s\S]*?)@@ENDCODE@@/g, (m,code)=>`<pre><code>${code}</code></pre>`);
+  return html;
+}
+
+function parseFrontMatter(md){
+  const fm = { meta:{}, body: md };
+  if (!md.startsWith('---')) return fm;
+  const end = md.indexOf('\n---', 3);
+  if (end === -1) return fm;
+  const raw = md.slice(3, end).trim();
+  const body = md.slice(end + 4).replace(/^\s+/, '');
+  const meta = {};
+  for (const line of raw.split('\n')){
+    const m = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
+    if (!m) continue;
+    const k = m[1].trim();
+    let v = m[2].trim();
+    if (v.startsWith('[') && v.endsWith(']')){
+      try { v = JSON.parse(v); } catch(e){}
+    } else {
+      v = v.replace(/^"(.*)"$/,'$1');
+    }
+    meta[k]=v;
+  }
+  fm.meta = meta;
+  fm.body = body;
+  return fm;
+}
+
+function pad2(n){ return String(n).padStart(2,'0'); }
+
+(async function(){
+  const qs = new URLSearchParams(location.search);
+  const part = qs.get('part');
+  const ch = qs.get('ch');
+  if (!part || !ch){
+    document.getElementById('content').textContent = 'Missing query params: ?part=2&ch=10';
+    return;
+  }
+  const path = `../content/part${part}/ch${pad2(ch)}.md`;
+  document.getElementById('pathInfo').textContent = `Loading: ${path}`;
+
+  try{
+    const res = await fetch(path, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Content not found: ${path}`);
+    const md = await res.text();
+    const fm = parseFrontMatter(md);
+
+    const title = fm.meta.title || `Part ${part} · Chapter ${ch}`;
+    document.getElementById('pageTitle').textContent = title;
+
+    const metaEl = document.getElementById('meta');
+    metaEl.innerHTML = '';
+    if (fm.meta.updated) metaEl.insertAdjacentHTML('beforeend', `<span class="pill">Updated: ${fm.meta.updated}</span>`);
+    if (fm.meta.private === true || fm.meta.private === 'true') metaEl.insertAdjacentHTML('beforeend', `<span class="pill">Private</span>`);
+    const tags = Array.isArray(fm.meta.tags) ? fm.meta.tags : [];
+    for (const t of tags.slice(0,6)){
+      metaEl.insertAdjacentHTML('beforeend', `<span class="tag accent">${escapeHtml(String(t))}</span>`);
+    }
+
+    document.getElementById('content').innerHTML = mdToHtml(fm.body);
+  }catch(err){
+    document.getElementById('content').textContent = err.message;
+  }
+})();
+</script>
+</body>
+</html>

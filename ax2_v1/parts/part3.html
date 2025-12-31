@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Part 3. Non‑LLM Modalities · AX²</title>
+  <style>
+:root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.0rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); }
+
+        /* --- Minimal Modal Styling --- */
+        #requestModal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); /* 네이비 톤 투명 배경 */
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .btn-close:hover { background: #f0f0f0; color: #333; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+
+        .toc { margin: 14px 0 20px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa; }
+        .toc a { text-decoration: none; }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 14px; }
+        .toc-item { display:flex; gap:8px; align-items: baseline; }
+        .toc-num { font-weight: 800; color: var(--navy); }
+        .toc-title { color: var(--ink); }
+        .compact-list { margin: 8px 0 0 18px; }
+        .post-block { scroll-margin-top: 120px; }
+        .post-actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 12px; }
+        @media (max-width: 720px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+<a id="top"></a>
+<header>
+  <a href="../index.html" class="back-link">← Back</a>
+  <div class="header-right">
+    <span class="badge">3부. Non‑LLM(AUDIO/VIDEO/VISION/문서 등)</span>
+  </div>
+</header>
+
+<main class="container">
+  <section class="category-head">
+    <h1>Part 3. Non‑LLM Modalities</h1>
+    <p class="category-desc">비전/비디오/문서/음성 등 LLM 외 핵심 모달리티를 실무 파이프라인 관점에서 정리합니다.</p>
+  </section>
+
+  <section class="toc">
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">12</span><a class="toc-title" href="#ch12">Vision AI</a></div>
+<div class="toc-item"><span class="toc-num">13</span><a class="toc-title" href="#ch13">Video AI</a></div>
+<div class="toc-item"><span class="toc-num">14</span><a class="toc-title" href="#ch14">Document AI</a></div>
+<div class="toc-item"><span class="toc-num">15</span><a class="toc-title" href="#ch15">Audio/Speech AI</a></div>
+    </div>
+  </section>
+
+  
+    <article class="post-block" id="ch12">
+        <div class="post-header">
+            <h2>12장. Vision AI</h2>
+            <div class="post-date">Summary · 3부. Non‑LLM(AUDIO/VIDEO/VISION/문서 등)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>비전은 단순 분류가 아니라 검출·분할·추적·문서/산업 비전까지 포함한다는 핵심을 정리합니다. 문제 선택→데이터 설계→지표(mAP/IoU 등)→서빙/엣지까지 한 흐름으로 이해하도록 구성합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 비전은 분류뿐 아니라 검출/분할로 “어디에 무엇이 있는지”를 푼다.</li>
+                <li>핵심 원리: 특징 학습은 데이터/라벨/증강에 크게 의존하며, 평가 지표가 태스크를 규정한다.</li>
+                <li>핵심 구성·기술: Detection(mAP), Segmentation(IoU), 데이터 증강, 도메인 적응, 서빙/엣지.</li>
+                <li>실무 포인트: 현장 데이터 분포가 달라지기 쉬우므로 수집/라벨 정책과 재학습 루프를 먼저 설계한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 12: Vision AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=12'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+    <article class="post-block" id="ch13">
+        <div class="post-header">
+            <h2>13장. Video AI</h2>
+            <div class="post-date">Summary · 3부. Non‑LLM(AUDIO/VIDEO/VISION/문서 등)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>비디오는 프레임 단위 인식이 아니라 **시간 축(추적/이벤트/행동)**을 다루는 문제라는 점을 설명합니다. 실시간 스트리밍 파이프라인에서 지연·처리량·정확도 트레이드오프가 왜 핵심인지 정리합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 비디오는 시간 축을 포함해 추적/행동/이벤트를 인식한다.</li>
+                <li>핵심 원리: 프레임 단위 정보에 temporal 모델링을 더해 상황 변화를 포착한다.</li>
+                <li>핵심 구성·기술: Tracking, Action recognition, 이벤트 탐지, 스트리밍 파이프라인, 버퍼/지연 관리.</li>
+                <li>실무 포인트: 실시간은 정확도보다 지연/처리량 제약이 먼저이며, 파이프라인 병목을 계측해야 한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 13: Video AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=13'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch14">
+        <div class="post-header">
+            <h2>14장. Document AI</h2>
+            <div class="post-date">Summary · 3부. Non‑LLM(AUDIO/VIDEO/VISION/문서 등)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>문서 AI는 OCR을 넘어 레이아웃 이해·표/필드 추출·정합성 검증까지 포함한다는 점을 다룹니다. 결과를 구조화하고 검증하는 단계가 실제 업무 자동화에서 왜 결정적인지 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 문서 AI는 OCR을 넘어 레이아웃/표/필드 추출로 구조화를 완성한다.</li>
+                <li>핵심 원리: 문서 의미는 텍스트만이 아니라 위치/레이아웃(2D 구조)에 의해 결정된다.</li>
+                <li>핵심 구성·기술: OCR, 레이아웃 분석, 테이블 파싱, IE(정보추출), 검증 룰/스키마.</li>
+                <li>실무 포인트: 추출 결과는 반드시 검증(정합성/범위/상호제약)을 붙여야 자동화가 안전해진다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 14: Document AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=14'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch15">
+        <div class="post-header">
+            <h2>15장. Audio/Speech AI</h2>
+            <div class="post-date">Summary · 3부. Non‑LLM(AUDIO/VIDEO/VISION/문서 등)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>STT/TTS는 정확도뿐 아니라 **지연(실시간성)과 운영(노이즈/중단/복구)**이 품질을 좌우한다는 관점을 제공합니다. 음성 에이전트는 인식→이해→대화→합성의 전체 체인으로 봐야 함을 정리합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 음성은 STT(인식)와 TTS(합성)로 사람-시스템 인터페이스를 만든다.</li>
+                <li>핵심 원리: 스트리밍에서 지연/정확도/끊김 복구가 사용자 경험을 좌우한다.</li>
+                <li>핵심 구성·기술: STT/TTS, VAD, 노이즈 처리, 스트리밍 프로토콜, 음성 에이전트 체인.</li>
+                <li>실무 포인트: 정확도만 튜닝하지 말고 latency budget·fallback(텍스트 전환)·운영 모니터링을 함께 잡는다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 15: Audio/Speech AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=15'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+    <article class="post-block" id="B4">
+        <div class="post-header">
+            <h2>B4. Sound 기술 개요</h2>
+            <div class="post-date">Summary · 3부. Non‑LLM(AUDIO/VIDEO/VISION/문서 등)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>Sound 기술에 대한 개요와 관련 기술을 소개합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: To be defined</li>
+                <li>핵심 원리: To be defined</li>
+                <li>핵심 구성·기술: To be defined</li>
+                <li>실무 포인트: To be defined</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 15: Audio/Speech AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=15'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+
+</main>
+
+
+<div id="requestModal" onclick="closeRequestModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="modalTitle">Request Full Version</h3>
+    <p>This page is public summary only. Full notes are kept private.</p>
+    <div class="modal-box">
+      <div class="muted">Tip: copy the chapter title above into your message.</div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="closeRequestModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+const modal = document.getElementById('requestModal');
+const modalTitle = document.getElementById('modalTitle');
+function openRequestModal(title) {
+  modalTitle.textContent = title || 'Request Full Version';
+  modal.style.display = 'flex';
+}
+function closeRequestModal() { modal.style.display = 'none'; }
+
+</script>
+</body>
+</html>

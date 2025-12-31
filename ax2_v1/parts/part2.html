@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Part 2. LLM Systems · AX²</title>
+  <style>
+:root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.0rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); }
+
+        /* --- Minimal Modal Styling --- */
+        #requestModal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); /* 네이비 톤 투명 배경 */
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .btn-close:hover { background: #f0f0f0; color: #333; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+
+        .toc { margin: 14px 0 20px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa; }
+        .toc a { text-decoration: none; }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 14px; }
+        .toc-item { display:flex; gap:8px; align-items: baseline; }
+        .toc-num { font-weight: 800; color: var(--navy); }
+        .toc-title { color: var(--ink); }
+        .compact-list { margin: 8px 0 0 18px; }
+        .post-block { scroll-margin-top: 120px; }
+        .post-actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 12px; }
+        @media (max-width: 720px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+<a id="top"></a>
+<header>
+  <a href="../index.html" class="back-link">← Back</a>
+  <div class="header-right">
+    <span class="badge">2부. LLM(설계·개발·활용)</span>
+  </div>
+</header>
+
+<main class="container">
+  <section class="category-head">
+    <h1>Part 2. LLM Systems</h1>
+    <p class="category-desc">프롬프트·스키마·툴·RAG·에이전트까지, 실무형 LLM 시스템 구축 흐름을 다룹니다.</p>
+  </section>
+
+  <section class="toc">
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">5</span><a class="toc-title" href="#ch5">LLM 동작 원리와 추론</a></div>
+<div class="toc-item"><span class="toc-num">6</span><a class="toc-title" href="#ch6">프롬프트 엔지니어링</a></div>
+<div class="toc-item"><span class="toc-num">7</span><a class="toc-title" href="#ch7">구조화 출력/스키마</a></div>
+<div class="toc-item"><span class="toc-num">8</span><a class="toc-title" href="#ch8">Tool/Function Calling</a></div>
+<div class="toc-item"><span class="toc-num">9</span><a class="toc-title" href="#ch9">품질 이슈와 대응</a></div>
+<div class="toc-item"><span class="toc-num">10</span><a class="toc-title" href="#ch10">RAG</a></div>
+<div class="toc-item"><span class="toc-num">11</span><a class="toc-title" href="#ch11">Agent/Workflow</a></div>
+    </div>
+  </section>
+
+  
+    <article class="post-block" id="A5">
+        <div class="post-header">
+            <h2>5장. LLM 동작 원리와 추론</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>토크나이저, 디코딩(샘플링/빔 등), 컨텍스트 창이 품질과 비용을 어떻게 결정하는지 설명합니다. “왜 같은 모델인데 결과가 들쭉날쭉한가”를 추론 과정 관점에서 이해하게 만듭니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: LLM은 다음 토큰 확률을 반복 예측해 문장을 생성한다.</li>
+                <li>핵심 원리: 디코딩 전략(temperature/top-p 등)이 다양성과 일관성을 바꾼다.</li>
+                <li>핵심 구성·기술: 토크나이저, 디코딩(샘플링/빔), KV-cache, 컨텍스트 윈도우, 추론 효율.</li>
+                <li>실무 포인트: 품질만 보지 말고 P95 지연·토큰 비용·캐시 히트율을 함께 최적화해야 한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!--button class="btn btn-primary" onclick="openRequestModal('Chapter 5: LLM 동작 원리와 추론')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=05'">View Full Version</button>          
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A6">
+        <div class="post-header">
+            <h2>6장. 프롬프트 엔지니어링</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>프롬프트를 자연어가 아니라 **명세(규칙/제약/형식)**로 다루는 관점을 정리합니다. 예시·템플릿·시스템 지시로 일관성을 올리고, 대표 실패 패턴(탈선/환각/형식 깨짐)을 줄이는 원리를 설명합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 프롬프트는 자연어가 아니라 “행동 명세/제약/형식 계약”이다.</li>
+                <li>핵심 원리: 예시(few-shot)와 역할/목표/제약의 명확화가 출력 분산을 줄인다.</li>
+                <li>핵심 구성·기술: 템플릿, 시스템 지시, 예시 설계, 실패 패턴(탈선/환각/형식 붕괴).</li>
+                <li>실무 포인트: 프롬프트는 버전관리·A/B·회귀테스트 대상이며, “금지/허용” 규칙을 문장으로 박아야 한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 6: 프롬프트 엔지니어링')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=06'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A7">
+        <div class="post-header">
+            <h2>7장. 구조화 출력/스키마</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>LLM 출력이 시스템에 들어가려면 스키마로 강제되어야 한다는 핵심을 다룹니다. JSON Schema/Pydantic 기반 검증과 재시도 설계를 통해 파싱 실패를 구조적으로 낮추는 방법을 정리합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 출력이 시스템에 들어가려면 JSON 등 구조화된 계약이 필요하다.</li>
+                <li>핵심 원리: 스키마 검증으로 오류를 “발견 가능한 실패”로 바꾸고 재시도로 복구한다.</li>
+                <li>핵심 구성·기술: JSON Schema, Pydantic, validator, retry 정책, partial repair.</li>
+                <li>실무 포인트: 파싱 실패는 운영 장애로 직결되므로, 스키마·검증·재시도를 기본값으로 둔다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 7: 구조화 출력/스키마')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=07'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A8">
+        <div class="post-header">
+            <h2>8장. Tool/Function Calling</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>LLM이 “답변”을 넘어 “행동”을 하게 되는 구조(도구 호출)를 설명합니다. 파라미터 검증, 허용 목록, 안전 실행이 왜 필수이며 이를 빼면 어떤 사고가 나는지 핵심 논리를 정리합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: LLM이 외부 도구(API/DB/업무시스템)를 호출해 실제 작업을 수행한다.</li>
+                <li>핵심 원리: 도구 입력은 엄격히 검증되어야 하며, 실행 권한은 분리돼야 한다.</li>
+                <li>핵심 구성·기술: 함수 시그니처, 파라미터 검증, allowlist, 샌드박스, 실행 로그/감사.</li>
+                <li>실무 포인트: “호출 가능 도구 최소화 + 검증 + 승인”이 없으면 인젝션/오남용 위험이 급증한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 8: Tool/Function Calling')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=08'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A9">
+        <div class="post-header">
+            <h2>9장. 품질 이슈와 대응</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>환각은 단일 현상이 아니라 근거 부족/질문 오해/정렬 실패 등으로 분해된다는 점을 강조합니다. 근거 요구, 답변 범위 제한, 불확실성 표현, 정책 기반 가드레일 같은 기본 대응의 원리를 정리합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 환각은 근거 부족/문맥 오해/요구사항 불명확/정렬 실패로 분해된다.</li>
+                <li>핵심 원리: 모델은 확률적 생성기이므로 “검증/근거/제약”을 시스템이 제공해야 한다.</li>
+                <li>핵심 구성·기술: 근거 요구, 불확실성 표현, 정책 필터링, self-check/consistency, refusal 전략.</li>
+                <li>실무 포인트: “근거 없으면 모른다”를 규칙화하고, 평가셋으로 환각 유형을 추적해야 한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!--button class="btn btn-primary" onclick="openRequestModal('Chapter 9: 품질 이슈와 대응')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=09'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A10">
+        <div class="post-header">
+            <h2>10장. RAG</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>RAG는 “지식을 붙이는 기술”이 아니라 검색→선별→압축→근거 기반 생성의 파이프라인이라는 점을 설명합니다. 벡터DB·하이브리드 검색·리랭크·컨텍스트 압축이 각각 어떤 품질 문제를 해결하는지 연결해서 정리합니다.</strong><p>
+            <ul class="compact-list">
+                <li>핵심 개념: RAG는 검색으로 근거를 확보한 뒤 그 근거로 답변을 생성하는 파이프라인이다.</li>
+                <li>핵심 원리: 품질은 검색(리콜)→선별(정밀)→압축(토큰예산)→생성의 합성 결과다.</li>
+                <li>핵심 구성·기술: 벡터DB, 하이브리드(BM25+벡터), 리랭크, 청킹, 컨텍스트 압축, ACL.</li>
+                <li>실무 포인트: Top-K만 늘리지 말고 리랭크/압축으로 효율을 확보하고, 인덱스 버전/권한을 캐시 키에 포함한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 10: RAG')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=10'">View Full Version</button>            
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A11">
+        <div class="post-header">
+            <h2>11장. Agent/Workflow</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>에이전트의 핵심은 자율성이 아니라 상태/검증/제어 가능한 멀티스텝이라는 관점을 제공합니다. 라우팅, 상태머신/그래프 오케스트레이션, 재시도·중단 조건을 통해 “운영 가능한 에이전트”를 만드는 원리를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 에이전트는 멀티스텝 의사결정+툴 실행을 “통제 가능한 워크플로우”로 만든 것이다.</li>
+                <li>핵심 원리: 상태(메모리)와 전이(규칙), 재시도/중단 조건이 있어야 안정적으로 동작한다.</li>
+                <li>핵심 구성·기술: 라우팅, 상태머신, 그래프 오케스트레이션, 계획-실행-검증 루프, 가드레일.</li>
+                <li>실무 포인트: 자율성을 높이기보다 “스텝 분해+스키마+검증+관측”으로 실패를 관리하는 게 핵심이다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 11: Agent/Workflow')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=11'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+    <article class="post-block" id="B2">
+        <div class="post-header">
+            <h2>B2. SLM 개요</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>SLM의 개요와 주요 기술에 대해서 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: To be defined</li>
+                <li>핵심 원리: To be defined</li>
+                <li>핵심 구성·기술: To be defined</li>
+                <li>실무 포인트: To be defined</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 11: Agent/Workflow')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=b2'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+    <article class="post-block" id="B3">
+        <div class="post-header">
+            <h2>B3. Context Managemenr 개요</h2>
+            <div class="post-date">Summary · 2부. LLM(설계·개발·활용)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>Context Management의 개요와 주요 기술에 대해서 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: To be defined</li>
+                <li>핵심 원리: To be defined</li>
+                <li>핵심 구성·기술: To be defined</li>
+                <li>실무 포인트: To be defined</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 11: Agent/Workflow')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=2&ch=b3'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>    
+</main>
+
+<div id="requestModal" onclick="closeRequestModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="modalTitle">Request Full Version</h3>
+    <p>This page is public summary only. Full notes are kept private.</p>
+    <div class="modal-box">
+      <div class="muted">Tip: copy the chapter title above into your message.</div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="closeRequestModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+const modal = document.getElementById('requestModal');
+const modalTitle = document.getElementById('modalTitle');
+function openRequestModal(title) {
+  modalTitle.textContent = title || 'Request Full Version';
+  modal.style.display = 'flex';
+}
+function closeRequestModal() { modal.style.display = 'none'; }
+
+</script>
+</body>
+</html>

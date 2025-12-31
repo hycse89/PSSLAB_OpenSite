@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Part 4. Special Topics · AX²</title>
+  <style>
+:root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.0rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); }
+
+        /* --- Minimal Modal Styling --- */
+        #requestModal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); /* 네이비 톤 투명 배경 */
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .btn-close:hover { background: #f0f0f0; color: #333; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+
+        .toc { margin: 14px 0 20px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa; }
+        .toc a { text-decoration: none; }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 14px; }
+        .toc-item { display:flex; gap:8px; align-items: baseline; }
+        .toc-num { font-weight: 800; color: var(--navy); }
+        .toc-title { color: var(--ink); }
+        .compact-list { margin: 8px 0 0 18px; }
+        .post-block { scroll-margin-top: 120px; }
+        .post-actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 12px; }
+        @media (max-width: 720px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+<a id="top"></a>
+<header>
+  <a href="../index.html" class="back-link">← Back</a>
+  <div class="header-right">
+    <span class="badge">4부. 기타 연관 또는 특수한 AI 분야</span>
+  </div>
+</header>
+
+<main class="container">
+  <section class="category-head">
+    <h1>Part 4. Special Topics</h1>
+    <p class="category-desc">멀티모달·시계열/추천·엣지·도메인 특화처럼 최신 트렌드와 제약이 큰 주제를 다룹니다.</p>
+  </section>
+
+  <section class="toc">
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">16</span><a class="toc-title" href="#ch16">멀티모달 AI</a></div>
+<div class="toc-item"><span class="toc-num">17</span><a class="toc-title" href="#ch17">이상탐지·예측·추천</a></div>
+<div class="toc-item"><span class="toc-num">18</span><a class="toc-title" href="#ch18">온디바이스·엣지 AI</a></div>
+<div class="toc-item"><span class="toc-num">19</span><a class="toc-title" href="#ch19">도메인 특화 적용 패턴</a></div>
+    </div>
+  </section>
+
+  
+    <article class="post-block" id="ch16">
+        <div class="post-header">
+            <h2>16장. 멀티모달 AI</h2>
+            <div class="post-date">Summary · 4부. 기타 연관 또는 특수한 AI 분야</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>멀티모달은 “모델 하나”가 아니라 전처리 + (멀티모달) 검색/RAG + 구조화 + 툴 실행의 결합 시스템이라는 관점을 정리합니다. 텍스트·이미지·음성·비디오를 함께 다룰 때 입력 정렬과 평가가 왜 더 중요해지는지 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 텍스트+이미지+음성+비디오를 함께 이해/검색/생성하는 통합 시스템이다.</li>
+                <li>핵심 원리: 모달 간 정렬(alignment)과 표현 통합이 품질을 결정한다.</li>
+                <li>핵심 구성·기술: 멀티모달 인코더, 멀티모달 RAG, 캡셔닝/비전-언어, 툴 연동.</li>
+                <li>실무 포인트: “어떤 모달을 왜 쓰는지”를 명확히 하고, 평가셋을 모달 조합별로 따로 구축한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 16: 멀티모달 AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=4&ch=16'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch17">
+        <div class="post-header">
+            <h2>17장. 이상탐지·예측·추천</h2>
+            <div class="post-date">Summary · 4부. 기타 연관 또는 특수한 AI 분야</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>현업 가치가 큰 영역은 여전히 시계열/로그/행동 기반의 비LLM 문제라는 점을 정리합니다. 이상탐지·예측·추천은 공통적으로 분포 변화와 평가 설계가 핵심이며, 목표/KPI에 따라 접근이 달라진다는 점을 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 시계열/로그/행동 데이터로 이상·미래·개인화를 다루는 핵심 응용군이다.</li>  
+                <li>핵심 원리: 분포 변화/시즌성/희소성이 크므로 평가·검증 체계가 성능만큼 중요하다.</li>
+                <li>핵심 구성·기술: 이상탐지, 예측(시계열), 추천/랭킹, 피처 스토어, 오프라인/온라인 평가.</li>
+                <li>실무 포인트: KPI(정확도 vs 비즈니스 가치)를 먼저 고정하고, 온라인 A/B로 검증하는 루프가 필수다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 17: 이상탐지·예측·추천')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=4&ch=17'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch18">
+        <div class="post-header">
+            <h2>18장. 온디바이스·엣지 AI</h2>
+            <div class="post-date">Summary · 4부. 기타 연관 또는 특수한 AI 분야</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>엣지 AI는 모델을 줄이는 문제가 아니라 지연·프라이버시·비용 제약을 만족하는 시스템 설계 문제로 정리합니다. 경량화/양자화/컴파일, 서버-디바이스 하이브리드 오프로딩의 핵심 트레이드오프를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 엣지는 전력/메모리/지연/오프라인 제약 하에서 AI를 실행하는 방식이다. </li>
+                <li>핵심 원리: 제약이 모델 구조·정밀도·런타임을 강제하며, 하이브리드 오프로딩이 현실적 해법이다.</li>
+                <li>핵심 구성·기술: 경량화, 양자화(저비트), 컴파일/런타임, OTA, 플릿 운영.</li>
+                <li>실무 포인트: “배포 후 업데이트/관측”이 성패를 좌우하므로 OTA/롤백/호환성 전략을 함께 설계한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 18: 온디바이스·엣지 AI')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=4&ch=18'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch19">
+        <div class="post-header">
+            <h2>19장. 도메인 특화 적용 패턴</h2>
+            <div class="post-date">Summary · 4부. 기타 연관 또는 특수한 AI 분야</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>의료/금융/제조 등에서는 성능보다 규정·리스크·검증·책임이 설계를 지배한다는 점을 다룹니다. HITL, 감사/증적, 데이터 소유권/권한, 골든셋·회귀 게이트 같은 반복 가능한 템플릿을 정리합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 의료/금융/제조는 규제·책임·검증 요구가 강한 환경이다.</li>
+                <li>핵심 원리: 성능보다 안전/감사/설명가능성이 우선되며 HITL이 표준 패턴이 된다.</li>
+                <li>핵심 구성·기술: HITL, 감사/증적, 데이터 권한/ACL, 골든셋/회귀, 위험분석.</li>
+                <li>실무 포인트: 도메인에서는 “정답 정의와 승인권자”부터 정해야 하며, 운영 프로세스가 기술만큼 중요</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 19: 도메인 특화 적용 패턴')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=4&ch=19'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+    <article class="post-block" id="B5">
+        <div class="post-header">
+            <h2>B5. Document 기술 개요</h2>
+            <div class="post-date">Summary · 4부. 기타 연관 또는 특수한 AI 분야</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>Document 기술에 대한 개요와 관련 기술을 소개합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: To be defined</li>
+                <li>핵심 원리: To be defined</li>
+                <li>핵심 구성·기술: To be defined</li>
+                <li>실무 포인트: To be defined</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=15'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+
+</main>
+
+<div id="requestModal" onclick="closeRequestModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="modalTitle">Request Full Version</h3>
+    <p>This page is public summary only. Full notes are kept private.</p>
+    <div class="modal-box">
+      <div class="muted">Tip: copy the chapter title above into your message.</div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="closeRequestModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+const modal = document.getElementById('requestModal');
+const modalTitle = document.getElementById('modalTitle');
+function openRequestModal(title) {
+  modalTitle.textContent = title || 'Request Full Version';
+  modal.style.display = 'flex';
+}
+function closeRequestModal() { modal.style.display = 'none'; }
+
+</script>
+</body>
+</html>

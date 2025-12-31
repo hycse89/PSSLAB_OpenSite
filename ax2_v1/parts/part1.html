@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Part 1. AI Foundations · AX²</title>
+  <style>
+:root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.0rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); }
+
+        /* --- Minimal Modal Styling --- */
+        #requestModal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); /* 네이비 톤 투명 배경 */
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .btn-close:hover { background: #f0f0f0; color: #333; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+
+        .toc { margin: 14px 0 20px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa; }
+        .toc a { text-decoration: none; }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 14px; }
+        .toc-item { display:flex; gap:8px; align-items: baseline; }
+        .toc-num { font-weight: 800; color: var(--navy); }
+        .toc-title { color: var(--ink); }
+        .compact-list { margin: 8px 0 0 18px; }
+        .post-block { scroll-margin-top: 120px; }
+        .post-actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 12px; }
+        @media (max-width: 720px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+<a id="top"></a>
+<header>
+  <a href="../index.html" class="back-link">← Back</a>
+  <div class="header-right">
+    <span class="badge">1부. AI 개념(기초 프레임)</span>
+  </div>
+</header>
+
+<main class="container">
+  <section class="category-head">
+    <h1>Part 1. AI Foundations</h1>
+    <p class="category-desc">AI/ML/DL 기초 프레임과 평가·NLP·Transformer 핵심 개념을 빠르게 정리합니다.</p>
+  </section>
+
+  <section class="toc">
+    <div class="toc-grid">
+      <div class="toc-item"><span class="toc-num">A1</span><a class="toc-title" href="#A1">AI/ML/DL 개요</a></div>
+      <div class="toc-item"><span class="toc-num">A2</span><a class="toc-title" href="#A2">학습/평가 기본</a></div>
+      <div class="toc-item"><span class="toc-num">A3</span><a class="toc-title" href="#A3">NLP AI 개요</a></div>
+      <div class="toc-item"><span class="toc-num">A4</span><a class="toc-title" href="#A4">Transformer &amp; Attention</a></div>
+      <div class="toc-item"><span class="toc-num">B1</span><a class="toc-title" href="#B1">AX 개요</a></div>      
+    </div>
+  </section>
+
+  
+    <article class="post-block" id="A1">
+        <div class="post-header">
+            <h2>1장. AI/ML/DL 개요</h2>
+            <div class="post-date">Summary · 1부. AI 개념(기초 프레임)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>AI를 “모델”이 아니라 제품/시스템으로 보는 관점을 먼저 잡습니다. AI/ML/DL과 파운데이션 모델 시대의 차이를 구분하고, 품질이 깨지는 원인을 레이어별로 분해하는 사고방식을 정리합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: AI 문제를 데이터·목표·제약으로 정의하고 적절한 학습 패러다임을 선택한다.</li>
+                <li>핵심 원리: 성능은 모델만이 아니라 데이터 분포/라벨/피처 설계와 목적함수 정렬에 의해 결정된다.</li>
+                <li>핵심 구성·기술: 지도/비지도/강화학습, 분류·회귀·클러스터링, 데이터 파이프라인/라벨링.</li>
+                <li>실무 포인트: “문제정의→데이터가능성→평가지표”를 먼저 고정하면 시행착오가 급감한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 1: AI/ML/DL 개요')">Request Full Version (EMail)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=1&ch=01'">View Full Version</button>            
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A2">
+        <div class="post-header">
+            <h2>2장. 학습/평가 기본</h2>
+            <div class="post-date">Summary · 1부. AI 개념(기초 프레임)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>손실함수·일반화·과적합이 무엇이며 왜 발생하는지 핵심 원리를 정리합니다.지표 선택과 실험 설계를 통해 “좋다/나쁘다”를 재현 가능하게 정의하는 방법을 다룹니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 학습은 손실 최소화, 평가는 일반화 성능을 검증하는 체계이다.</li>
+                <li>핵심 원리: 과적합은 모델 용량·데이터량·정규화·누수 여부의 상호작용으로 발생한다.</li>
+                <li>핵심 구성·기술: 손실함수, 정규화/early stopping, train/valid/test 분리, 지표(accuracy/F1/AUC 등), 실험 설계.</li>
+                <li>실무 포인트: 지표를 KPI와 연결하고, 데이터 누수/분포 차이부터 의심하는 습관이 중요하다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 2: 학습/평가 기본')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=1&ch=02'">View Full Version</button>                        
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A3">
+        <div class="post-header">
+            <h2>3장. NLP AI 개요</h2>
+            <div class="post-date">Summary · 1부. AI 개념(기초 프레임)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>텍스트를 토큰화하고 벡터(임베딩)로 바꾸는 이유와 효과를 설명합니다. 분류/추출/생성 등 NLP 태스크를 구조적으로 구분하고, 임베딩이 검색·RAG로 이어지는 연결을 잡습니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 텍스트를 토큰/임베딩으로 변환해 모델이 처리 가능한 형태로 만든다.</li>
+                <li>핵심 원리: 의미 유사성은 임베딩 공간에서의 거리/내적으로 표현되며 검색·분류의 기반이 된다.</li>
+                <li>핵심 구성·기술: 토큰화(BPE 등), 임베딩, 태스크(분류/NER/요약/질의응답).</li>
+                <li>실무 포인트: 토큰화/전처리 일관성이 품질을 좌우하며, 임베딩 품질이 RAG 성능의 출발점이다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!--button class="btn btn-primary" onclick="openRequestModal('Chapter 3: NLP AI 개요')">Request Full Version (Private)</button-->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=1&ch=03'">View Full Version</button>                 
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="A4">
+        <div class="post-header">
+            <h2>4장. Transformer &amp; Attention</h2>
+            <div class="post-date">Summary · 1부. AI 개념(기초 프레임)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>Attention이 왜 성능을 끌어올렸는지(정보 선택·조합) 핵심만 정리합니다. 인코더/디코더 구조와 포지셔널 정보가 무엇을 해결하는지, 그리고 컨텍스트 길이·비용 문제가 왜 생기는지 설명합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: Attention은 입력 전체에서 중요한 정보를 가중합으로 선택·조합하는 메커니즘이다.</li>
+                <li>핵심 원리: Self-Attention으로 장거리 의존성을 학습하며, 포지셔널 정보로 순서를 보완한다.</li>
+                <li>핵심 구성·기술: 인코더/디코더, 멀티헤드 어텐션, FFN, 포지셔널 인코딩, 컨텍스트 길이.</li>
+                <li>실무 포인트: 컨텍스트가 길어질수록 비용/지연이 급증하므로 “무엇을 넣을지”가 설계의 핵심이다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 4: Transformer &amp; Attention')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=1&ch=04'">View Full Version</button>                 
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+
+    <article class="post-block" id="B1">
+        <div class="post-header">
+            <h2>B1. AX(AI Experience) 개요</h2>
+            <div class="post-date">Summary · 1부. AI 개념(기초 프레임)</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>AI Experience의 핵심 요소를 정리합니다. AX가 어떻게 구성되고, 어떤 방식으로 사용되는지, 그리고 실무에서의 적용 사례를 설명합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: To be defined</li>
+                <li>핵심 원리: To be defined</li>
+                <li>핵심 구성·기술: To be defined</li>
+                <li>실무 포인트: To be defined</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=1&ch=b1'">View Full Version</button>                 
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+</main>
+
+
+<div id="requestModal" onclick="closeRequestModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="modalTitle">Request Full Version</h3>
+    <p>This page is public summary only. Full notes are kept private.</p>
+    <div class="modal-box">
+      <div class="muted">Tip: copy the chapter title above into your message.</div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="closeRequestModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+const modal = document.getElementById('requestModal');
+const modalTitle = document.getElementById('modalTitle');
+function openRequestModal(title) {
+  modalTitle.textContent = title || 'Request Full Version';
+  modal.style.display = 'flex';
+}
+function closeRequestModal() { modal.style.display = 'none'; }
+
+</script>
+</body>
+</html>

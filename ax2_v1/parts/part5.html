@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Part 5. Ops &amp; Governance · AX²</title>
+  <style>
+:root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.0rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); }
+
+        /* --- Minimal Modal Styling --- */
+        #requestModal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); /* 네이비 톤 투명 배경 */
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .btn-close:hover { background: #f0f0f0; color: #333; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+
+        .toc { margin: 14px 0 20px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: #fafafa; }
+        .toc a { text-decoration: none; }
+        .toc-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px 14px; }
+        .toc-item { display:flex; gap:8px; align-items: baseline; }
+        .toc-num { font-weight: 800; color: var(--navy); }
+        .toc-title { color: var(--ink); }
+        .compact-list { margin: 8px 0 0 18px; }
+        .post-block { scroll-margin-top: 120px; }
+        .post-actions { display:flex; gap:10px; flex-wrap: wrap; margin-top: 12px; }
+        @media (max-width: 720px) { .toc-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+<a id="top"></a>
+<header>
+  <a href="../index.html" class="back-link">← Back</a>
+  <div class="header-right">
+    <span class="badge">5부. AI 관리/운영/거버넌스</span>
+  </div>
+</header>
+
+<main class="container">
+  <section class="category-head">
+    <h1>Part 5. Ops &amp; Governance</h1>
+    <p class="category-desc">서비스 운영 관점에서 배포·보안·평가·개선·거버넌스·드리프트·비용을 체계화합니다.</p>
+  </section>
+  
+  <section class="toc">
+    <div class="toc-grid">
+        <div class="toc-item"><span class="toc-num">20</span><a class="toc-title" href="#ch20">배포·서빙·운영</a></div>
+        <div class="toc-item"><span class="toc-num">21</span><a class="toc-title" href="#ch21">보안·프라이버시·안전</a></div>
+        <div class="toc-item"><span class="toc-num">22</span><a class="toc-title" href="#ch22">품질 평가·테스트·회귀</a></div>
+        <div class="toc-item"><span class="toc-num">23</span><a class="toc-title" href="#ch23">지속 개선 루프</a></div>
+        <div class="toc-item"><span class="toc-num">24</span><a class="toc-title" href="#ch24">거버넌스·표준·조직 운영</a></div>
+        <div class="toc-item"><span class="toc-num">25</span><a class="toc-title" href="#ch25">드리프트·모니터링·재학습</a></div>
+        <div class="toc-item"><span class="toc-num">26</span><a class="toc-title" href="#ch26">비용 최적화·라우팅·캐시</a></div>
+    </div>
+  </section>
+
+  
+    <article class="post-block" id="ch20">
+        <div class="post-header">
+            <h2>20장. 배포·서빙·운영</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>제품화의 승부처는 학습이 아니라 **서빙 품질(지연·비용·안정성·관측·감사)**이라는 점을 핵심 메시지로 정리합니다. P95/P99 지연, 처리량, 캐시/배치, 타임아웃/롤백, 관측 가능성 등을 하나의 운영 레버로 연결합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 모델을 서비스로 운영하려면 서빙·관측·안정성·릴리즈 체계가 필요하다.</li>
+                <li>핵심 원리: 품질은 평균이 아니라 tail latency(P95/P99)와 장애 모드에서 무너진다.</li>
+                <li>핵심 구성·기술: 서빙 엔진, 캐시/배치, 관측(로그/메트릭/트레이스), 롤백, SLO.</li>
+                <li>실무 포인트: “성능 저하→원인추적→완화”를 운영 루틴으로 만들고, 관측 없이는 개선도 불가능하다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 20: 배포·서빙·운영')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=20'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch21">
+        <div class="post-header">
+            <h2>21장. 보안·프라이버시·안전</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>LLM 시스템의 주요 리스크는 PII/권한/정책 위반과 프롬프트 인젝션·툴 오용이라는 점을 정리합니다. 정책·ACL·검증·감사로그로 “실행되면 안 되는 것”을 구조적으로 차단하는 원리를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: LLM 시스템 리스크는 PII/권한/정책 위반과 인젝션·툴 오용이다.</li>
+                <li>핵심 원리: 입력·출력·도구 실행 지점에 정책/검증/감사를 두어 방어선을 만든다.</li>
+                <li>핵심 구성·기술: ACL, PII 마스킹, 인젝션 대응, 정책 엔진, 감사 로그, allowlist.</li>
+                <li>실무 포인트: “권한/데이터 경계”를 먼저 설계하고, 비정상 요청을 차단/격리하는 운영 규칙이 필요하다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 21: 보안·프라이버시·안전')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=21'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a> 
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch22">
+        <div class="post-header">
+            <h2>22장. 품질 평가·테스트·회귀</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>LLM/RAG/Agent는 데모 품질이 아니라 회귀에 강한 품질 시스템이 필요하다는 점을 다룹니다. 골든셋·루브릭·레드팀·릴리즈 게이트로 품질을 지속적으로 유지하는 평가 체계를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: LLM/RAG/Agent는 데모가 아니라 회귀에 강한 평가 시스템이 필요하다.</li>
+                <li>핵심 원리: 실패 유형을 분해해 골든셋/루브릭으로 측정하고 릴리즈 게이트로 차단한다.</li>
+                <li>핵심 구성·기술: 골든셋, 루브릭, 자동 평가, 레드팀, 회귀 테스트, 릴리즈 게이트.</li>
+                <li>실무 포인트: “측정 가능한 기준”이 없으면 개선이 누적되지 않으며, 평가 없는 배포는 품질 부채를 만든다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 22: 품질 평가·테스트·회귀')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=22'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch23">
+        <div class="post-header">
+            <h2>23장. 지속 개선 루프</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>운영 피드백을 데이터로 바꿔 개선→평가→배포가 반복되는 루프를 만드는 원리를 정리합니다. “무엇을 고칠지”를 우선순위화하고 재발 방지까지 이어지는 구조를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 운영 피드백을 데이터화해 개선→평가→배포를 반복하는 체계다.</li>
+                <li>핵심 원리: 문제를 유형화하고 우선순위를 정해야 개선이 누적된다.</li>
+                <li>핵심 구성·기술: 피드백 수집, 라벨링/분류, 실험/릴리즈, 지표 대시보드, 이슈 트래킹.</li>
+                <li>실무 포인트: “재현 가능한 케이스(샘플)”를 쌓아야 고쳐지고, 고친 뒤엔 회귀로 고정해야 한다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 23: 지속 개선 루프')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=23'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch24">
+        <div class="post-header">
+            <h2>24장. 거버넌스·표준·조직 운영</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>AI 운영은 기술만으로 통제되지 않으며 역할/책임/변경관리/감사가 품질과 안전을 좌우한다는 점을 다룹니다. RACI와 표준 템플릿, 증적 체계를 통해 조직이 AI를 책임 있게 소유하는 방법을 정리합니다.</strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: AI 운영은 기술+조직 체계(RACI/변경관리/감사)로 통제된다.</li>
+                <li>핵심 원리: 책임과 승인 흐름이 명확해야 안전·품질·법무 리스크가 관리된다.</li>
+                <li>핵심 구성·기술: RACI, 변경관리, 표준 템플릿, 감사/증적, 정책 문서화.</li>
+                <li>실무 포인트: 팀/모델/데이터가 늘수록 표준과 증적이 없으면 운영이 무너진다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 24: 거버넌스·표준·조직 운영')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=24'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+
+    <article class="post-block" id="ch25">
+        <div class="post-header">
+            <h2>25장. 드리프트·모니터링·재학습</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>모델/데이터/프롬프트/인덱스가 변하면서 성능이 떨어지는 현상을 드리프트로 정리합니다. 감지→완화→재학습(또는 재인덱싱)→게이트→롤백까지 자동화 체인으로 품질을 지키는 원리를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 데이터/환경 변화로 성능이 떨어지는 드리프트를 탐지·완화·복구하는 체계다.</li>
+                <li>핵심 원리: 감지(모니터링)→완화(룰/라우팅)→재학습/재인덱싱→게이트→롤백의 파이프라인이 필요하다.</li>
+                <li>핵심 구성·기술: 드리프트 지표, 모니터링, 자동 재학습/재인덱싱, 실험/게이트, 롤백.</li>
+                <li>실무 포인트: 무엇이 변했는지(데이터/프롬프트/인덱스/정책)를 추적할 수 있어야 원인분석이 가능하다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 25: 드리프트·모니터링·재학습')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=25'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+
+    <article class="post-block" id="ch26">
+        <div class="post-header">
+            <h2>26장. 비용 최적화·라우팅·캐시</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>비용은 “모델 단가”가 아니라 라우팅·캐시·토큰/컨텍스트 절감·서빙 효율·예산 가드레일 같은 아키텍처 습관에서 결정된다는 점을 정리합니다. 요청 분류 후 필요한 경우에만 큰 모델을 쓰고, 반복을 캐시로 줄이며, 관측으로 비용 폭주를 막는 구조를 설명합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: 비용은 모델 크기보다 요청 처리 구조(라우팅/캐시/토큰 예산)에서 결정된다.</li>
+                <li>핵심 원리: “필요할 때만 큰 모델”을 쓰고 반복은 캐시로 줄이며 컨텍스트를 압축한다.</li>
+                <li>핵심 구성·기술: 모델 라우팅, 캐시, 컨텍스트 압축, 토큰 절감, 예산 가드레일, 관측 기반 FinOps.</li>
+                <li>실무 포인트: 품질을 떨어뜨리지 않는 비용 절감은 ‘측정→정책→자동화’로 운영해야 지속된다.</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <!-- button class="btn btn-primary" onclick="openRequestModal('Chapter 26: 비용 최적화·라우팅·캐시')">Request Full Version (Private)</button -->
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=5&ch=26'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+    
+    <article class="post-block" id="B6">
+        <div class="post-header">
+            <h2>B6. AI Orchestration 개요</h2>
+            <div class="post-date">Summary · 5부. AI 관리/운영/거버넌스</div>
+        </div>
+        <div class="summary-content">
+            <p><strong>Orchestration 기술에 대한 개요와 관련 기술을 소개합니다. </strong></p>
+            <ul class="compact-list">
+                <li>핵심 개념: To be defined</li>
+                <li>핵심 원리: To be defined</li>
+                <li>핵심 구성·기술: To be defined</li>
+                <li>실무 포인트: To be defined</li>
+            </ul>
+        </div>
+        <div class="post-actions">
+            <button class="btn btn-primary" onclick="window.location.href='../full/chapter.html?part=3&ch=15'">View Full Version</button>
+            <a class="btn btn-ghost" href="#top">Back to top</a>
+        </div>
+    </article>
+
+</main>
+
+
+<div id="requestModal" onclick="closeRequestModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3 id="modalTitle">Request Full Version</h3>
+    <p>This page is public summary only. Full notes are kept private.</p>
+    <div class="modal-box">
+      <div class="muted">Tip: copy the chapter title above into your message.</div>
+    </div>
+    <div style="margin-top:12px; display:flex; gap:10px; justify-content:flex-end; flex-wrap:wrap;">
+      <button class="btn btn-ghost" onclick="closeRequestModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+const modal = document.getElementById('requestModal');
+const modalTitle = document.getElementById('modalTitle');
+function openRequestModal(title) {
+  modalTitle.textContent = title || 'Request Full Version';
+  modal.style.display = 'flex';
+}
+function closeRequestModal() { modal.style.display = 'none'; }
+
+</script>
+</body>
+</html>
