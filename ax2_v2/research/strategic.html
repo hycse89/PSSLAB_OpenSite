@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Perspective | PSSLAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); }
+
+        /* --- Minimal Modal Styling --- */
+        #requestModal {
+            display: none; /* 기본적으로 숨김 */
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); /* 네이비 톤 투명 배경 */
+            z-index: 1000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff;
+            padding: 3rem;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            border-top: 4px solid var(--gold);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+        .btn-close:hover { background: #f0f0f0; color: #333; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="back-link">← Back to Portal</a>
+    <span class="header-logo">PSSLAB Research</span>
+</header>
+
+<div class="container">
+    <div class="category-head">
+        <h1>Strategic Perspective</h1>
+        <p>Redefining Enterprise Structure and Knowledge IP.</p>
+    </div>
+
+    <article class="post-block" id="post-20251221">
+        <div class="post-header">
+            <h2>AX² Framework: 12 Strategic Pillars for CEOs</h2>
+            <span class="post-date">DEC 21, 2025</span>
+        </div>
+        <div class="summary-content">
+            This research highlights the strategic effect of the AX² system, transforming a company into a "Human+AI" intelligent organization where knowledge is redefined as data, models, and agents.
+            <div class="summary-kr">
+                [요약] AX² 시스템을 통해 기업 지식과 업무가 어떻게 데이터, 모델, 에이전트로 재정의되는지 설명합니다.
+            </div>
+        </div>
+        <button onclick="openRequestModal('AX2 Framework: 12 Strategic Pillars')" class="btn-request">Request Full Version (PDF)</button>
+    </article>
+
+    <article class="post-block" id="post-20251103">
+        <div class="post-header">
+            <h2>M&A Strategy and Knowledge Integration Hub</h2>
+            <span class="post-date">NOV 03, 2025</span>
+        </div>
+        <div class="summary-content">
+            LAKE acts as a hub for systematic knowledge integration during M&A, converting acquired assets into reusable AXObjects to minimize human capital risks.
+            <div class="summary-kr">
+                [요약] M&A 시 LAKE를 통해 인수 대상의 지식을 AXObject로 변환하여 체계적으로 흡수하는 전략을 다룹니다.
+            </div>
+        </div>
+        <button onclick="openRequestModal('M&A Strategy and Knowledge Integration Hub')" class="btn-request">Request Full Version (PDF)</button>
+    </article>
+</div>
+
+<div id="requestModal" onclick="closeRequestModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3>Document Request</h3>
+        <p>To receive the full version of the selected research paper, please send an email request to the address below. All contents are allowed only for our clients or partners.</p>
+        <div class="email-box">contact@psslab.com</div>
+        <p style="font-size: 0.8rem; font-style: italic;">"Our research team will review your inquiry and respond shortly."</p>
+        <button class="btn-close" onclick="closeRequestModal()">Close</button>
+    </div>
+</div>
+
+<footer>&copy; 2025 PSSLAB. All rights reserved.</footer>
+
+<script>
+    const modal = document.getElementById('requestModal');
+
+    function openRequestModal(title) {
+        // 나중에 제목을 동적으로 사용하고 싶다면 여기에 추가 로직 가능
+        modal.style.display = 'flex';
+    }
+
+    function closeRequestModal() {
+        modal.style.display = 'none';
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Perspective | PSSLAB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #fff; --navy: #002347; --gold: #a68966; --text: #111; --sub: #777; --border: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.8; color: var(--text); margin: 0; padding: 0; }
+        
+        header { border-bottom: 1px solid var(--border); padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center; background: #fff; position: sticky; top: 0; z-index: 10; }
+        .back-link { text-decoration: none; color: var(--navy); font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .header-logo { font-family: 'Libre Baskerville', serif; font-weight: 700; color: var(--navy); font-size: 1.1rem; }
+
+        .container { max-width: 800px; margin: 0 auto; padding: 4rem 5%; }
+        
+        .category-head { font-family: 'Libre Baskerville', serif; margin-bottom: 5rem; border-bottom: 2px solid var(--navy); padding-bottom: 1.5rem; }
+        .category-head h1 { font-size: 2.2rem; margin: 0; color: var(--navy); letter-spacing: -1px; }
+        .category-head p { color: var(--sub); font-size: 1rem; margin-top: 0.5rem; }
+        
+        /* Research Post Block */
+        .post-block { margin-bottom: 6rem; scroll-margin-top: 120px; }
+        .post-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+        .post-header h2 { font-family: 'Libre Baskerville', serif; font-size: 1.5rem; margin: 0; color: var(--navy); line-height: 1.2; }
+        .post-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; min-width: 100px; text-align: right; }
+        
+        .summary-content { font-size: 1.05rem; margin-bottom: 2rem; text-align: justify; color: #333; }
+        .summary-kr { font-size: 0.9rem; color: var(--sub); font-style: italic; border-left: 3px solid var(--gold); padding-left: 1.5rem; margin-top: 1.5rem; line-height: 1.6; }
+        
+        .btn-request { display: inline-block; padding: 0.8rem 1.5rem; background: var(--navy); color: #fff; text-decoration: none; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn-request:hover { background: var(--gold); transform: translateY(-1px); }
+
+        /* Minimal Modal Styling */
+        #requestModal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 35, 71, 0.6); z-index: 1000; justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #fff; padding: 3rem; max-width: 450px; width: 90%; text-align: center;
+            border-top: 4px solid var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-content h3 { font-family: 'Libre Baskerville', serif; color: var(--navy); margin-top: 0; }
+        .modal-content p { font-size: 0.95rem; color: var(--sub); margin: 1.5rem 0; }
+        .email-box { background: #f8f8f8; padding: 1rem; font-weight: 600; color: var(--navy); border: 1px dashed var(--gold); margin-bottom: 1.5rem; }
+        .btn-close { background: none; border: 1px solid var(--border); padding: 0.5rem 1rem; cursor: pointer; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #999; }
+
+        footer { padding: 4rem 5%; border-top: 1px solid var(--border); font-size: 0.75rem; color: #999; text-align: center; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="back-link">← Back to Portal</a>
+    <span class="header-logo">PSSLAB Research</span>
+</header>
+
+<div class="container">
+    <div class="category-head">
+        <h1>Technical Perspective</h1>
+        <p>Engineering the Architecture of AX² Enterprise AI Operating System.</p>
+    </div>
+
+    <article class="post-block" id="post-tech-01">
+        <div class="post-header">
+            <h2>AXObject Abstraction: Intelligent Data Structuring</h2>
+            <span class="post-date">NOV 25, 2025</span>
+        </div>
+        <div class="summary-content">
+            LAKE serves as a storage layer that standardizes corporate assets into "AXObjects." Unlike traditional databases, LAKE performs data transformation for AI consumption through chunking, indexing, and metadata tagging, creating a "Context Fabric" for the entire system.
+            <div class="summary-kr">
+                [요약] LAKE는 기업 자산을 'AXObject'로 표준화하는 계층입니다. 전통적 DB와 달리 덩어리화(Chunking), 인덱싱, 메타데이터 태깅을 통해 AI가 이해 가능한 '컨텍스트 패브릭'을 구축하는 방법론을 다룹니다.
+            </div>
+        </div>
+        <button onclick="openRequestModal('AXObject Abstraction: Intelligent Data Structuring')" class="btn-request">Request Full Version (PDF)</button>
+    </article>
+
+    <article class="post-block" id="post-tech-02">
+        <div class="post-header">
+            <h2>AI-WARE Kernel: Secure Action Enforcement</h2>
+            <span class="post-date">OCT 12, 2025</span>
+        </div>
+        <div class="summary-content">
+            AI-WARE acts as the operating system's kernel, serving as the entry point for all external actions. It enforces a security pipeline including policy check, audit trail, and approval gateways to transform autonomous AI into a "controlled autonomous" entity.
+            <div class="summary-kr">
+                [요약] AI-WARE는 모든 외부 액션의 진입점이자 커널 역할을 합니다. 정책 검증, 감사 기록, 승인 게이트웨이를 포함한 보안 파이프라인을 통해 AI의 행동을 '통제된 자율성' 상태로 관리하는 기술적 구조를 설명합니다.
+            </div>
+        </div>
+        <button onclick="openRequestModal('AI-WARE Kernel: Secure Action Enforcement')" class="btn-request">Request Full Version (PDF)</button>
+    </article>
+
+</div>
+
+<div id="requestModal" onclick="closeRequestModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3>Document Request</h3>
+        <p>To receive the full version of the selected technical paper, please send an email request to the address below.</p>
+        <div class="email-box">contact@psslab.com</div>
+        <p style="font-size: 0.8rem; font-style: italic;">"Our research team will review your inquiry and respond shortly."</p>
+        <button class="btn-close" onclick="closeRequestModal()">Close</button>
+    </div>
+</div>
+
+<footer>
+    Precision Strategy & System Laboratory <br>
+    &copy; 2025 PSSLAB. All rights reserved.
+</footer>
+
+<script>
+    const modal = document.getElementById('requestModal');
+    function openRequestModal(title) { modal.style.display = 'flex'; }
+    function closeRequestModal() { modal.style.display = 'none'; }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">    
+    <title>PSSLAB | AX² System: Enterprise AI Operating System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color: #ffffff; --text-en: #111111; --text-kr: #777777; --accent-navy: #002347; --accent-gold: #a68966; --border-color: #eeeeee; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: var(--text-en); background-color: var(--bg-color); margin: 0; padding: 0; word-break: keep-all; }
+        header { border-bottom: 1px solid var(--accent-navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: baseline; background: #fff; position: sticky; top: 0; z-index: 100; }
+        .logo { font-family: 'Libre Baskerville', serif; font-weight: 700; font-size: 1.3rem; letter-spacing: -0.5px; color: var(--accent-navy); text-decoration: none; }
+        nav a { margin-left: 1.5rem; text-decoration: none; color: var(--text-en); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 5% 3rem 5%; }
+        
+        .hero-container { height: 280px; position: relative; margin-bottom: 1rem; overflow: hidden; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateY(10px); transition: all 0.5s ease; pointer-events: none; }
+        .hero-slide.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        .hero h1 { font-family: 'Libre Baskerville', serif; font-size: 2.2rem; line-height: 1.1; margin-bottom: 1rem; color: var(--accent-navy); }
+        .abstract-en { font-size: 1rem; text-align: justify; margin-bottom: 0.8rem; }
+        .abstract-kr { font-size: 0.85rem; color: var(--text-kr); border-left: 2px solid var(--accent-gold); padding-left: 1rem; }
+        .hero-nav { display: flex; gap: 1.2rem; margin-bottom: 2rem; align-items: center; }
+        .nav-item { font-family: 'Libre Baskerville', serif; font-size: 0.8rem; color: #ccc; cursor: pointer; padding-bottom: 3px; background: none; border: none; }
+        .nav-item.active { color: var(--accent-gold); font-weight: 700; border-bottom: 1px solid var(--accent-gold); }
+
+        .section-title { font-family: 'Libre Baskerville', serif; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-gold); margin: 2.5rem 0 1.2rem 0; display: flex; align-items: center; }
+        .section-title::after { content: ""; flex-grow: 1; height: 1px; background: var(--border-color); margin-left: 1rem; }
+        
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
+        .pillar h3 { font-family: 'Libre Baskerville', serif; font-size: 1.1rem; color: var(--accent-navy); margin-bottom: 0.5rem; }
+        .pillar .desc-kr { font-size: 0.75rem; color: var(--text-kr); line-height: 1.4; }
+
+        .log-item { padding: 0.8rem 0; border-bottom: 1px solid var(--border-color); display: grid; grid-template-columns: 90px 1fr; }
+        .log-date { font-size: 0.75rem; font-weight: 600; color: #999; }
+        .log-content strong { display: block; font-size: 0.95rem; margin-bottom: 0.2rem; }
+        .log-kr { font-size: 0.8rem; color: var(--text-kr); }
+        
+        /* Update Tag Style */
+        .type-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--accent-gold); margin-right: 5px; border: 1px solid var(--accent-gold); padding: 0 4px; border-radius: 2px; }
+
+        .library-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+        .lib-category { margin-bottom: 1rem; }
+        .lib-category h4 { font-family: 'Libre Baskerville', serif; font-size: 0.85rem; border-bottom: 1px solid var(--accent-navy); padding-bottom: 0.3rem; margin-bottom: 0.8rem; color: var(--accent-navy); }
+        .lib-list { list-style: none; padding: 0; margin: 0; }
+        .lib-item { margin-bottom: 0.4rem; font-size: 0.8rem; line-height: 1.3; display: flex; align-items: flex-start; }
+        .lib-item a { text-decoration: none; color: inherit; }
+        .lib-item a:hover { color: var(--accent-gold); }
+        .lib-item::before { content: "•"; color: var(--accent-gold); margin-right: 8px; }
+
+        footer { padding: 1.5rem 5%; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-size: 0.65rem; color: #999; }
+        @media (max-width: 768px) { .grid, .library-grid { grid-template-columns: 1fr; } .hero-container { height: 380px; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="#" class="logo">PSSLAB | AX² System</a>
+    <nav>
+        <a href="#fundamental">Fundamental</a>
+        <a href="#update">Update</a>
+        <a href="#article">Article</a>        
+        <a href="#report">Report</a>
+        <a href="#paper">Paper</a>        
+    </nav>
+</header>
+
+<div class="container">
+    <div class="hero-container" id="about">
+        <div class="hero-slide active">
+            <section class="hero">
+                <h1>01. Techno Naturalism</h1>
+                <div class="abstract-en">Harmonizing advanced technology with the business ecosystem.</div>
+                <div class="abstract-kr">첨단 기술과 비즈니스 생태계의 조화로운 통합을 위한 철학적 기반입니다.</div>
+            </section>
+        </div>
+        <div class="hero-slide">
+            <section class="hero">
+                <h1>02. Micro MOT</h1>
+                <div class="abstract-en">Securing intelligence IP through granular technology management.</div>
+                <div class="abstract-kr">기업 고유의 지능 IP 확보를 위한 세밀한 기술 경영 방법론입니다.</div>
+            </section>
+        </div>
+        <div class="hero-slide">
+            <section class="hero">
+                <h1>03. AX² Definition</h1>
+                <div class="abstract-en">Redefining the enterprise as an AI-native Operating System.</div>
+                <div class="abstract-kr">기업을 AI 네이티브 운영체제로 재정의하는 포괄적 프레임워크입니다.</div>
+            </section>
+        </div>
+        <div class="hero-slide">
+            <section class="hero">
+                <h1>04. AX² System</h1>
+                <div class="abstract-en">Operational framework: LAKE, MODEL, AGENT, and AI-WARE.</div>
+                <div class="abstract-kr">LAKE, MODEL, AGENT, AI-WARE로 구성된 실질적인 실행 체계입니다.</div>
+            </section>
+        </div>
+    </div>
+
+    <div class="hero-nav">
+        <button class="nav-item active" onclick="goToSlide(0)">01. 기술자연주의</button>
+        <button class="nav-item" onclick="goToSlide(1)">02. Micro MOT</button>
+        <button class="nav-item" onclick="goToSlide(2)">03. AX² Definition</button>
+        <button class="nav-item" onclick="goToSlide(3)">04. AX² System</button>        
+    </div>
+
+    <div class="section-title" id="fundamental">Fundamental</div>
+    <div class="grid">
+        <div class="pillar"><a href="research/report.html#post-20251221" style="text-decoration:none; color:inherit;"><h3>Techno Naturalism</h3><div class="desc-kr">기술과 비즈니스 조화의 근간 연구</div></a></div>
+        <div class="pillar"><a href="research/report.html#post-20251221" style="text-decoration:none; color:inherit;"><h3>Micro MOT</h3><div class="desc-kr">기술 가치 극대화를 위한 관리 전략</div></a></div>
+        <div class="pillar"><a href="research/report.html#post-20251221" style="text-decoration:none; color:inherit;"><h3>AX² Concept</h3><div class="desc-kr">지능형 조직 전환의 핵심 원칙</div></a></div>
+        <div class="pillar"><a href="research/report.html#post-20251221" style="text-decoration:none; color:inherit;"><h3>AX² System</h3><div class="desc-kr">4대 요소 기반의 통합 아키텍처</div></a></div>
+    </div>
+
+    <div class="section-title" id="update">Research Update</div>
+    <div class="archive-list">
+        <a href="research/report.html#post-20251221" style="text-decoration:none; color:inherit;">
+            <div class="log-item">
+                <span class="log-date">DEC 2025</span>
+                <div class="log-content">
+                    <strong><span class="type-tag">Report</span>AX² Framework: 12 Strategic Pillars for CEOs</strong>
+                    <div class="log-kr">경영진을 위한 AX² 시스템의 12가지 핵심 전략 가치</div>
+                </div>
+            </div>
+        </a>
+        <a href="research/article.html#post-20251221" style="text-decoration:none; color:inherit;">
+            <div class="log-item">
+                <span class="log-date">NOV 2025</span>
+                <div class="log-content">
+                    <strong><span class="type-tag">Article</span>LinkedIn: The Future of Enterprise AI Intelligence</strong>
+                    <div class="log-kr">링크드인 연재: 엔터프라이즈 AI 지능의 미래와 조직의 변화</div>
+                </div>
+            </div>
+        </a>
+        </div>
+
+    <div class="section-title" id="article">Research Article</div>
+    <div class="library-grid">
+        <div class="lib-category">
+            <h4>AI Strategy & Leadership</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="research/strategic.html#post-20251221">Leadership in the Age of AI OS</a></li></ul>
+            <ul class="lib-list"><li class="lib-item"><a href="research/strategic.html#post-20251221">Leadership in the Age of AI OS</a></li></ul>
+            <ul class="lib-list"><li class="lib-item"><a href="research/strategic.html#post-20251221">Leadership in the Age of AI OS</a></li></ul>
+            <ul class="lib-list"><li class="lib-item"><a href="research/strategic.html#post-20251221">Leadership in the Age of AI OS</a></li></ul>                                    
+        </div>
+        <div class="lib-category">
+            <h4>Human-AI Collaboration</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Restructuring Teams for Digital Workers</a></li></ul>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Restructuring Teams for Digital Workers</a></li></ul>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Restructuring Teams for Digital Workers</a></li></ul>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Restructuring Teams for Digital Workers</a></li></ul>                                                
+        </div>
+        <div class="lib-category">
+            <h4>Industry Trends</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">B2B AI Market Evolution 2025</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>Ethical Governance</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Policy-driven AI Execution Ethics</a></li></ul>
+        </div>
+        </div>
+
+    <div class="section-title" id="report">Research Report</div>
+    <div class="library-grid">
+        <div class="lib-category">
+            <h4>LAKE: Knowledge Assets</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">AXObject Structuring Methodology</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>MODEL: Intelligence IP</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Proprietary Intelligence Layer Design</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>AGENT: Digital Workforce</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Digital Worker Deployment Framework</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>AI-WARE: Execution Kernel</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Action Policy & Audit Enforcement</a></li></ul>
+        </div>
+        </div>
+
+    <div class="section-title" id="paper">Research Paper</div>
+    <div class="library-grid">
+        <div class="lib-category">
+            <h4>Cognitive Systems</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Abstraction of Enterprise Memory</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>Architecture Design</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Modular AI OS Kernel Theory</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>Economic Impact</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">ROI Analysis of AI-native Organizations</a></li></ul>
+        </div>
+        <div class="lib-category">
+            <h4>Future Methodology</h4>
+            <ul class="lib-list"><li class="lib-item"><a href="#">Toward Post-LLM Corporate Intelligence</a></li></ul>
+        </div>
+        </div>
+</div>
+
+<footer>
+    <div class="footer-info">Precision Strategy & System Laboratory <br> &copy; 2025 PSSLAB.</div>
+    <div class="footer-logo">PSSLAB</div>
+</footer>
+
+<script>
+    const slides = document.querySelectorAll('.hero-slide');
+    const navItems = document.querySelectorAll('.nav-item');
+    let currentSlide = 0;
+    function updateDisplay(index) {
+        slides.forEach(s => s.classList.remove('active'));
+        navItems.forEach(n => n.classList.remove('active'));
+        slides[index].classList.add('active');
+        navItems[index].classList.add('active');
+        currentSlide = index;
+    }
+    function goToSlide(index) { updateDisplay(index); }
+    setInterval(() => updateDisplay((currentSlide + 1) % slides.length), 6000);
+</script>
+</body>
+</html>
