@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 03: 추출의 미학 - The Calibration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0e0c; color: #d4c7b0; font-family: 'Noto Serif KR', serif; }
+        .brewing-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(197, 164, 126, 0.1); transition: all 0.4s ease; }
+        .brewing-card:hover { border-color: #c5a47e; transform: translateY(-5px); }
+        .brewing-step { border-left: 1px solid rgba(197, 164, 126, 0.3); padding-left: 2rem; position: relative; }
+        .brewing-step::before { content: ''; width: 8px; height: 8px; background: #c5a47e; border-radius: 50%; position: absolute; left: -4.5px; top: 0; }
+        .mono-val { font-family: 'Montserrat', sans-serif; color: #c5a47e; font-weight: 600; }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12">
+
+    <nav class="max-w-6xl mx-auto mb-12">
+        <a href="page2.html" class="text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">← Back to Phase 02</a>
+    </nav>
+
+    <main class="max-w-6xl mx-auto">
+        <header class="mb-16 text-center md:text-left">
+            <h2 class="text-[#c5a47e] text-sm tracking-widest uppercase mb-2 font-sans">Phase 03</h2>
+            <h1 class="text-4xl font-bold mb-6 text-white">추출의 미학: 10g의 정수</h1>
+            <p class="text-lg opacity-70 leading-relaxed italic max-w-2xl">
+                "종(種)의 성격에 따라 물 온도와 기다림의 시간이 달라집니다. <br class="hidden md:block"> 이것은 커피를 내리는 것이 아니라, 기억의 진액을 달이는 과정입니다."
+            </p>
+        </header>
+
+        <section class="mb-24">
+            <h3 class="text-xs uppercase tracking-[0.3em] text-[#c5a47e] mb-10 font-sans text-center opacity-70">Specific Extraction Protocol</h3>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="brewing-card p-8 rounded-3xl flex flex-col">
+                    <div class="text-[10px] text-[#c5a47e] mb-2 uppercase tracking-widest font-sans">The Noble Spirit</div>
+                    <h4 class="text-2xl font-bold mb-8 text-white">파나마 게이샤</h4>
+                    <ul class="space-y-5 text-sm mb-10">
+                        <li class="flex justify-between border-b border-white/5 pb-2"><span>물 온도</span><span class="mono-val text-lg">92-94°C</span></li>
+                        <li class="flex justify-between border-b border-white/5 pb-2"><span>뜸 들이기</span><span class="mono-val text-lg">30"</span></li>
+                        <li class="flex justify-between border-b border-white/5 pb-2"><span>추출 리듬</span><span>빠르고 가늘게</span></li>
+                    </ul>
+                    <p class="text-[12px] leading-relaxed opacity-50 italic mt-auto">
+                        "높은 온도로 화려한 자스민 향기를 순식간에 해체하십시오. 향이 날아가기 전 포착하는 것이 핵심입니다."
+                    </p>
+                </div>
+
+                <div class="brewing-card p-8 rounded-3xl flex flex-col">
+                    <div class="text-[10px] text-[#c5a47e] mb-2 uppercase tracking-widest font-sans">The Faithful Soldier</div>
+                    <h4 class="text-2xl font-bold mb-8 text-white">파인 로부스타</h4>
+                    <ul class="space-y-5 text-sm mb-10">
+                        <li class="flex justify-between border-b border-white/5 pb-2"><span>물 온도</span><span class="mono-val text-lg">88-90°C</span></li>
+                        <li class="flex justify-between border-b border-white/5 pb-2"><span>뜸 들이기</span><span class="mono-val text-lg">45"</span></li>
+                        <li class="flex justify-between border-b border-white/5 pb-2"><span>추출 리듬</span><span>안정적이고 정직하게</span></li>
+                    </ul>
+                    <p class="text-[12px] leading-relaxed opacity-50 italic mt-auto">
+                        "중온의 물로 쓴맛을 다독이고 고소함을 끌어내십시오. 흔들림 없는 물줄기가 충직한 맛을 보장합니다."
+                    </p>
+                </div>
+
+                <div class="brewing-card p-8 rounded-3xl flex flex-col border-[#c5a47e]/40 bg-[#c5a47e]/5 relative overflow-hidden">
+                    <div class="absolute top-4 right-4 text-[9px] bg-[#c5a47e] text-[#0f0e0c] px-2 py-1 font-bold rounded">LEGEND</div>
+                    <div class="text-[10px] text-[#c5a47e] mb-2 uppercase tracking-widest font-sans">The Lost Legend</div>
+                    <h4 class="text-2xl font-bold mb-8 text-white font-serif italic">필리핀 리베리카</h4>
+                    <ul class="space-y-5 text-sm mb-10">
+                        <li class="flex justify-between border-b border-[#c5a47e]/20 pb-2 font-bold"><span>물 온도</span><span class="mono-val text-xl">85-88°C</span></li>
+                        <li class="flex justify-between border-b border-[#c5a47e]/20 pb-2 font-bold"><span>뜸 들이기</span><span class="mono-val text-xl">60"</span></li>
+                        <li class="flex justify-between border-b border-[#c5a47e]/20 pb-2 font-bold"><span>추출 리듬</span><span>굵고 느린 방울</span></li>
+                    </ul>
+                    <p class="text-[12px] leading-relaxed text-[#c5a47e] italic mt-auto">
+                        "가장 낮은 온도에서 가장 길게 기다리십시오. 마담의 낮은 음성처럼 묵직한 진액을 인내심 있게 짜내야 합니다."
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="max-w-2xl mx-auto space-y-16 mb-24">
+            <div class="brewing-step">
+                <h4 class="text-xl font-bold text-white mb-2">관조 (The Gaze)</h4>
+                <p class="text-sm opacity-60 leading-relaxed">유리병 A의 홀빈을 빛에 비추어 보십시오. 각 종이 가진 고유의 형상과 로스팅의 흔적을 눈에 담는 것, 그것이 탐험의 시작입니다.</p>
+            </div>
+
+            <div class="brewing-step">
+                <h4 class="text-xl font-bold text-white mb-2">해체 (The Essence)</h4>
+                <p class="text-sm opacity-60 leading-relaxed">직접 분쇄하여 담은 유리병 B는 원두가 가진 모든 정보를 쏟아낼 준비가 되어 있습니다. 뚜껑을 여는 순간 터져 나오는 압축된 향기를 느끼십시오.</p>
+            </div>
+
+            <div class="brewing-step">
+                <h4 class="text-xl font-bold text-white mb-2">달임 (The Decoction)</h4>
+                <p class="text-sm opacity-60 leading-relaxed">물은 원두의 세포막을 두드리는 도구입니다. 위의 규격을 준수하며, 커피가 액체 상태의 서사로 변모하는 과정을 차분히 지켜보십시오.</p>
+            </div>
+        </section>
+
+        <div class="p-10 bg-white/5 border border-white/10 rounded-3xl text-center">
+            <p class="text-sm italic opacity-80 mb-4">"준비가 되셨다면, 이제 잔을 들고 다음 페이지로 넘어가십시오."</p>
+            <p class="text-xs text-[#c5a47e] tracking-widest uppercase">The countdown to the memories begins.</p>
+        </div>
+    </main>
+
+    <footer class="mt-20 flex flex-col md:flex-row gap-6 justify-center mb-16 px-6">
+        <a href="page2.html" class="px-12 py-4 rounded-full border border-white/20 text-white/50 hover:text-white transition-all font-bold uppercase tracking-widest text-center text-xs">Prev</a>
+        <a href="page4.html" class="px-12 py-4 rounded-full bg-[#c5a47e] text-[#0f0e0c] hover:bg-white transition-all font-bold uppercase tracking-widest text-center text-xs">Next: 사계의 추적</a>
+    </footer>
+
+</body>
+</html>

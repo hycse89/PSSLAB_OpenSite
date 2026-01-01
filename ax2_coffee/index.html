@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Calibration: 진공 너머의 체취</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0f0e0c;
+            color: #d4c7b0;
+            font-family: 'Noto Serif KR', serif;
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #c5a47e 0%, #8e6d45 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-blur {
+            background: rgba(40, 36, 32, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 164, 126, 0.2);
+            transition: all 0.3s ease;
+        }
+        .card-blur:hover {
+            border-color: #c5a47e;
+            transform: translateY(-5px);
+        }
+        .zero-point-btn {
+            box-shadow: 0 0 20px rgba(197, 164, 126, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-6">
+
+    <header class="text-center mb-12">
+        <h2 class="text-sm tracking-[0.5em] uppercase mb-2 opacity-60">AX Coffee Experience</h2>
+        <h1 class="text-4xl md:text-5xl font-bold gold-gradient mb-4">The Calibration</h1>
+        <p class="text-lg opacity-80 italic font-light">"진공 너머의 체취, 당신의 감각을 조율하다"</p>
+    </header>
+
+    <div class="mb-16 text-center">
+        <button class="zero-point-btn bg-[#c5a47e] text-[#0f0e0c] px-8 py-3 rounded-full font-bold uppercase tracking-widest hover:bg-white transition-all">
+            Start: 0점 조절하기
+        </button>
+        <p class="mt-4 text-xs opacity-50 uppercase tracking-tighter">아무 맛도 없는 진공 상태에서 탐험을 시작하십시오</p>
+    </div>
+
+    <nav class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
+        
+        <a href="page1.html" class="card-blur p-8 rounded-2xl flex flex-col justify-between group">
+            <div>
+                <span class="text-xs text-[#c5a47e] mb-2 block uppercase tracking-widest">Phase 01</span>
+                <h3 class="text-2xl font-semibold mb-3 group-hover:text-[#c5a47e]">세 가지 영혼</h3>
+                <p class="text-sm opacity-60 leading-relaxed">아라비카, 로부스타, 그리고 전설의 리베리카. 신분 정점에 선 원두들의 연대기.</p>
+            </div>
+            <span class="mt-6 text-right text-xl">→</span>
+        </a>
+
+        <a href="page2.html" class="card-blur p-8 rounded-2xl flex flex-col justify-between group">
+            <div>
+                <span class="text-xs text-[#c5a47e] mb-2 block uppercase tracking-widest">Phase 02</span>
+                <h3 class="text-2xl font-semibold mb-3 group-hover:text-[#c5a47e]">미각의 조력자</h3>
+                <p class="text-sm opacity-60 leading-relaxed">초콜릿, 치즈, 버터. 커피라는 야수에게 비단옷을 입히는 정교한 무대 장치.</p>
+            </div>
+            <span class="mt-6 text-right text-xl">→</span>
+        </a>
+
+        <a href="page3.html" class="card-blur p-8 rounded-2xl flex flex-col justify-between group">
+            <div>
+                <span class="text-xs text-[#c5a47e] mb-2 block uppercase tracking-widest">Phase 03</span>
+                <h3 class="text-2xl font-semibold mb-3 group-hover:text-[#c5a47e]">추출의 미학</h3>
+                <p class="text-sm opacity-60 leading-relaxed">10g의 정수. 온도와 시간의 조율을 통해 기억의 진액을 짜내는 법.</p>
+            </div>
+            <span class="mt-6 text-right text-xl">→</span>
+        </a>
+
+        <a href="page4.html" class="card-blur p-8 rounded-2xl flex flex-col justify-between group">
+            <div>
+                <span class="text-xs text-[#c5a47e] mb-2 block uppercase tracking-widest">Phase 04</span>
+                <h3 class="text-2xl font-semibold mb-3 group-hover:text-[#c5a47e]">사계의 추적</h3>
+                <p class="text-sm opacity-60 leading-relaxed">절정에서 잔향까지. 식어가는 잔 속에서 끈질긴 생명력의 체취를 찾는 여정.</p>
+            </div>
+            <span class="mt-6 text-right text-xl">→</span>
+        </a>
+
+    </nav>
+
+    <footer class="mt-20 opacity-30 text-[10px] tracking-widest uppercase">
+        Designed by AI & Human Philosophy Synergy
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 04: 사계의 추적 - The Calibration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0e0c; color: #d4c7b0; font-family: 'Noto Serif KR', serif; }
+        .timeline-container { position: relative; padding-left: 3rem; }
+        .timeline-line { position: absolute; left: 0.75rem; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, #c5a47e, rgba(197,164,126,0.1)); }
+        .timeline-dot { position: absolute; left: 0; width: 1.5rem; height: 1.5rem; background: #0f0e0c; border: 2px solid #c5a47e; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
+        .phase-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(197, 164, 126, 0.1); transition: all 0.3s ease; }
+        .phase-card:hover { border-color: #c5a47e; background: rgba(255, 255, 255, 0.05); }
+        .temp-label { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #c5a47e; letter-spacing: 0.2em; }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12">
+
+    <nav class="max-w-3xl mx-auto mb-12">
+        <a href="page3.html" class="text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">← Back to Phase 03</a>
+    </nav>
+
+    <main class="max-w-3xl mx-auto">
+        <header class="mb-16">
+            <h2 class="text-[#c5a47e] text-sm tracking-widest uppercase mb-2 font-sans">Phase 04</h2>
+            <h1 class="text-4xl font-bold mb-6 text-white text-balance">사계(四季)의 추적: 감각의 타임라인</h1>
+            <p class="text-lg opacity-70 leading-relaxed">
+                커피는 살아있는 생명체와 같습니다. 뜨거운 열기에서 차가운 잔향까지, 온도가 빚어내는 네 가지 계절을 따라가십시오.
+            </p>
+        </header>
+
+        <div class="timeline-container space-y-12">
+            <div class="timeline-line"></div>
+
+            <div class="relative">
+                <div class="timeline-dot"><span class="text-[8px]">1</span></div>
+                <div class="phase-card p-6 rounded-2xl">
+                    <div class="temp-label mb-2">HOT (80°C+)</div>
+                    <h3 class="text-xl font-bold text-white mb-3">1단계: 절정 (The Peak)</h3>
+                    <p class="text-sm opacity-60 leading-relaxed mb-4">
+                        갓 내린 커피의 강렬한 카리스마. 향이 활화산처럼 폭발하며 혀를 압도합니다. 이때 쓴맛의 타격감을 <strong>다크 초콜릿</strong>으로 승화시키십시오.
+                    </p>
+                    <span class="text-[10px] text-[#c5a47e] italic">#에너지 #폭발 #초콜릿결합</span>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="timeline-dot"><span class="text-[8px]">2</span></div>
+                <div class="phase-card p-6 rounded-2xl">
+                    <div class="temp-label mb-2">WARM (40°C - 60°C)</div>
+                    <h3 class="text-xl font-bold text-white mb-3">2-3단계: 변주 (The Variation)</h3>
+                    <p class="text-sm opacity-60 leading-relaxed mb-4">
+                        열기가 걷히고 해상도가 높아지는 시기. 숨어있던 산미와 단맛이 고개를 듭니다. <strong>따뜻한 물</strong>을 한 방울 더해 맛의 공간을 열고, <strong>치즈</strong>로 단맛을 증폭하십시오.
+                    </p>
+                    <span class="text-[10px] text-[#c5a47e] italic">#해상도 #물한방울 #치즈증폭</span>
+                </div>
+            </div>
+
+            <div class="relative">
+                <div class="timeline-dot bg-[#c5a47e]"><span class="text-[8px] text-[#0f0e0c] font-bold">4</span></div>
+                <div class="phase-card p-6 rounded-2xl border-[#c5a47e]/40">
+                    <div class="temp-label mb-2">COLD (REFRIGERATED)</div>
+                    <h3 class="text-xl font-bold text-[#c5a47e] mb-3">4단계: 잔향 (The Linger)</h3>
+                    <p class="text-sm opacity-60 leading-relaxed mb-4">
+                        냉장고 속에서 차갑게 식은 뒤 드러나는 본질. 게이샤는 떠나가고 <strong>리베리카</strong>만이 남습니다. 끈질긴 생명력의 체취에서 20년 전 마담의 노래를 발견하십시오.
+                    </p>
+                    <div class="flex gap-2">
+                        <span class="text-[10px] text-[#c5a47e] italic">#진실 #리베리카 #마담의노래</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-20 p-8 border-t border-b border-[#c5a47e]/20 text-center">
+            <h4 class="text-xs tracking-widest text-[#c5a47e] mb-4 font-sans">SPECIAL CALIBRATION</h4>
+            <p class="text-sm opacity-80 leading-loose italic">
+                "4단계의 차가운 리베리카를 머금고 코로 숨을 내뱉으십시오. <br>
+                그때 느껴지는 희미한 잔향이 당신의 감각이 도달할 마지막 영점입니다."
+            </p>
+        </div>
+    </main>
+
+    <footer class="mt-20 text-center mb-12">
+        <p class="text-[10px] opacity-30 mb-8 tracking-widest uppercase">The End of the Journey, The Start of the Senses</p>
+        <a href="index.html" class="inline-block bg-[#c5a47e] text-[#0f0e0c] px-12 py-4 rounded-full font-bold uppercase tracking-widest hover:bg-white transition-all">
+            Return to Zero
+        </a>
+    </footer>
+
+</body>
+</html>

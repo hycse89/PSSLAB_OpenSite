@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 01: 세 가지 영혼 - The Calibration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0e0c; color: #d4c7b0; font-family: 'Noto Serif KR', serif; }
+        .gold-border { border: 1px solid rgba(197, 164, 126, 0.3); }
+        .stat-bar { background: rgba(197, 164, 126, 0.1); border-radius: 4px; overflow: hidden; height: 6px; }
+        .stat-fill { background: #c5a47e; height: 100%; transition: width 1s ease-out; }
+        .bean-card { background: rgba(25, 22, 19, 0.8); transition: all 0.4s ease; }
+        .bean-card:hover { transform: scale(1.02); border-color: #c5a47e; }
+        .tab-btn.active { border-bottom: 2px solid #c5a47e; color: #c5a47e; }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12">
+
+    <nav class="max-w-5xl mx-auto mb-12">
+        <a href="index.html" class="text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">← Back to Dashboard</a>
+    </nav>
+
+    <main class="max-w-5xl mx-auto">
+        <header class="mb-16">
+            <h2 class="text-[#c5a47e] text-sm tracking-widest uppercase mb-2 font-sans">Phase 01</h2>
+            <h1 class="text-4xl font-bold mb-6">커피의 세 가지 영혼</h1>
+            <p class="text-lg opacity-70 leading-relaxed max-w-2xl">
+                커피의 세계에는 엄격한 신분제가 존재합니다. 섬세한 귀족부터 강인한 병사, 그리고 잊혀졌던 전설까지. 당신의 잔에 담긴 영혼들의 정체를 확인하십시오.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="bean-card p-8 rounded-3xl gold-border flex flex-col">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-1">Arabica</h3>
+                    <p class="text-[#c5a47e] text-xs uppercase tracking-tighter mb-4">The Noble Spirit (Geisha)</p>
+                    <p class="text-sm opacity-60 leading-relaxed h-20">섬세한 자스민 향과 산뜻한 과실의 산미. 가장 눈부신 순간에 변심하여 떠나는 수줍은 귀족.</p>
+                </div>
+                <div class="space-y-4 mb-8 text-xs uppercase tracking-widest">
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Aroma (향미)</span><span>95%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 95%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Body (바디감)</span><span>40%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 40%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Rarity (희소성)</span><span>85%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 85%"></div></div>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-white/10 italic text-sm opacity-50">"첫사랑의 화원"</div>
+            </div>
+
+            <div class="bean-card p-8 rounded-3xl gold-border flex flex-col">
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-1">Robusta</h3>
+                    <p class="text-[#c5a47e] text-xs uppercase tracking-tighter mb-4">The Faithful Soldier</p>
+                    <p class="text-sm opacity-60 leading-relaxed h-20">구수한 견과류와 초콜릿의 묵직함. 어떤 온도에서도 변치 않고 곁을 지키는 든든한 아군.</p>
+                </div>
+                <div class="space-y-4 mb-8 text-xs uppercase tracking-widest">
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Aroma (향미)</span><span>50%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 50%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Body (바디감)</span><span>90%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 90%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Rarity (희소성)</span><span>30%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 30%"></div></div>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-white/10 italic text-sm opacity-50">"충직한 벗의 신뢰"</div>
+            </div>
+
+            <div class="bean-card p-8 rounded-3xl gold-border border-[#c5a47e] flex flex-col relative overflow-hidden">
+                <div class="absolute top-4 right-4 bg-[#c5a47e] text-[#0f0e0c] text-[10px] px-2 py-1 font-bold rounded">LEGEND</div>
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-1">Liberica</h3>
+                    <p class="text-[#c5a47e] text-xs uppercase tracking-tighter mb-4">The Lost Legend</p>
+                    <p class="text-sm opacity-60 leading-relaxed h-20">스모키한 담배 연기와 농익은 과실의 관능. 20년 전 마담의 노래를 품은 멸종의 전설.</p>
+                </div>
+                <div class="space-y-4 mb-8 text-xs uppercase tracking-widest">
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Aroma (향미)</span><span>88%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 88%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Body (바디감)</span><span>100%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 100%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><span>Rarity (희소성)</span><span>99%</span></div>
+                        <div class="stat-bar"><div class="stat-fill" style="width: 99%"></div></div>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-white/10 italic text-sm opacity-50">"문밖에 선 그대"</div>
+            </div>
+
+        </div>
+
+        <p class="mt-16 text-center text-xs opacity-40 leading-loose">
+            * 수치는 절대적인 기준이 아닌, 이번 'The Calibration' 탐험을 위한 상대적 감각 지표입니다.
+        </p>
+    </main>
+
+    <footer class="mt-20 text-center">
+        <a href="page2.html" class="inline-block bg-transparent border border-[#c5a47e] text-[#c5a47e] px-10 py-3 rounded-full hover:bg-[#c5a47e] hover:text-[#0f0e0c] transition-all font-bold uppercase tracking-widest">
+            Next: 미각의 조력자들
+        </a>
+    </footer>
+
+</body>
+</html>

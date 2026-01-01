@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase 02: 미각의 조력자 - The Calibration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;700&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0e0c; color: #d4c7b0; font-family: 'Noto Serif KR', serif; }
+        .catalyst-card { background: linear-gradient(145deg, #1a1815, #11100e); border: 1px solid rgba(197, 164, 126, 0.15); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .catalyst-card:hover { border-color: #c5a47e; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .icon-circle { width: 60px; height: 60px; border-radius: 50%; border: 1px solid #c5a47e; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 600; color: #c5a47e; margin-bottom: 1.5rem; }
+        .effect-tag { font-size: 0.7rem; letter-spacing: 0.1em; border: 1px solid rgba(197, 164, 126, 0.4); padding: 2px 8px; border-radius: 12px; margin-right: 5px; color: #c5a47e; text-transform: uppercase; }
+    </style>
+</head>
+<body class="min-h-screen p-6 md:p-12 flex flex-col items-center">
+
+    <nav class="w-full max-w-5xl mb-12">
+        <a href="page1.html" class="text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">← Back to Phase 01</a>
+    </nav>
+
+    <main class="w-full max-w-5xl">
+        <header class="mb-16 text-center md:text-left">
+            <h2 class="text-[#c5a47e] text-sm tracking-[0.3em] uppercase mb-2 font-sans">Phase 02</h2>
+            <h1 class="text-4xl font-bold mb-6">미각의 조력자들</h1>
+            <p class="text-lg opacity-70 leading-relaxed max-w-2xl">
+                커피라는 거친 야수에게 비단옷을 입히고, 숨겨진 보석 같은 단맛을 끌어올리는 세 가지 장치입니다. 단순한 디저트가 아닌, 감각의 증폭기입니다.
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            
+            <div class="catalyst-card p-10 rounded-3xl group">
+                <div class="icon-circle group-hover:bg-[#c5a47e] group-hover:text-[#0f0e0c] transition-colors">CH</div>
+                <h3 class="text-2xl font-bold mb-4">다크 초콜릿</h3>
+                <div class="flex mb-6 flex-wrap gap-y-2">
+                    <span class="effect-tag">쓴맛의 승화</span>
+                    <span class="effect-tag">입체적 풍미</span>
+                </div>
+                <p class="text-sm opacity-60 leading-relaxed mb-8">
+                    강배전의 어둠을 환희로 바꿉니다. 카카오의 쓴맛이 커피의 쓴맛과 만나면 기묘하게 상쇄되며, 그 뒤편에 숨어있던 카라멜 같은 단맛이 폭죽처럼 터져 나옵니다.
+                </p>
+                <div class="text-[10px] uppercase tracking-widest text-[#c5a47e] font-sans italic opacity-80">
+                    "비단옷을 입은 야수"
+                </div>
+            </div>
+
+            <div class="catalyst-card p-10 rounded-3xl group">
+                <div class="icon-circle group-hover:bg-[#c5a47e] group-hover:text-[#0f0e0c] transition-colors">CS</div>
+                <h3 class="text-2xl font-bold mb-4">하드 치즈</h3>
+                <div class="flex mb-6 flex-wrap gap-y-2">
+                    <span class="effect-tag">해상도 증폭</span>
+                    <span class="effect-tag">감칠맛 조율</span>
+                </div>
+                <p class="text-sm opacity-60 leading-relaxed mb-8">
+                    미각의 백라이트를 켭니다. 짭조름한 결정체가 혀의 감각을 예민하게 깨워, 커피의 미세한 단맛을 평소보다 수십 배 더 또렷하게 감지하게 만듭니다.
+                </p>
+                <div class="text-[10px] uppercase tracking-widest text-[#c5a47e] font-sans italic opacity-80">
+                    "단맛의 해상도 탐험"
+                </div>
+            </div>
+
+            <div class="catalyst-card p-10 rounded-3xl group">
+                <div class="icon-circle group-hover:bg-[#c5a47e] group-hover:text-[#0f0e0c] transition-colors">BT</div>
+                <h3 class="text-2xl font-bold mb-4">순수 버터</h3>
+                <div class="flex mb-6 flex-wrap gap-y-2">
+                    <span class="effect-tag">질감의 양탄자</span>
+                    <span class="effect-tag">천상의 목넘김</span>
+                </div>
+                <p class="text-sm opacity-60 leading-relaxed mb-8">
+                    무색무취의 고속도로를 깝니다. 혀 위에 얇은 유지방 막을 형성하여, 거친 커피 진액이 미끄러지듯 목을 통과하게 만듭니다. 진공 없는 꽉 찬 질감의 완성입니다.
+                </p>
+                <div class="text-[10px] uppercase tracking-widest text-[#c5a47e] font-sans italic opacity-80">
+                    "우아한 활주로"
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-20 p-8 border border-[#c5a47e]/20 rounded-2xl bg-white/5 text-center">
+            <h4 class="text-[#c5a47e] text-xs uppercase tracking-widest mb-4">Experimental Tip</h4>
+            <p class="text-sm opacity-80 italic italic">
+                "치즈 한 조각을 아주 작게 잘라 어금니로 씹은 뒤, 그 감칠맛이 사라지기 전 리베리카 한 모금을 흘려보내십시오."
+            </p>
+        </div>
+    </main>
+
+    <footer class="mt-20 flex flex-col md:flex-row gap-6 mb-12">
+        <a href="page1.html" class="px-10 py-3 rounded-full border border-white/20 text-white/50 hover:text-white transition-all font-bold uppercase tracking-widest text-center">
+            Prev: 세 가지 영혼
+        </a>
+        <a href="page3.html" class="px-10 py-3 rounded-full bg-[#c5a47e] text-[#0f0e0c] hover:bg-white transition-all font-bold uppercase tracking-widest text-center">
+            Next: 추출의 미학
+        </a>
+    </footer>
+
+</body>
+</html>
