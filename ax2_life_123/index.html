@@ -8,6 +8,14 @@
     <style>
         body {
             font-family: 'Noto Sans KR', sans-serif;
+
+            /* 배경 이미지 설정 */
+            background-image: url('./images/stage_back.png'); /* 이미지 파일명과 일치해야 함 */
+            background-size: cover;      /* 화면 전체를 가득 채움 */
+            background-position: center; /* 이미지를 중앙에 배치 */
+            background-repeat: no-repeat; /* 이미지 반복 방지 */
+            background-attachment: fixed; /* 스크롤 시 배경 고정 (선택 사항) */
+
             background-color: #f4f7f6;
             margin: 0;
             display: flex;
@@ -16,7 +24,7 @@
             min-height: 100vh;
             color: #333;
         }
-        .container {
+        .container_0 {
             width: 90%;
             max-width: 1000px;
             background: white;
@@ -25,6 +33,17 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             text-align: center;
         }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.9); /* 배경색에 투명도를 주어 뒤쪽 이미지가 살짝 비치게 함 */
+            backdrop-filter: blur(5px);           /* 투명한 부분을 흐리게 처리하여 가독성 확보 */
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
         header { margin-bottom: 50px; }
         h1 { font-size: 3rem; margin: 0; color: #2c3e50; letter-spacing: -1px; }
         .subtitle { font-size: 1.2rem; color: #7f8c8d; margin-top: 10px; }
@@ -80,7 +99,9 @@
 <div class="container">
     <header>
         <h1>LIFE-123</h1>
-        <div class="subtitle">DRAFT-20260101 아빠가 아이들에게 전하는 인생의 층위를 설계하는 지도</div>
+        <div class="subtitle">[DRAFT-20260101] 아빠가 아이들 곁에 영원히 남겨두고 싶은 아빠의 인생조언</div>
+        <h2> </h2>
+        <a href="content-viewer.html?file=markdowns/prologue.md&stage=0" style="padding: 12px 25px; border-radius: 30px; text-decoration: none; font-weight: 500; background: #70777e; color: white;">본문 보기에 앞서...</a>        
     </header>
 
     <div class="nav-grid">
