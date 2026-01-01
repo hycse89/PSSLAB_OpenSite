@@ -5,7 +5,7 @@
 
 인류의 역사, 아니 생명 전체의 역사를 통틀어 가장 혁명적인 사건은 '1'이 '2'가 된 순간이었어. 진화론적 아나키스트였던 크로포트킨은 생존 경쟁보다 더 강력한 진화의 동력이 **'상호 부조(Mutual Aid)'**임을 역설했단다. 개체 하나(1)는 약하지만, 서로의 눈이 되어주고 서로의 부족함을 채워주는 '짝(2단계)'을 이룰 때 생명은 비로소 혹독한 환경을 이겨내는 시너지를 얻게 된다고 보았지. (출처:만물은 서로 돕는다 (Mutual Aid: A Factor of Evolution), 1902년)
 
-![STAGE0_IMAGE](../images/stage-2.png)
+![STAGE2_IMAGE](https://hycse89.github.io/PSSLAB_OpenSite/ax2_life_123/images/stage-2.png)
 
 ### ### 클론의 정체에서 다양성의 진화로
 

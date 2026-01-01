@@ -5,7 +5,7 @@
 
 지금까지의 단계(0~3)는 인간의 이성과 논리로 어느 정도 통제할 수 있는 세계였단다. 하지만 '4'는 다르다. 이곳은 인간의 직관이 완전히 무너지고, 우리가 아는 상식이 더 이상 통하지 않는 **'초월(Transcendence)'**의 영역이지. 인류가 어떻게 이 거대한 복잡성의 벽에 부딪히게 되었는지 그 기원을 살펴보자구나.
 
-![STAGE0_IMAGE](../images/stage-4.png)
+![STAGE4_IMAGE](https://hycse89.github.io/PSSLAB_OpenSite/ax2_life_123/images/stage-4.png)
 
 ### ### 뉴턴의 시계에서 하이젠베르크의 안개로
 

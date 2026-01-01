@@ -6,7 +6,7 @@
 
 현대 심리학의 아버지 윌리엄 제임스는 습관을 **'생명의 거대한 회전 바퀴'**라고 불렀단다. 그는 고등 생명체일수록 자주 반복되는 행동을 신경계의 하부 조직으로 넘겨버린다는 점을 간파했지. 우리가 숨 쉬는 법을 의식하지 않듯, 습관이 '0단계'가 되어 우리를 지배할 때 비로소 뇌는 새로운 창조를 위한 여백을 얻게 된단다. (출처:심리학의 원리 (The Principles of Psychology), 1890년)
 
-![STAGE0_IMAGE](../images/stage-0.png)
+![STAGE0_IMAGE](https://hycse89.github.io/PSSLAB_OpenSite/ax2_life_123/images/stage-0.png)
 
 ### ### 생물학적 0단계: 자율신경계라는 경이로운 외주화
 

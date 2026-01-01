@@ -5,7 +5,7 @@
 
 인류의 역사에서 이 '1'은 단순한 숫자가 아니란다. 그것은 혼돈(Chaos) 속에 질서(Order)를 부여하고, 수만 가지의 정보 중 단 하나에만 화살을 쏘아 올린 **'인지 혁명'**의 정수지. 카시러는 인간을 '이성적 동물'이 아닌 **'상징적 동물(Animal Symbolicum)'**로 정의했단다. 인류는 복잡하고 거대한 자연을 단 하나의 '상징(1단계)'이나 기호로 압축하는 능력을 가졌기에 문명을 세울 수 있었지. 혼돈 속에서 단 하나의 본질을 포착해내는 것이야말로 인간 지성의 시작이란다. (출처:상징 형식의 철학 (Philosophie der symbolischen Formen), 1923~1929년)
 
-![STAGE0_IMAGE](../images/stage-1.png)
+![STAGE1_IMAGE](https://hycse89.github.io/PSSLAB_OpenSite/ax2_life_123/images/stage-1.png)
 
 ### ### 혼돈 속에서 화살을 쏘다: 집중의 탄생
 
