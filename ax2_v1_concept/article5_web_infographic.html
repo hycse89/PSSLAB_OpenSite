@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² Infographic 5: AI CANCER</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+        
+        :root {
+            --bg-color: #100a0a;
+            --text-color: #e0e0e0;
+            --primary-color: #ff4141; /* 경고, 위험을 상징하는 붉은색 */
+            --secondary-color: #41a1ff; /* 기술, 중립을 상징하는 푸른색 */
+            --dim-color: #666;
+            --font-display: 'Roboto Mono', monospace;
+            --font-body: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            border-bottom: 1px solid rgba(255, 65, 65, 0.1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1, h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 4vw; line-height: 1.3; margin-bottom: 20px; color: var(--primary-color); }
+        h2 { font-size: 3vw; margin-bottom: 20px; }
+        p { font-size: 1.5vw; line-height: 1.8; max-width: 800px; font-weight: 300; }
+        
+        .highlight { color: var(--primary-color); font-weight: 700; }
+        .tech-term { color: var(--secondary-color); font-family: var(--font-display); }
+
+        /* 증상 섹션 */
+        .symptoms-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+            margin-top: 40px;
+        }
+        .symptom-tag {
+            padding: 10px 20px;
+            border: 1px solid var(--dim-color);
+            border-radius: 20px;
+            font-size: 1.2vw;
+            cursor: default;
+            transition: all 0.3s ease;
+        }
+        .symptom-tag:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        /* 암세포 비유 섹션 */
+        #cancer-analogy {
+            background: linear-gradient(180deg, var(--bg-color), #200);
+        }
+        .cell-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 50px;
+            width: 100%;
+        }
+        .cell {
+            width: 15vw;
+            height: 15vw;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: var(--font-display);
+            font-size: 1.5vw;
+            font-weight: 700;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .normal-cell {
+            background-color: var(--secondary-color);
+            color: #000;
+            box-shadow: 0 0 20px var(--secondary-color);
+        }
+        .cancer-cell {
+            background-color: var(--primary-color);
+            color: #000;
+            box-shadow: 0 0 20px var(--primary-color);
+            animation: pulse-danger 1.5s infinite;
+        }
+        .arrow {
+            font-size: 5vw;
+            align-self: center;
+        }
+
+        @keyframes pulse-danger {
+            0% { transform: scale(1); box-shadow: 0 0 20px var(--primary-color); }
+            50% { transform: scale(1.05); box-shadow: 0 0 35px var(--primary-color); }
+            100% { transform: scale(1); box-shadow: 0 0 20px var(--primary-color); }
+        }
+
+        /* 진단 과정 시각화 */
+        .diagnosis-flow {
+            width: 100%;
+            max-width: 800px;
+            margin-top: 50px;
+            position: relative;
+        }
+        .stage {
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid var(--dim-color);
+            border-radius: 10px;
+            font-size: 1.2vw;
+            position: relative;
+        }
+        .stage.healthy { border-left: 5px solid var(--secondary-color); text-align: left; }
+        .stage.infected { border-left: 5px solid var(--primary-color); text-align: left; }
+        .stage span {
+            font-family: var(--font-display);
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.5vw;
+        }
+        .stage.infected span { color: var(--primary-color); }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            h1 { font-size: 7vw; }
+            h2 { font-size: 6vw; }
+            p { font-size: 3.5vw; }
+            .symptom-tag { font-size: 3vw; padding: 8px 15px; }
+            .cell-container { flex-direction: column; align-items: center; }
+            .cell { width: 40vw; height: 40vw; font-size: 4vw; }
+            .arrow { transform: rotate(90deg); margin: 20px 0; }
+            .stage { font-size: 3vw; }
+            .stage span { font-size: 4vw; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <main>
+        <section class="section visible">
+            <h1><span style="font-size: 2vw; display: block; color: var(--text-color); font-family: var(--font-body); font-weight: 400;">[SHOCKING]</span>
+            당신의 AI 프로젝트가<br><span class="highlight">'암(CANCER)'</span>에 걸릴 수 있습니다.</h1>
+        </section>
+        
+        <section class="section">
+            <h2>환각, 그 이상의 문제: <span class="tech-term">AI Uncertainty</span></h2>
+            <p>우리는 흔히 AI의 '환각' 문제만을 이야기하지만, AI의 불확실성은 훨씬 더 교활하고 다양한 형태로 나타납니다.</p>
+            <div class="symptoms-container">
+                <div class="symptom-tag">#프롬프트 해석 오류</div>
+                <div class="symptom-tag">#긴 문맥 처리 성능 저하</div>
+                <div class="symptom-tag">#재현 불가능성</div>
+                <div class="symptom-tag" style="border-color:var(--primary-color); color:var(--primary-color);">#지시 불이행 (명령 거부)</div>
+                <div class="symptom-tag">#미묘한 편향성</div>
+            </div>
+            <p style="margin-top: 40px;">이러한 작은 불확실성들이 방치될 때, 비극은 시작됩니다.</p>
+        </section>
+
+        <section id="cancer-analogy" class="section">
+            <h2>정상 세포 vs. 암 세포</h2>
+            <p>AI Cancer가 무서운 이유는 진단이 극도로 어렵기 때문입니다. 모든 것이 정상적으로 보이기 때문이죠.</p>
+            <div class="cell-container">
+                <div class="cell normal-cell">
+                    Normal Output<br><br>
+                    "사소하지만<br>수용 가능한 오류"
+                </div>
+                <div class="arrow">→</div>
+                <div class="cell normal-cell">
+                    Normal Output<br><br>
+                    "미묘한<br>비일관성"
+                </div>
+                <div class="arrow">→</div>
+                <div class="cell cancer-cell">
+                    Project Failure<br><br>
+                    "회복 불가능한<br>프로젝트 실패"
+                </div>
+            </div>
+            <p style="margin-top: 50px;">각 단계의 결과물은 '정상 세포'처럼 보이지만, 이들이 모여 결국 시스템 전체를 파괴하는 '암'이 됩니다.</p>
+        </section>
+
+        <section class="section">
+            <h2>AI Cancer의 진행 과정</h2>
+            <p>AI의 불확실성이 어떻게 프로젝트를 회복 불가능한 상태로 만드는지 보여줍니다.</p>
+            <div class="diagnosis-flow">
+                <div class="stage healthy">
+                    <span>Stage 1: Initial Prompt</span>
+                    초기 요구사항은 명확하고, AI의 응답도 정상적으로 보임.
+                </div>
+                <div class="stage healthy">
+                    <span>Stage 2: Minor Errors</span>
+                    결과물에 사소한 오류나 불일치가 발견되지만, '허용 가능한 수준'으로 간주하고 넘어감.
+                </div>
+                <div class="stage infected">
+                    <span>Stage 3: Metastasis (전이)</span>
+                    초기의 작은 오류들이 다른 모듈과 데이터에 영향을 주기 시작. 문제는 숨어버리고, 겉으로는 정상 동작하는 것처럼 보임.
+                </div>
+                <div class="stage infected">
+                    <span>Stage 4: System Failure</span>
+                    누적된 오류들이 임계점을 넘어 시스템 전체의 신뢰도를 붕괴시키고, 프로젝트는 회복 불가능한 상태가 됨.
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>진단, 그리고 대응</h2>
+            <p>AX²는 AI Cancer의 발생 원인, 상황, 그리고 대처 방법을 심도 있게 연구합니다.<br>눈부신 기회의 이면에 숨겨진 위험을 관리하는 것, 새로운 시대의 리더가 갖추어야 할 핵심 역량입니다.</p>
+            <p>AX²는 Enterprise AI의 AI Uncertainty를 위해서 AX² Mission Critical System을 제안합니다. 다양한 AI 시스템에서 안정적으로 Enteprise AI를 구축할 수 있도록 합니다.</p>            
+        </section>
+    </main>
+    
+    <script>
+        // 스크롤 시 섹션이 나타나는 효과
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>

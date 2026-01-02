@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² Infographic 3: The Guardian Agent</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        
+        :root {
+            --bg-color: #050818;
+            --text-color: #e0e8ff;
+            --primary-color: #00d1ff;
+            --accent-color: #ffae00;
+            --danger-color: #ff3c3c;
+            --font-display: 'Orbitron', sans-serif;
+            --font-body: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 80px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(0, 209, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 209, 255, 0.5);
+        }
+
+        h1 { font-size: 4.5vw; line-height: 1.2; margin-bottom: 20px; }
+        h2 { font-size: 3vw; margin-bottom: 20px; }
+        p { font-size: 1.5vw; line-height: 1.8; max-width: 800px; font-weight: 300; }
+        
+        .highlight { color: var(--primary-color); }
+        .accent { color: var(--accent-color); }
+
+        /* Agent Type Comparison */
+        .agent-comparison {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 40px;
+            margin-top: 50px;
+        }
+        .agent-type {
+            flex: 1;
+            padding: 30px;
+            border: 1px solid;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+        }
+        .task-bot {
+            border-color: var(--dim-color);
+            background: rgba(136, 136, 136, 0.1);
+        }
+        .guardian-agent {
+            border-color: var(--primary-color);
+            background: rgba(0, 209, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 209, 255, 0.3);
+        }
+        .agent-type h3 { font-size: 2vw; }
+        .agent-type ul { list-style-type: none; padding: 0; text-align: left; font-size: 1.2vw; }
+        .agent-type ul li { margin-bottom: 15px; }
+
+        /* Core Mission Section */
+        #mission {
+            background: linear-gradient(180deg, var(--bg-color) 0%, #101838 50%, var(--bg-color) 100%);
+        }
+        .mission-box {
+            border: 2px solid var(--primary-color);
+            padding: 40px;
+            border-radius: 20px;
+            background-color: rgba(16, 24, 56, 0.8);
+            box-shadow: inset 0 0 20px rgba(0, 209, 255, 0.5);
+        }
+        .mission-box h2 {
+            font-size: 3.5vw;
+            margin-top: 0;
+            letter-spacing: 2px;
+        }
+        .mission-box p {
+            font-size: 1.8vw;
+            color: var(--accent-color);
+            font-weight: 400;
+        }
+
+        /* Guardian Diagram */
+        .guardian-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .human-icon {
+            font-size: 5vw;
+            color: var(--accent-color);
+        }
+        .shield {
+            width: 20vw;
+            height: 20vw;
+            position: relative;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .shield-hex {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary-color);
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: rotate-shield 20s linear infinite;
+        }
+        .shield-hex.outer { opacity: 0.2; }
+        .shield-hex.middle { opacity: 0.4; transform: scale(0.7); animation-direction: reverse; }
+        .shield-hex.inner { opacity: 0.6; transform: scale(0.4); }
+
+        @keyframes rotate-shield {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .risk-indicators {
+            display: flex;
+            justify-content: space-between;
+            width: 40vw;
+        }
+        .risk {
+            font-size: 1.2vw;
+            color: var(--danger-color);
+            opacity: 0;
+            animation: fade-in-out 4s infinite;
+        }
+        .risk:nth-child(1) { animation-delay: 0s; }
+        .risk:nth-child(2) { animation-delay: 1s; }
+        .risk:nth-child(3) { animation-delay: 2s; }
+        .risk:nth-child(4) { animation-delay: 3s; }
+
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            h1 { font-size: 8vw; }
+            h2 { font-size: 6vw; }
+            p { font-size: 3.5vw; }
+            .agent-comparison { flex-direction: column; }
+            .agent-type h3 { font-size: 5vw; }
+            .agent-type ul { font-size: 3vw; }
+            .mission-box h2 { font-size: 7vw; }
+            .mission-box p { font-size: 4vw; }
+            .shield { width: 50vw; height: 50vw; }
+            .risk-indicators { width: 80vw; }
+            .risk { font-size: 3vw; }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section class="section visible">
+            <h1>It's Not an Assistant.<br>It's Your <span class="highlight">Guardian</span>.</h1>
+            <p>AX²의 두 번째 핵심 구성요소, AX² AGENT "JARVIS"</p>
+        </section>
+
+        <section class="section">
+            <h2>AI 에이전트, 무엇이 다른가?</h2>
+            <p>많은 사람들이 AI 에이전트를 단순히 업무를 대신 처리해주는 '만능 도우미'로 생각합니다.<br>하지만 AX² AGENT는 그 지향점이 다릅니다.</p>
+            <div class="agent-comparison">
+                <div class="agent-type task-bot">
+                    <h3>일반적인 Task Bot</h3>
+                    <ul>
+                        <li>✓ 레스토랑 예약</li>
+                        <li>✓ 여행 스케줄 정리</li>
+                        <li>✓ 이메일 요약</li>
+                        <li>(존재하는 서비스로도 충분)</li>
+                    </ul>
+                </div>
+                <div class="agent-type guardian-agent">
+                    <h3>AX² Guardian Agent</h3>
+                    <ul>
+                        <li>✓ 보이지 않는 위험 감지</li>
+                        <li>✓ 잠재적 기회 포착</li>
+                        <li>✓ 선제적 상황 분석 및 대응</li>
+                        <li><span class="accent">✓ 인간 역량의 증강</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="mission" class="section">
+            <div class="mission-box">
+                <h2>CORE MISSION</h2>
+                <p>Situational Awareness & Risk Avoidance<br>(상황 인식과 위험 회피)</p>
+            </div>
+            <p style="margin-top: 40px; font-weight: 400;">단순한 '보조'를 넘어, 당신을 보호하고 잠재력을 극대화하는 것.<br>이것이 AX²의 세계에서 AI가 존재하는 이유입니다.</p>
+        </section>
+        
+        <section class="section">
+            <h2>Your 24/7 Digital Guardian</h2>
+            <p>AX² AGENT는 당신이 인지하지 못하는 순간에도<br>당신의 '아날로그적인 제약'을 극복하도록 돕습니다.</p>
+            <div class="guardian-diagram">
+                <div class="risk-indicators">
+                    <span class="risk">시장 변동성 분석</span>
+                    <span class="risk">프로젝트 리스크</span>
+                    <span class="risk">보안 위협 감지</span>
+                    <span class="risk">경쟁사 동향</span>
+                </div>
+                <div class="shield">
+                    <div class="shield-hex outer"></div>
+                    <div class="shield-hex middle"></div>
+                    <div class="shield-hex inner"></div>
+                    <div class="human-icon">👤</div>
+                </div>
+                <h3 style="font-family: var(--font-body); font-weight: 400;">
+                    당신은 <span class="accent">가장 중요한 일</span>에만 집중하세요.
+                </h3>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // 스크롤 시 섹션이 나타나는 효과
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

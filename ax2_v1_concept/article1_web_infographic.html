@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² Infographic: The Beginning</title>
+    <style>
+        /* 기본 스타일 및 폰트 설정 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
+        
+        :root {
+            --bg-color: #0a0a1a;
+            --text-color: #e0e0e0;
+            --primary-color: #00aaff;
+            --secondary-color: #ffaa00;
+            --dim-color: #888;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* 섹션 기본 스타일 */
+        .section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 50px 20px;
+            box-sizing: border-box;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero 섹션 (메인 타이틀) */
+        .hero h1 {
+            font-size: 4.5vw;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        .hero h1 .highlight {
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color);
+        }
+        
+        .hero h1 .dim {
+            color: var(--dim-color);
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 4.5vw;
+            background-color: var(--text-color);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* 공통 헤더 및 텍스트 스타일 */
+        h2 {
+            font-size: 3vw;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.5vw;
+            line-height: 1.8;
+            max-width: 800px;
+            font-weight: 300;
+        }
+
+        /* 변곡점 섹션 */
+        .inflection-point .icons {
+            font-size: 5vw;
+            margin: 20px 0;
+        }
+        .inflection-point .icons span {
+            margin: 0 20px;
+        }
+
+        /* 선택 섹션 (2단 레이아웃) */
+        .choice-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 50px;
+            gap: 40px;
+        }
+        
+        .choice-path {
+            flex: 1;
+            padding: 30px;
+            border: 1px solid var(--dim-color);
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .choice-path:hover {
+            transform: translateY(-10px);
+        }
+
+        .choice-path.consumer {
+            border-color: var(--dim-color);
+        }
+        .choice-path.consumer:hover {
+            box-shadow: 0 0 20px rgba(136, 136, 136, 0.5);
+        }
+        
+        .choice-path.leader {
+            border-color: var(--primary-color);
+        }
+        .choice-path.leader:hover {
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        .choice-path h3 {
+            font-size: 2.5vw;
+            margin-top: 0;
+        }
+
+        .choice-path ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            font-size: 1.2vw;
+        }
+        .choice-path ul li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .choice-path ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        .consumer li::before { color: var(--dim-color); }
+        .leader li::before { color: var(--primary-color); }
+
+        /* 방정식 섹션 (AX²) */
+        .equation .ax2-logo {
+            font-size: 15vw;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: 0 0 25px var(--primary-color), 0 0 50px var(--primary-color);
+            margin: 20px 0;
+        }
+        .ax2-definition {
+            font-size: 2vw;
+            font-weight: 400;
+        }
+        .ax2-definition span {
+            color: var(--secondary-color);
+            font-weight: 700;
+        }
+
+        /* 초대 섹션 */
+        .invitation a {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 30px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 1.5vw;
+            font-weight: 700;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .invitation a:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .hero h1, .typing-cursor { font-size: 8vw; }
+            h2 { font-size: 6vw; }
+            p { font-size: 3.5vw; }
+            .choice-container { flex-direction: column; }
+            .choice-path h3 { font-size: 5vw; }
+            .choice-path ul { font-size: 3vw; }
+            .equation .ax2-logo { font-size: 25vw; }
+            .ax2-definition { font-size: 4vw; }
+            .invitation a { font-size: 4vw; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="section hero visible">
+        <h1>
+            <span id="typing-line1"></span><br>
+            <span id="typing-line2"></span>
+            <span class="typing-cursor"></span>
+        </h1>
+    </header>
+
+    <main>
+        <section class="section inflection-point">
+            <h2>거대한 변곡점 위에 선 우리</h2>
+            <div class="icons">
+                <span>💡</span>
+                <span>❓</span>
+                <span>😨</span>
+            </div>
+            <p>Transformer와 ChatGPT로 대표되는 LLM AI가 세상의 모든 대화의 중심에 선 지금, 우리는 거대한 변곡점 위에 서 있습니다. 어떤 이는 열광하고, 어떤 이는 자신의 자리가 위협받을 것이라는 막연한 두려움을 느낍니다. 이것은 더 이상 미래학자의 거창한 담론이 아닌, 우리 모두의 현실적인 질문이 되었습니다.</p>
+        </section>
+
+        <section class="section choice">
+            <h2>새로운 시대, 두 개의 길</h2>
+            <p>AI가 공기처럼 당연해지는 '뉴 노멀(New Normal)' 시대가 오고 있습니다. 그저 AI를 '사용'하는 것만으로는 아무것도 증명할 수 없는 세상. 당신 앞에는 두 개의 길이 놓여 있습니다.</p>
+            <div class="choice-container">
+                <div class="choice-path consumer">
+                    <h3>The Consumer</h3>
+                    <ul>
+                        <li>AI가 생성하는 정보 소비</li>
+                        <li>반복적인 AI 활용</li>
+                        <li>기존의 역할에 머무름</li>
+                        <li>가치 창출의 한계</li>
+                    </ul>
+                </div>
+                <div class="choice-path leader">
+                    <h3>The Leader</h3>
+                    <ul>
+                        <li>AI를 넘어선 가치 창조</li>
+                        <li>전략적인 AI 지렛대 활용</li>
+                        <li>새로운 시대의 기준 제시</li>
+                        <li>무한한 성장의 가능성</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section equation">
+            <h2>생존을 넘어, '리더'가 되기 위한 방정식</h2>
+            <div class="ax2-logo">AX²</div>
+            <p class="ax2-definition">
+                AI <span>T</span>ransformation('X')
+                <br>&<br>
+                AI <span>E</span>xperience('X')
+            </p>
+            <p>AI 시대에 맞게 스스로를 전환하고, AI가 주는 새로운 경험을 내 것으로 만들어 생존과 성장의 도구로 삼아야 한다는 의미를 담고 있습니다.</p>
+        </section>
+
+        <section class="section invitation">
+            <h2>여정의 시작</h2>
+            <p>앞으로 이어질 칼럼들을 통해, 저희는 AX²라는 가설 아래 AI 시대의 진정한 리더가 되기 위한 구체적인 방법론과 혁신적인 아이디어들을 공유하고자 합니다. AI의 주인이 되기 위한 여정, 그 첫걸음에 당신을 초대합니다.</p>
+            <a href="ax2_homepage.html">Join the Journey</a>
+        </section>
+    </main>
+
+    <script>
+        // 타이핑 효과를 위한 스크립트
+        const line1Text = "AI 시대, 당신은";
+        const line2Text = "'소비자'로 남겠습니까, '지배자'가 되겠습니까?";
+        const line1Element = document.getElementById('typing-line1');
+        const line2Element = document.getElementById('typing-line2');
+
+        function typeWriter(element, text, speed, callback) {
+            let i = 0;
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            type();
+        }
+
+        window.addEventListener('load', () => {
+            line2Element.style.opacity = 0;
+            typeWriter(line1Element, line1Text, 100, () => {
+                line1Element.querySelector('.highlight')?.classList.remove('highlight');
+                line1Element.querySelector('.dim')?.classList.remove('dim');
+                line2Element.style.opacity = 1;
+                
+                // 두 번째 라인의 단어들을 감싸서 효과를 줍니다.
+                line2Element.innerHTML = line2Text.replace(/'소비자'/g, "<span class='dim'>'소비자'</span>")
+                                                  .replace(/'지배자'/g, "<span class='highlight'>'지배자'</span>");
+            });
+        });
+
+
+        // 스크롤 시 섹션이 나타나는 효과
+        const sections = document.querySelectorAll('.section');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.2 // 섹션이 20% 보이면 효과 적용
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
