@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² System Research Server</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f5f7fa; }
+        header { background-color: #1b252a; color: white; padding: 2px; text-align: center; }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #455a64;
+            padding: 0px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap; /* 이미 포함되어 있어 줄바꿈 가능 */
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            font-size: 14px;
+            flex: 1 1 auto; /* 버튼이 공간에 따라 유연하게 줄어듦 */
+            min-width: 120px; /* 버튼 최소 너비 지정 */
+        }
+
+        nav button:hover {
+            background-color: #546e7a;
+            font-weight: bold; /* 버튼에 마우스 오버 시 강조 */
+            color: yellow
+        }
+
+        /* ✅ 모바일 화면에서 버튼을 세로로 정렬 */
+        @media (max-width: 600px) {
+        nav {
+            flex-direction: column;
+            align-items: stretch; /* 버튼을 nav의 폭에 맞춤 */
+        }
+
+        nav button {
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #607d8b; /* 버튼 간 구분선 (선택사항) */
+        }
+
+        nav button:first-child {
+            border-top: none;
+        }
+        }
+
+        .container { padding: 20px; }
+        .card, .important-card {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .hidden { display: none; }
+        .agent-avatar { float: right; width: 50px; height: 50px; border-radius: 50%; background-color: #37474f; }
+        .emotion-text { color: #607d8b; font-style: italic; }
+
+        .analysis-grid, .agent-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .analysis-grid .card, .agent-grid .card {
+            flex: 1 1 calc(25% - 10px);
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 1024px) {
+            .analysis-grid .card, .agent-grid .card {
+                flex: 1 1 calc(50% - 10px);
+            }
+        }
+        @media (max-width: 600px) {
+            .analysis-grid .card, .agent-grid .card {
+                flex: 1 1 100%;
+            }
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; overflow-x: auto; }
+        table, th, td { border: 1px solid #ccc; }
+        th, td { padding: 8px; text-align: left; }
+        th { background-color: #e0e0e0; }
+
+        button.analysis {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #455a64;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .important-info {
+            color: #1976d2;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-right: 4px;
+        }
+        .important-info:last-child { margin-right: 0; }
+        .important-info:hover { color: #0d47a1; }
+    </style>
+
+    <script>
+        function adjustContainerOffset() {
+        const nav = document.querySelector('nav');
+        const container = document.querySelector('.container');
+
+        if (nav && container) {
+            // 정확한 계산: 실제 nav의 높이만 반영
+            const navHeight = nav.getBoundingClientRect().height;
+
+            // 약간의 여유 (원하면): const navHeight = nav.getBoundingClientRect().height + 2;
+            container.style.paddingTop = navHeight + 'px';
+        }
+        }
+
+        // 초기 실행 + 창 크기 변경 시
+        window.addEventListener('load', adjustContainerOffset);
+        window.addEventListener('resize', adjustContainerOffset);
+    </script>
+
+</head>
+<body style="background-color: #000000;">
+
+<header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;">
+    <h1 style="padding: 0; margin: 10px;">AX² Research System</h1>
+    <!-- <p style="padding: 0; margin: 10px; font-weight: italic; font-size:10px">"AX² System에서 AI는 인간의 가치를 높이고, 인간을 강화하며, 인간을 보호한다."</p> -->
+</header>
+
+<nav style="position: fixed; top: 60px; left: 0; width: 100%; z-index: 999;">
+    <button onclick="showTab('Research')">Research</button>
+    <button onclick="showTab('Design')">Design</button>
+    <button onclick="showTab('Development')">Development</button>    
+    <button onclick="showTab('Presentation')">Presentation</button>
+    <button onclick="showTab('Reference')">Reference</button>
+</nav>
+
+<div style="margin-top: 50px;"></div>
+<div class="container" >
+    <div id="Research">
+        <iframe src="./ax_research/index.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+    </div>
+
+    <div id="Design" class="hidden">
+        <iframe src="./ax_design/index.html" style="width: 100%; height: 100vh; border: none;"></iframe>        
+    </div>
+
+    <div id="Development" class="hidden">
+        <iframe src="./ax_dev/index.html" style="width: 100%; height: 100vh; border: none;"></iframe>        
+    </div>
+
+    <div id="Presentation" class="hidden">
+        <iframe src="./ax_presentation/index.html" style="width: 100%; height: 100vh; border: none; "></iframe>        
+    </div>
+
+    <div id="Reference" class="hidden">
+        <iframe src="./ax_reference/index.html" style="width: 100%; height: 100vh; border: none;"></iframe>        
+    </div>
+    
+</div>
+
+<script>
+    function showTab(tabName) {
+        document.querySelectorAll('.container > div').forEach(div => div.classList.add('hidden'));
+        document.getElementById(tabName).classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
