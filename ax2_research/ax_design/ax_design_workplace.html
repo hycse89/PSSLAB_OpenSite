@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">   	
+	
+    <title>AX² Design Workplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .dashboard-container {
+            display: grid;
+            /* grid-template-columns: repeat(6, 1fr); */ /* <- 기존 코드 */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* <- 수정된 코드 */
+            gap: 20px;
+            margin: 0 auto;
+            /* max-width: 1500px; */ /* <- 유동적인 반응형을 위해 제거 또는 주석 처리 */
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 200px;
+            border: 1px dashed #575757;
+            padding: 10px;
+          }
+
+        .column-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #007BFF;
+        }
+
+        .link-button {
+            display: block;
+            width: 180px;
+            padding: 6px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: normal;  /* bold */
+            margin-bottom: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .link-button:hover {
+            background-color: #012d5b;
+        }
+
+        .drag-over {
+            background-color: #f0f0f0;
+          }
+    </style>
+</head>
+
+<body>
+  <!-- 상단 타이틀 -->
+  <h2 style="margin-bottom: 4px; color: #007BFF">Design Workplace</h2>
+  <button onclick="resetLayout()" style="margin-bottom: 10px; padding: 2px 5px; font-size: 10px; background-color: #000000; color: #ffffff"">🔄 Reset Layout</button>
+
+    <!-- 6개의 컬럼을 포함하는 컨테이너 -->
+    <div class="dashboard-container">
+
+        <!-- Column 1 -->
+        <div class="column">
+            <div class="column-title">AX² System</div>                      
+            <a href="/ax_design/utils/mermaid_viewer.html?data=/ax_design/doc/doc_ax_system_func.txt&title=AX%20System%20Function%20List" class="link-button" target="_blank">AX System Func. List</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_nclc_tech.md" class="link-button" target="_blank">AX NCLC의 주요AI기술</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_nclc_cli_prototype.md" class="link-button" target="_blank">AX NCLC CLI Prototype</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_nclc_platform.md" class="link-button" target="_blank">AX NCLC Platform</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_nclc_solution.md" class="link-button" target="_blank">AX NCLC Solution</a>
+        </div>
+        
+        <!-- Column 2 -->
+        <div class="column">
+            <div class="column-title">AI Analysis</div>
+       
+            <a href="/ax_design/doc/ax_tech.html" class="link-button" target="_blank">AI Tech. Hierarchy</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_langchain.md" class="link-button" target="_blank">LangChain&LangGraph</a>            
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_addon.md" class="link-button" target="_blank">AX 연계 기술 및 솔루션</a>                        
+            <a href="/ax_design/utils/graph_viewer.html?header=AX%Library%20and%20Utilities&file=../doc/doc_ax_utilities.md" class="link-button" target="_blank">AX Template&Utilities</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="column">
+            <div class="column-title">AX² Lake</div>
+            <a href="/ax_design/utils/graph_viewer.html?header=AX%20Lake%20System&file=../doc/doc_ax_lake_system_design.md" class="link-button" target="_blank">AX Lake System</a>            
+        </div>
+        <!-- Column 4 -->
+        <div class="column">
+            <div class="column-title">AX² Experience</div>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_aiui.md" class="link-button" target="_blank">AIUI.yaml Window 컴포넌트 DSL v0.1</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_myai.md" class="link-button" target="_blank">마이 아이 UX</a>        
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_ux_strategy.md" class="link-button" target="_blank">AX 경험 전략</a>                        
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_ux_experience.md" class="link-button" target="_blank">AX 경험 디자인</a>                  
+        </div>
+
+        <!-- Column 5: -->
+        <div class="column">
+            <div class="column-title">AX² Agent</div>          
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_agent_design_v1.md" class="link-button" target="_blank">AX2 Agent Design V1</a>
+            <a href="/ax_design/utils/markdown_viewer.html?file=../doc/doc_ax_software_dev.md" class="link-button" target="_blank">소프트웨어 자동 개발</a>            
+        </div>
+
+        <!-- Column 6: -->
+        <div class="column">
+            <div class="column-title">AX² AI-Ware</div>          
+
+        </div>
+
+        <!-- Column 7 -->
+        <div class="column">
+            <div class="column-title">AX² Etc.</div>
+            <a href="/ax_design/doc/ax_message1.html" class="link-button" target="_blank">AX Message 1</a>            
+            <a href="/ax_design/utils/graph_viewer.html?header=AX%20Insight%201&file=../doc/doc_ax_insight.md" class="link-button" target="_blank">AX Insight 1</a>
+            <a href="/ax_design/doc/ax_dev_tools.html" class="link-button" target="_blank">Development Tools</a>
+            <a href="/ax_design/doc/ax_hw_system.html" class="link-button" target="_blank">AX HW System</a>
+                                   
+        </div>
+
+        <!-- Column 8 -->
+        <div class="column">
+            <div class="column-title">AX² Design Backup</div>
+            <a href="/ax_design/doc/enterprise_ax.html" class="link-button" target="_blank">Enterprise AX System 2</a>                        
+            <a href="/ax_design/doc/ax_concept.html" class="link-button" target="_blank">AX Concept</a>         
+            <a href="/ax_design/doc/ax_value.html" class="link-button" target="_blank">AX Value</a>           
+            <a href="/ax_design/doc/ax_stages.html" class="link-button" target="_blank">AX Stages</a>  
+            <a href="/ax_design/doc/ax_nclc_ux.html" class="link-button" target="_blank">AX UX 1 - AI NCLC</a>
+            <a href="/ax_design/doc/ax_multiverse.html" class="link-button" target="_blank">AX UX 2 - AI TEAM</a>
+            <a href="/ax_design/doc/test_graphviz1.html" class="link-button" target="_blank">AX UX 3 - Anti AI</a>
+            <a href="/ax_design/doc/ax_nclc_ux.html" class="link-button" target="_blank">AX UX 4 - Digital AI</a>                                    
+            <a href="/ax_design/doc/ax_pilot_dev.html" class="link-button" target="_blank">AX Pilot Dev</a>
+            <a href="/ax_design/doc/ax_test_system.html" class="link-button" target="_blank">AX Test System</a>                   
+        </div>        
+
+        <!-- Column 9 -->
+        <div class="column">
+            <div class="column-title">DX&Etc</div>
+            <a href="/ax_design/doc/dx_class.html" class="link-button" target="_blank">Digital MultiVerse</a>
+			      <a href="/ax_design/doc/dx_class.html" class="link-button" target="_blank">Digital DNA&Cell</a>
+            <a href="/ax_design/doc/dx_class.html" class="link-button" target="_blank">DX Evolving IdeaFlow</a>
+       			<a href="/ax_design/doc/dx_class.html" class="link-button" target="_blank">Digital Object Structure</a>                 
+        </div>            
+    </div>
+
+    <script>
+        let draggedItem = null;
+      
+        function setupDragAndDrop() {
+          // 모든 버튼에 드래그 속성 및 이벤트 추가
+          document.querySelectorAll('.link-button').forEach(btn => {
+            btn.setAttribute('draggable', 'true');
+            btn.addEventListener('dragstart', (e) => {
+              draggedItem = e.target;
+              setTimeout(() => e.target.style.display = 'none', 0);
+            });
+          });
+      
+          // 각 column 영역에 drop 이벤트 등록
+          document.querySelectorAll('.column').forEach(column => {
+            column.addEventListener('dragover', (e) => {
+              e.preventDefault();
+              column.classList.add('drag-over');
+            });
+      
+            column.addEventListener('dragleave', () => {
+              column.classList.remove('drag-over');
+            });
+      
+            column.addEventListener('drop', (e) => {
+              e.preventDefault();
+              column.classList.remove('drag-over');
+              if (draggedItem) {
+                draggedItem.style.display = 'block';
+                column.appendChild(draggedItem);
+                draggedItem = null;
+                saveLayout();
+              }
+            });
+          });
+      
+          document.addEventListener('dragend', () => {
+            if (draggedItem) {
+              draggedItem.style.display = 'block';
+              draggedItem = null;
+            }
+          });
+        }
+      
+        function saveLayout() {
+          const layout = [];
+          document.querySelectorAll('.column').forEach(col => {
+            const links = Array.from(col.querySelectorAll('.link-button')).map(btn => ({
+              href: btn.getAttribute('href'),
+              text: btn.textContent
+            }));
+            layout.push(links);
+          });
+          localStorage.setItem('devDashboardLayout', JSON.stringify(layout));
+        }
+      
+        function loadLayout() {
+          const layout = JSON.parse(localStorage.getItem('devDashboardLayout'));
+          const columns = document.querySelectorAll('.column');
+      
+          if (!layout || layout.length !== columns.length) {
+            setupDragAndDrop(); // 최초 또는 구조 달라졌을 때
+            return;
+          }
+      
+          // 기존 버튼 제거
+          columns.forEach(col => {
+            col.querySelectorAll('.link-button').forEach(btn => btn.remove());
+          });
+      
+          // 저장된 layout 재구성
+          layout.forEach((links, colIndex) => {
+            const col = columns[colIndex];
+            links.forEach(link => {
+              const a = document.createElement('a');
+              a.href = link.href;
+              a.textContent = link.text;
+              a.className = 'link-button';
+              a.setAttribute('draggable', 'true');
+              a.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                setTimeout(() => e.target.style.display = 'none', 0);
+              });
+              col.appendChild(a);
+            });
+          });
+      
+          setupDragAndDrop();
+        }
+      
+        function resetLayout() {
+          localStorage.removeItem('devDashboardLayout');
+          location.reload();
+        }
+      
+        window.addEventListener('DOMContentLoaded', loadLayout);
+      </script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">   	
+	
+    <title>AX&DX System Devopment Workplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .dashboard-container {
+            display: grid;
+            /* grid-template-columns: repeat(6, 1fr); */ /* <- 기존 코드 */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* <- 수정된 코드 */
+            gap: 20px;
+            margin: 0 auto;
+            /* max-width: 1500px; */ /* <- 유동적인 반응형을 위해 제거 또는 주석 처리 */
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 200px;
+            border: 1px dashed #575757;
+            padding: 10px;
+          }
+
+        .column-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #009419;
+        }
+
+        .link-button {
+            display: block;
+            width: 180px;
+            padding: 6px;
+            background-color: #009419;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: normal;  /* bold */
+            margin-bottom: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .link-button:hover {
+            background-color: #003a03;
+        }
+
+        .drag-over {
+            background-color: #f0f0f0;
+          }
+    </style>
+</head>
+<body>
+
+  <!-- 상단 타이틀 -->
+  <h2 style="margin-bottom: 4px; color: #009419">Devopment Workplace</h2>
+  <button onclick="resetLayout()" style="margin-bottom: 10px; padding: 2px 5px; font-size: 10px; background-color: #000000; color: #ffffff"">🔄 Reset Layout</button>
+
+    <!-- 6개의 컬럼을 포함하는 컨테이너 -->
+    <div class="dashboard-container">
+        
+        <!-- Column 1: AX Main Dev -->
+        <div class="column">
+            <div class="column-title">AX System Dev</div>
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX Catalog Server</a>                                     
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX Lake Server</a>             
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX Dashbaord Server</a>             
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX Node Server</a>                  
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX System - AX Experience</a>           
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX System - AX Mondrian Board</a>                        
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX System - AX MacGyver Tool</a> 
+        </div>
+
+        <!-- Column 2: AX Function Dev -->
+        <div class="column">
+            <div class="column-title">AX Function Dev</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_code_server.md" class="link-button" target="_blank">Code Server (MVP 버전)</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_web_table.md" class="link-button" target="_blank">Web Table Template</a>            
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">Web Site Barebone Template</a>                   
+            <a href="/ax_dev/dev1.html" class="link-button" target="_blank">AX Insightful Analytics</a>                 
+        </div>
+
+        <!-- Column 3: AX Tool Dev -->
+        <div class="column">
+            <div class="column-title">AX Tool Dev</div> 
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_classifier_triage.md" class="link-button" target="_blank">문서분리기-통합분류기</a>                        
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_classifier_keyword.md" class="link-button" target="_blank">문서분리기-키워드기반</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_classifier_sentence.md" class="link-button" target="_blank">문서분리기-문장기반</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_classifier_plm.md" class="link-button" target="_blank">문서분리기-PLM기반</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_slm_dev_design.md" class="link-button" target="_blank">SLM 구축&훈련 설계</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_sentence_ext.md" class="link-button" target="_blank">문단 추출기</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_keyword_v2.md" class="link-button" target="_blank">키워드 추출기</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_stt_tts.md" class="link-button" target="_blank">LLM 음성 채팅 코드</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_dq_system_phase1.md" class="link-button" target="_blank">Document Quatization Phase1</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_dq_system_phase2.md" class="link-button" target="_blank">Document Quatization Phase2</a>
+            <a href="/ax_dev/doc/dev1.html" class="link-button" target="_blank">Movie Partial Viewer</a>    
+            <a href="/ax_dev/doc/test1.html" class="link-button" target="_blank">Tool 1-Mermaid Viewer</a>            
+            <a href="/ax_dev/utils/graph_viewer.html?header=TEST2&file=../doc/test2.md" class="link-button" target="_blank">Tool 2-Graph Tree</a>                                        
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/test3.md" class="link-button" target="_blank">Tool 3-Markdown</a>     
+            <a href="/ax_dev/utils/svg_slide_viewer.html?file=../doc/dx_demo" class="link-button" target="_blank">Tool 4-Demo Slide View</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_txt_downloader.md" class="link-button" target="_blank">Tool 5-Text Downloader</a>                
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_txt_organizer.md" class="link-button" target="_blank">Tool 6-Text Organizer</a>                            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_cd_viewer.md" class="link-button" target="_blank">Tool 7-Cognitive Document Viewer</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_graph_viewer_v2.md" class="link-button" target="_blank">Tool 8-Graph Viewer 2</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_mermaid_viewer_v2.md" class="link-button" target="_blank">Tool 9-Mermaid Viewer Version 2</a>                        
+        </div>
+
+        <!-- Column 4: AI UI_UX Dev -->
+        <div class="column">
+            <div class="column-title">AI UX Dev</div>
+            <a href="http://localhost:8002/ax_ui_test6.html" class="link-button" target="_blank">UX Test 1</a>
+            <a href="http://localhost:8002/ax_ui_test7.html" class="link-button" target="_blank">UX Frame 1</a>        
+        </div>
+
+        <!-- Column 5: AI Test Dev -->
+        <div class="column">
+            <div class="column-title">Test and Check</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_base_model_test.md" class="link-button" target="_blank">3대 SLM BASE MODEL TEST</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_doc_compare.md" class="link-button" target="_blank">LangChain기반의 문서비교</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_langchain_slm1.md" class="link-button" target="_blank">LangChain기반의 SLM구축 1</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_langchain_slm2.md" class="link-button" target="_blank">LangChain기반의 SLM구축 2</a>            
+            <a href="/ax_dev/utils/graph_viewer_v2.html?header=Graph_Viewer_V2&file=../doc/0_doc_test_graph2.md" class="link-button" target="_blank">Graph Viewer V2 Test</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_debug_subprocess_issue.md" class="link-button" target="_blank">Python Subprocess Issue</a>            
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">SLM1-GPT2</a>
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">SLM2-Gemma3</a>
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">SLM3-BitNet</a>    
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">Orchestration-LangChain</a>    
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">Orchestration-LangGraph</a>  
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">Augmentation-RAG</a>    
+            <a href="/ax_dev/doc/dev1.md" class="link-button" target="_blank">Augmentation-LoRA</a>     
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_web_no_cache.md" class="link-button" target="_blank">브라우저 캐시 무력화 방안</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_sw_parsing.md" class="link-button" target="_blank">Text Parser 개발 방안</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_web_txt_downloader.md" class="link-button" target="_blank">Web Text Downloader</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_txt_organizer.md" class="link-button" target="_blank">Web Text Organizer</a>                     
+        </div>
+        
+        <!-- Column 6: Note and Info. -->
+        <div class="column">
+            <div class="column-title">Note and Info.</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_gemma3_slm.md" class="link-button" target="_blank">Gemam3 SLM</a>   
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_gemma3_lora.md" class="link-button" target="_blank">Gemam3 SLM-LoRA</a>   
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ai_gemma3_rag.md" class="link-button" target="_blank">Gemam3 SLM-RAG</a>              
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_it_dev_virtual_env.md" class="link-button" target="_blank">개발환경 가상화 전략</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_it_docker.md" class="link-button" target="_blank">Docker</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_it_vector_db.md" class="link-button" target="_blank">Vector DB</a>            
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_debug_loadpage.md" class="link-button" target="_blank">loadPage debug</a>
+        </div>
+
+        <!-- Column 7:  -->
+        <div class="column">
+            <div class="column-title">Progress-AX Contents</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Data Server Progress</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Code Server Progress</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Gemma3 SLM Server</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Document Quantization</a>
+        </div>
+
+        <!-- Column 8:  -->
+        <div class="column">
+            <div class="column-title">Progress-AX Experience</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_experience_progress.md" class="link-button" target="_blank">Catalog Server Progress</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_experience_progress.md" class="link-button" target="_blank">Experience-분석</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_experience_progress.md" class="link-button" target="_blank">Experience-생성</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_experience_progress.md" class="link-button" target="_blank">Experience-학습</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_experience_progress.md" class="link-button" target="_blank">Experience-육성</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_experience_progress.md" class="link-button" target="_blank">Experience-상황</a>            
+        </div>
+
+        <!-- Column 9:  -->
+        <div class="column">
+            <div class="column-title">Progress-AX Agent</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Agent Server Progress</a>
+        </div>
+
+        <!-- Column 10:  -->
+        <div class="column">
+            <div class="column-title">Progress-AX Comm.</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Comm. Server Progress</a>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">Multimodal Communicator</a>
+        </div>
+
+        <!-- Column 11:  -->
+        <div class="column">
+            <div class="column-title">Progress-AX App</div>
+            <a href="/ax_dev/utils/markdown_viewer.html?file=../doc/doc_ax_contents_progress.md" class="link-button" target="_blank">App Server Progress</a>
+        </div>
+
+    </div>
+
+    <script>
+        let draggedItem = null;
+      
+        function setupDragAndDrop() {
+          // 모든 버튼에 드래그 속성 및 이벤트 추가
+          document.querySelectorAll('.link-button').forEach(btn => {
+            btn.setAttribute('draggable', 'true');
+            btn.addEventListener('dragstart', (e) => {
+              draggedItem = e.target;
+              setTimeout(() => e.target.style.display = 'none', 0);
+            });
+          });
+      
+          // 각 column 영역에 drop 이벤트 등록
+          document.querySelectorAll('.column').forEach(column => {
+            column.addEventListener('dragover', (e) => {
+              e.preventDefault();
+              column.classList.add('drag-over');
+            });
+      
+            column.addEventListener('dragleave', () => {
+              column.classList.remove('drag-over');
+            });
+      
+            column.addEventListener('drop', (e) => {
+              e.preventDefault();
+              column.classList.remove('drag-over');
+              if (draggedItem) {
+                draggedItem.style.display = 'block';
+                column.appendChild(draggedItem);
+                draggedItem = null;
+                saveLayout();
+              }
+            });
+          });
+      
+          document.addEventListener('dragend', () => {
+            if (draggedItem) {
+              draggedItem.style.display = 'block';
+              draggedItem = null;
+            }
+          });
+        }
+      
+        function saveLayout() {
+          const layout = [];
+          document.querySelectorAll('.column').forEach(col => {
+            const links = Array.from(col.querySelectorAll('.link-button')).map(btn => ({
+              href: btn.getAttribute('href'),
+              text: btn.textContent
+            }));
+            layout.push(links);
+          });
+          localStorage.setItem('devDashboardLayout', JSON.stringify(layout));
+        }
+      
+        function loadLayout() {
+          const layout = JSON.parse(localStorage.getItem('devDashboardLayout'));
+          const columns = document.querySelectorAll('.column');
+      
+          if (!layout || layout.length !== columns.length) {
+            setupDragAndDrop(); // 최초 또는 구조 달라졌을 때
+            return;
+          }
+      
+          // 기존 버튼 제거
+          columns.forEach(col => {
+            col.querySelectorAll('.link-button').forEach(btn => btn.remove());
+          });
+      
+          // 저장된 layout 재구성
+          layout.forEach((links, colIndex) => {
+            const col = columns[colIndex];
+            links.forEach(link => {
+              const a = document.createElement('a');
+              a.href = link.href;
+              a.textContent = link.text;
+              a.className = 'link-button';
+              a.setAttribute('draggable', 'true');
+              a.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                setTimeout(() => e.target.style.display = 'none', 0);
+              });
+              col.appendChild(a);
+            });
+          });
+      
+          setupDragAndDrop();
+        }
+      
+        function resetLayout() {
+          localStorage.removeItem('devDashboardLayout');
+          location.reload();
+        }
+      
+        window.addEventListener('DOMContentLoaded', loadLayout);
+      </script>
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.png">   	
+	
+    <title>Reference Workplace</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .dashboard-container {
+            display: grid;
+            /* grid-template-columns: repeat(6, 1fr); */ /* <- 기존 코드 */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* <- 수정된 코드 */
+            gap: 20px;
+            margin: 0 auto;
+            /* max-width: 1500px; */ /* <- 유동적인 반응형을 위해 제거 또는 주석 처리 */
+        }        
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 200px;
+            border: 1px dashed #575757;
+            padding: 10px;
+          }
+
+        .column-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #575757;
+        }
+
+        .link-button {
+            display: block;
+            width: 180px;
+            padding: 6px;
+            background-color: #575757;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: normal;  /* bold */
+            margin-bottom: 8px;
+            transition: background-color 0.3s;
+        }
+
+        .link-button:hover {
+            background-color: #1f2021;
+        }
+
+        .drag-over {
+            background-color: #f0f0f0;
+          }
+    </style>
+</head>
+<body>
+
+  <!-- 상단 타이틀 -->
+  <h2 style="margin-bottom: 4px; color: #575757;">Reference Workplace</h2>
+  <button onclick="resetLayout()" style="margin-bottom: 10px; padding: 2px 5px; font-size: 10px; background-color: #000000; color: #ffffff"">🔄 Reset Layout</button>
+
+    <!-- 6개의 컬럼을 포함하는 컨테이너 -->
+    <div class="dashboard-container">
+        
+        <!-- Column : 주요 기사 -->
+        <div class="column">
+            <div class="column-title">주요 기사-비즈니스</div>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=프롬프트%20엔지니어&file=../doc/article1.pdf" class="link-button" target="_blank">프롬프트 엔지니어</a>     
+     
+            <a href="/ax_reference/utils/pdf_viewer.html?header=애플%20AI코딩%20플랫폼&file=../doc/article2.pdf" class="link-button" target="_blank">애플 AI코딩 플랫폼</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=아마존%20AI코딩%20플랫폼&file=../doc/article3.pdf" class="link-button" target="_blank">아마존 AI코딩 플랫폼</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20못%20쓰면%20일자리도%20없어&file=../doc/article5.pdf" class="link-button" target="_blank">AI 못 쓰면 일자리도 없어</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20코딩&file=../doc/article6.pdf" class="link-button" target="_blank">올해는 AI가 코딩에서 인간을 영원히 앞지르는 해</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Vibe%20Coding&file=../doc/article_vibe_coding.pdf" class="link-button" target="_blank">SW산업 근간 흔들어</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=넌%20AI%20하나만 쓰니?&file=../doc/article_multi_llm.pdf" class="link-button" target="_blank">넌 AI 하나만 쓰니?</a>  
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20Agent%20과장광고&file=../doc/article_gartner.pdf" class="link-button" target="_blank">AI Agent 과장광고</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20일자리의%20미래&file=../doc/article_ai_work.pdf" class="link-button" target="_blank">AI 일자리의 미래</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI개발%20사기-Builder%20AI&file=../doc/article_builder_ai.pdf" class="link-button" target="_blank">AI개발 사기-Builder AI</a>
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20Agent%20과장광고&file=../doc/article_ai_agent.pdf" class="link-button" target="_blank">Anthropic AI Agent</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20Agent%20과장광고&file=../doc/doc_ai_app.pdf" class="link-button" target="_blank">박사학위? AI개발?</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=코난테크놀로지&file=../doc/article_conan.pdf" class="link-button" target="_blank">코난테크놀로지 SLM</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Microsoft%20AI도입%7000억%20절감&file=../doc/article_microsoft_7000억절감.pdf" class="link-button" target="_blank">Microsoft AI도입 7000억 절감</a>
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Microsoft%20AI도입%7000억%20절감&file=../doc/article_stanford_report.pdf" class="link-button" target="_blank">스탠포드 보고서 기사</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20신입사원%20처럼%20여겨짐&file=../doc/article_알트먼_AI_신입사원.pdf" class="link-button" target="_blank">알트먼 "AI에이전트, 이미 신입사원"</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20신입사원%20처럼%20여겨짐&file=../doc/article_코딩보다설계.pdf" class="link-button" target="_blank">코딩 보다 설계</a>
+        </div>
+
+        <div class="column">
+            <div class="column-title">주요 기사-기술</div>
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20라우팅%20모델&file=../doc/article_ai_router.pdf" class="link-button" target="_blank">AI 라우팅 모델</a>
+            <a href="/ax_reference/utils/markdown_viewer.html?file=../doc/article_context_engineering.md" class="link-button" target="_blank">Prompt Engineering(X), Context Engineering(O) </a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=저품질%20데이터&file=../doc/reference1.pdf" class="link-button" target="_blank">저품질 데이터</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=LLM%20추론시간%20늘리면%20멍청해짐&file=../doc/article_추론_바보.pdf" class="link-button" target="_blank">LLM 추론시간 늘리면 멍청해짐</a>  
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Microsoft%20BitNet&file=../doc/reference3.pdf" class="link-button" target="_blank">Microsoft BitNet</a>      
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20Agent%20과장광고&file=../doc/article_ai_agent.pdf" class="link-button" target="_blank">Anthropic AI Agent</a>  
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20Agent%20과장광고&file=../doc/article_ai_coding_gpt5.pdf" class="link-button" target="_blank">GPT5를 이용한 AI Coding</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI%20Agent%20과장광고&file=../doc/doc_langchain_deepagents.pdf" class="link-button" target="_blank">LangChain Deep Agents</a>
+        </div>
+
+        <!-- Column : 주요 사례 -->        
+        <div class="column">
+            <div class="column-title">주요 사례</div>
+            <a href="/ax_reference/utils/markdown_viewer.html?file=../doc/doc_case_review1.md" class="link-button" target="_blank">Case Review K사-AI Agent</a>
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=미래에셋증권&file=../doc/reference2.pdf" class="link-button" target="_blank">미래에셋증권-AI포탈</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=LGCNS&file=../doc/article4.pdf" class="link-button" target="_blank">LGCNS-AI가 분석·설계·코딩다한다</a>
+            <a href="/ax_reference/doc/case_devin.png" class="link-button" target="_blank">쓸만한 초급 Web Site 구축 가격은?</a>
+            <a href="https://python-cli-dashboard-iuat700o.devinapps.com/" class="link-button" target="_blank">Devin Test Case - 5천원</a>
+            <a href="/ax_reference/utils/markdown_viewer.html?file=../doc/doc_ax_anti_ai2.md" class="link-button" target="_blank">Case Review-AI Coding </a>
+
+            <a href="/ax_presentation/utils/svg_viewer.html?file=../doc/case_review.svg" class="link-button" target="_blank">DX&AX Case Review 1</a>
+            <a href="/ax_presentation/utils/svg_viewer.html?file=../doc/dx_case_demo.svg" class="link-button" target="_blank">Legacy AX Case Demo   
+
+            <a href="https://notebooklm.google.com/notebook/730886f6-06df-4073-b0ae-4d98fbfce357" class="link-button" target="_blank">NLM-xLM</a>
+            <a href="https://notebooklm.google.com/notebook/697bb2ef-a005-4f97-981e-08d6c4d6e864" class="link-button" target="_blank">NLM-Fine Tuning</a>            
+            <a href="https://notebooklm.google.com/notebook/730886f6-06df-4073-b0ae-4d98fbfce357" class="link-button" target="_blank">NLM-FAISS</a>    
+            
+            <a href="/ax_presentation/utils/svg_viewer.html?file=../doc/case_review.svg" class="link-button" target="_blank">DX&AX Case Review 1</a>
+            <a href="/ax_presentation/utils/svg_viewer.html?file=../doc/dx_case_demo.svg" class="link-button" target="_blank">AX Case Demo 1</a>  
+            <a href="/ax_presentation/utils/pdf_viewer.html?header=Fine%20Tuning%20Book&file=../doc/doc_fine_tuning_book.pdf" class="link-button" target="_blank">예시:AI산출물-Fine Tuning BOOK</a>
+
+        </div>
+
+        <!-- Column : 주요 사이트 -->
+        <div class="column">
+            <div class="column-title">주요 사이트</div>
+            <a href="https://app.devin.ai/" class="link-button" target="_blank">Devin AI Engineer</a>
+            <a href="https://ollama.com/" class="link-button" target="_blank">Ollama</a> 
+            <a href="https://huggingface.co/" class="link-button" target="_blank">HuggingFace</a>     
+            <a href="https://www.aitimes.com/" class="link-button" target="_blank">AI Times</a>
+            <a href="https://yozm.wishket.com/magazine/" class="link-button" target="_blank">요즘 IT</a>
+            <a href="https://news.hada.io/" class="link-button" target="_blank">GeekNews</a>                
+        </div>
+
+        <!-- Column 3: 주요 보고서 -->
+        <div class="column">
+          <div class="column-title">주요 보고서</div>
+          <a href="/ax_research/utils/markdown_viewer.html?file=../doc/doc_ax_synergy_deep_research.md" class="link-button" target="_blank">AX Synergy - Deep Research</a>                            
+          <a href="/ax_reference/utils/pdf_viewer.html?header=Gemini%20제품군&file=../doc/doc_research_with_gemini_v1.pdf" class="link-button" target="_blank">Gemini 제품군을 활용한 연구분석 방법론 </a>
+          <a href="/ax_presentation/utils/pdf_viewer.html?header=Fine%20Tuning%20Book&file=../doc/doc_fine_tuning_book.pdf" class="link-button" target="_blank">AI학습-Fine Tuning Guide Book</a>
+          <a href="/ax_reference/utils/pdf_viewer.html?header=Future%20of%20Work%20with%20AI%20Agents&file=../doc/paper_future_of_work_with_ai_agents.pdf" class="link-button" target="_blank">스탠포드-Futre of Work with AI Agents</a>
+
+        </div>
+
+        <!-- Column 4: 주요 논문 -->
+        <div class="column">
+            <div class="column-title">주요 논문</div>
+            <a href="/ax_reference/utils/markdown_viewer.html?file=../doc/doc_ai_best_paper.md" class="link-button" target="_blank">LLM 분야 20대 논문</a>        
+            <a href="/ax_reference/utils/markdown_viewer.html?file=../doc/doc_ai_best_paper.md" class="link-button" target="_blank">LLM 분야 20대 논문 - 번역&요약</a>        
+
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Attention is All You Need&file=../doc/paper1.pdf" class="link-button" target="_blank">Attention is All You Need</a>          
+            <a href="/ax_reference/utils/pdf_viewer.html?header=GPT-4_Technical_Report&file=../doc/report5.pdf" class="link-button" target="_blank">GPT-4 Technical Report</a>
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Gemma3_Technical_Report&file=../doc/report6.pdf" class="link-button" target="_blank">Gemma3 Technical Report</a>            
+            <a href="/ax_reference/utils/pdf_viewer.html?header=BitNet_Technical_Report&file=../doc/report7.pdf" class="link-button" target="_blank">BitNet Technical Report</a>                
+            <a href="/ax_reference/utils/pdf_viewer.html?header=Llama3_Technical_Report&file=../doc/Llama3.pdf" class="link-button" target="_blank">Llama3 Technical Report</a>                
+            <a href="/ax_reference/utils/pdf_viewer.html?header=RAG_for_NLP&file=../doc/paper2.pdf" class="link-button" target="_blank">Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</a>                            
+        </div>
+
+        <!-- Column 5: 주요 동영상 -->
+        <div class="column">
+            <div class="column-title">주요 동영상</div>
+            <a href="https://youtu.be/_WmgvJUqVi0" class="link-button" target="_blank">Contents Intelligence 1</a>
+            <a href="https://youtu.be/BRKj2SGdum4" class="link-button" target="_blank">Contents Intelligence 2</a>            
+        </div>
+
+        <!-- Column 6: 기타 참고자료 -->
+        <div class="column">
+            <div class="column-title">기타 참고자료</div>            
+            <a href="/ax_reference/utils/pdf_viewer.html?header=AI_Engieering&file=../doc/doc_ai_engineering.pdf" class="link-button" target="_blank">AI Engineering</a>                      
+            <a href="/ax_reference/utils/markdown_viewer.html?file=../doc/doc_safe_prompt_for_code.md" class="link-button" target="_blank">ChatGPT용 안전 프롬프트 모음 (코드 작업 특화)</a>
+            <a href="/ax_reference/doc/ai_portals.html" class="link-button" target="_blank">AI 국내외 포탈</a>  
+        </div>
+
+    </div>
+
+    <script>
+        let draggedItem = null;
+      
+        function setupDragAndDrop() {
+          // 모든 버튼에 드래그 속성 및 이벤트 추가
+          document.querySelectorAll('.link-button').forEach(btn => {
+            btn.setAttribute('draggable', 'true');
+            btn.addEventListener('dragstart', (e) => {
+              draggedItem = e.target;
+              setTimeout(() => e.target.style.display = 'none', 0);
+            });
+          });
+      
+          // 각 column 영역에 drop 이벤트 등록
+          document.querySelectorAll('.column').forEach(column => {
+            column.addEventListener('dragover', (e) => {
+              e.preventDefault();
+              column.classList.add('drag-over');
+            });
+      
+            column.addEventListener('dragleave', () => {
+              column.classList.remove('drag-over');
+            });
+      
+            column.addEventListener('drop', (e) => {
+              e.preventDefault();
+              column.classList.remove('drag-over');
+              if (draggedItem) {
+                draggedItem.style.display = 'block';
+                column.appendChild(draggedItem);
+                draggedItem = null;
+                saveLayout();
+              }
+            });
+          });
+      
+          document.addEventListener('dragend', () => {
+            if (draggedItem) {
+              draggedItem.style.display = 'block';
+              draggedItem = null;
+            }
+          });
+        }
+      
+        function saveLayout() {
+          const layout = [];
+          document.querySelectorAll('.column').forEach(col => {
+            const links = Array.from(col.querySelectorAll('.link-button')).map(btn => ({
+              href: btn.getAttribute('href'),
+              text: btn.textContent
+            }));
+            layout.push(links);
+          });
+          localStorage.setItem('devDashboardLayout', JSON.stringify(layout));
+        }
+      
+        function loadLayout() {
+          const layout = JSON.parse(localStorage.getItem('devDashboardLayout'));
+          const columns = document.querySelectorAll('.column');
+      
+          if (!layout || layout.length !== columns.length) {
+            setupDragAndDrop(); // 최초 또는 구조 달라졌을 때
+            return;
+          }
+      
+          // 기존 버튼 제거
+          columns.forEach(col => {
+            col.querySelectorAll('.link-button').forEach(btn => btn.remove());
+          });
+      
+          // 저장된 layout 재구성
+          layout.forEach((links, colIndex) => {
+            const col = columns[colIndex];
+            links.forEach(link => {
+              const a = document.createElement('a');
+              a.href = link.href;
+              a.textContent = link.text;
+              a.className = 'link-button';
+              a.setAttribute('draggable', 'true');
+              a.addEventListener('dragstart', (e) => {
+                draggedItem = e.target;
+                setTimeout(() => e.target.style.display = 'none', 0);
+              });
+              col.appendChild(a);
+            });
+          });
+      
+          setupDragAndDrop();
+        }
+      
+        function resetLayout() {
+          localStorage.removeItem('devDashboardLayout');
+          location.reload();
+        }
+      
+        window.addEventListener('DOMContentLoaded', loadLayout);
+      </script>
+
+</body>
+</html>
