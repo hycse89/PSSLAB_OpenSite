@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>PSSLAB SVG Graph View</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      font-family: sans-serif;
+      overflow: auto;
+    }
+    #graph-container {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+    }
+    svg {
+      background: white;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="graph-container">
+    <svg id="graph"></svg>
+  </div>
+
+  <script>
+    function renderGraph() {
+      const svg = document.getElementById('graph');
+      svg.innerHTML = '';
+
+      const params = new URLSearchParams(window.location.search);
+      const file = params.get('file') || 'graph.md';
+      const headerText = decodeURIComponent(params.get('header') || 'Graph Viewer');
+
+      fetch(file)
+        .then(res => res.text())
+        .then(md => {
+          const lines = md.split('\n').map(line => line.trim()).filter(Boolean);
+          const rootTitle = lines.find(l => l.startsWith('#'))?.replace(/^#+\s*/, '') || 'ROOT';
+
+          const positions = {
+            'left-top': [],
+            'right-top': [],
+            'left-bottom': [],
+            'right-bottom': []
+          };
+
+          let current = null;
+          for (const line of lines) {
+            if (line.startsWith('##')) {
+              const match = line.match(/\{(.*?)\}/);
+              const pos = match ? match[1].trim() : null;
+              const cleanTitle = line.replace(/##\s*/, '').replace(/\s*\{.*\}\s*/, '').trim();
+              current = { title: cleanTitle, items: [], position: pos };
+              if (positions[pos]) positions[pos].push(current);
+            } else if ((line.startsWith('-') || line.startsWith('*')) && current) {
+              current.items.push(line.replace(/^[-*]\s*/, ''));
+            }
+          }
+
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+          const elements = [];
+
+          function drawBox(x, y, title, items) {
+            const group = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            const boxWidth = 200;
+            const boxHeight = 30 + items.length * 20;
+
+            const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect.setAttribute('x', x);
+            rect.setAttribute('y', y);
+            rect.setAttribute('width', boxWidth);
+            rect.setAttribute('height', boxHeight);
+            rect.setAttribute('fill', '#fff');
+            rect.setAttribute('stroke', '#999');
+            group.appendChild(rect);
+
+            const titleText = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            titleText.setAttribute('x', x + boxWidth / 2);
+            titleText.setAttribute('y', y + 20);
+            titleText.setAttribute('text-anchor', 'middle');
+            titleText.setAttribute('font-weight', 'bold');
+            titleText.textContent = title;
+            group.appendChild(titleText);
+
+            items.forEach((item, i) => {
+              const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+              text.setAttribute('x', x + 10);
+              text.setAttribute('y', y + 40 + i * 20);
+              text.textContent = '\u2022 ' + item;
+              group.appendChild(text);
+            });
+
+            elements.push(group);
+
+            const right = x + boxWidth;
+            const bottom = y + boxHeight;
+            if (x < minX) minX = x;
+            if (y < minY) minY = y;
+            if (right > maxX) maxX = right;
+            if (bottom > maxY) maxY = bottom;
+
+            return { x, y, width: boxWidth, height: boxHeight };
+          }
+
+          const spacing = 10;
+          const groupGap = 60;
+
+          const leftX = 100;
+          const rightX = 900;
+
+          const totalTop = positions['left-top'].length + positions['right-top'].length;
+          const totalBottom = positions['left-bottom'].length + positions['right-bottom'].length;
+          const totalRows = Math.max(totalTop, totalBottom);
+          const approxHeight = totalRows * 80 + 60;
+          const rootY = approxHeight / 2;
+          const root = drawBox(500, rootY, rootTitle, []);
+          const rootLeftX = root.x;
+          const rootRightX = root.x + root.width;
+          const rootCenterY = root.y + root.height / 2;
+
+          const connections = [];
+
+          function layoutBlock(topData, bottomData, x, direction) {
+            const topHeight = topData.reduce((acc, box) => acc + (30 + box.items.length * 20 + spacing), 0);
+            const bottomHeight = bottomData.reduce((acc, box) => acc + (30 + box.items.length * 20 + spacing), 0);
+            const topStart = rootCenterY - topHeight - groupGap / 2;
+            const bottomStart = rootCenterY + groupGap / 2;
+
+            let y = topStart;
+            for (const box of topData) {
+              const pt = drawBox(x, y, box.title, box.items);
+              const fromX = direction === 'left' ? pt.x + pt.width : pt.x;
+              connections.push({ fromX, fromY: pt.y + pt.height / 2, direction });
+              y += pt.height + spacing;
+            }
+
+            y = bottomStart;
+            for (const box of bottomData) {
+              const pt = drawBox(x, y, box.title, box.items);
+              const fromX = direction === 'left' ? pt.x + pt.width : pt.x;
+              connections.push({ fromX, fromY: pt.y + pt.height / 2, direction });
+              y += pt.height + spacing;
+            }
+          }
+
+          layoutBlock(positions['left-top'], positions['left-bottom'], leftX, 'left');
+          layoutBlock(positions['right-top'], positions['right-bottom'], rightX, 'right');
+
+          const margin = 100;
+          const offsetX = -minX + margin;
+          const offsetY = -minY + 50; // increase spacing between title and graph
+
+          const gWrapper = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+          gWrapper.setAttribute('transform', `translate(${offsetX}, ${offsetY})`);
+
+          // Add centered header inside the SVG
+          const headerTextEl = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          headerTextEl.setAttribute('x', (maxX - minX + 2 * margin) / 2);
+          headerTextEl.setAttribute('y', 30);
+          headerTextEl.setAttribute('text-anchor', 'middle');
+          headerTextEl.setAttribute('font-size', '24');
+          headerTextEl.setAttribute('font-weight', 'bold');
+          headerTextEl.textContent = headerText;
+          svg.appendChild(headerTextEl);
+
+          elements.forEach(el => gWrapper.appendChild(el));
+
+          for (const pt of connections) {
+            const startX = pt.fromX + offsetX;
+            const startY = pt.fromY + offsetY;
+            const endX = pt.direction === 'left' ? rootLeftX + offsetX : rootRightX + offsetX;
+            const endY = rootCenterY + offsetY;
+            const controlX = pt.direction === 'left'
+              ? (startX + endX) / 2 - 40
+              : (startX + endX) / 2 + 40;
+
+            const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            path.setAttribute('d', `M ${startX} ${startY} C ${controlX} ${startY}, ${controlX} ${endY}, ${endX} ${endY}`);
+            path.setAttribute('fill', 'none');
+            path.setAttribute('stroke', 'gray');
+            path.setAttribute('stroke-width', '2');
+            svg.appendChild(path);
+          }
+
+          svg.appendChild(gWrapper);
+
+          const width = maxX - minX + 2 * margin;
+          const height = maxY - minY + 2 * margin - 100;
+          svg.setAttribute('width', width);
+          svg.setAttribute('height', height);
+        });
+    }
+
+    renderGraph();
+    window.addEventListener('resize', renderGraph);
+  </script>
+</body>
+</html>

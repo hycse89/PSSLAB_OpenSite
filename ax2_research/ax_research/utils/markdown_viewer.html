@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>PSSLAB Markdown Viewer</title>
+
+  <!-- Marked.js CDN (Markdown 파서) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: auto;
+      background-color: #fdfdfd;
+    }
+    pre {
+      background: #eee;
+      padding: 0.8em;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+
+<h4>PSSLAB Markdown Viewer</h4>
+<div id="content">로딩 중...</div>
+
+<script>
+  // URL에서 파일명 파라미터 추출
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get('file');
+
+  if (file) {
+    fetch(file)
+      .then(res => {
+        if (!res.ok) throw new Error('파일을 불러올 수 없습니다.');
+        return res.text();
+      })
+      .then(md => {
+        const html = marked.parse(md);
+        document.getElementById('content').innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById('content').innerText = '에러: ' + err.message;
+      });
+  } else {
+    document.getElementById('content').innerText = 'Markdown 파일명을 URL 파라미터로 전달하세요. 예: ?file=example.md';
+  }
+</script>
+
+</body>
+</html>

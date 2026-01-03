@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic SVG Slide Viewer</title>
+  <style>
+    html, body {
+      height: 100%; width: 100%; margin: 0; padding: 0; overflow: hidden;
+      position: relative;
+    }
+    #slideContainer {
+      height: 100%; width: 100%; display: flex; justify-content: center; align-items: center;
+    }
+    .slide {
+      display: none; height: 100%; width: 100%;
+      justify-content: center; align-items: center;
+    }
+    .slide.active { display: flex; }
+
+    .slide object {
+      height: 100%; width: 100%; 
+      object-fit: contain; /* 중요: SVG 비율 유지, 화면 크기에 맞춤 */
+    }
+
+    .nav-button {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      padding: 8px 14px; background: rgba(0,0,0,0.5); color: #fff;
+      border: none; cursor: pointer; border-radius: 4px; z-index: 10;
+      font-size: 14px;
+    }
+    #prev { left: 10px; }
+    #next { right: 10px; }
+  </style>
+</head>
+<body>
+
+<div id="slideContainer"></div>
+
+<button id="prev" class="nav-button">Previous</button>
+<button id="next" class="nav-button">Next</button>
+
+<script>
+let slideIndex = 0;
+let slides = [];
+const slideContainer = document.getElementById('slideContainer');
+
+const MAX_SLIDES = 100;
+
+function getBaseFileName() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('file') || 'slide';
+}
+
+function checkFileExists(url) {
+  return fetch(url, { method: 'HEAD' }).then(response => response.ok).catch(() => false);
+}
+
+async function createSlides(baseName, maxCount) {
+  for (let i = 1; i <= maxCount; i++) {
+    const slideNum = String(i).padStart(4, '0');
+    const fileName = `${baseName}${slideNum}.svg`;
+    const exists = await checkFileExists(fileName);
+    if (!exists) break;
+
+    const slideDiv = document.createElement('div');
+    slideDiv.className = 'slide';
+
+    const object = document.createElement('object');
+    object.type = 'image/svg+xml';
+    object.data = fileName;
+
+    slideDiv.appendChild(object);
+    slideContainer.appendChild(slideDiv);
+  }
+  slides = document.querySelectorAll('.slide');
+}
+
+function showSlide(index) {
+  slides.forEach(slide => slide.classList.remove('active'));
+  if (slides[index]) slides[index].classList.add('active');
+}
+
+function nextSlide() {
+  if (slides.length === 0) return;
+  slideIndex = (slideIndex + 1) % slides.length;
+  showSlide(slideIndex);
+}
+
+function prevSlide() {
+  if (slides.length === 0) return;
+  slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+  showSlide(slideIndex);
+}
+
+document.getElementById('next').onclick = nextSlide;
+document.getElementById('prev').onclick = prevSlide;
+
+window.onload = async function() {
+  const baseName = getBaseFileName();
+  await createSlides(baseName, MAX_SLIDES);
+  if (slides.length > 0) showSlide(slideIndex);
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>PSSLAB PDF Viewer</title>
+
+  <!-- PDF.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1rem;
+      background: #fdfdfd;
+    }
+    #pdf-viewer {
+      border: 1px solid #ccc;
+      max-width: 100%;
+      margin: auto;
+    }
+    canvas {
+      display: block;
+      margin: 0 auto 1rem auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+<h3 id="viewer-title">PSSLAB PDF Viewer</h3>
+<div id="pdf-viewer">PDF 로딩 중...</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const file = params.get('file');
+  const header = params.get('header');
+
+  // 헤더 파라미터가 있으면 타이틀에 추가
+  if (header) {
+    document.getElementById('viewer-title').textContent += ' - ' + header;
+  }
+
+  if (file) {
+    const container = document.getElementById('pdf-viewer');
+
+    const loadingTask = pdfjsLib.getDocument(file);
+    loadingTask.promise.then(pdf => {
+      container.innerHTML = ''; // 기존 로딩 메시지 제거
+
+      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+        pdf.getPage(pageNum).then(page => {
+          const scale = 1.5;
+          const viewport = page.getViewport({ scale });
+          const canvas = document.createElement('canvas');
+          const context = canvas.getContext('2d');
+          canvas.height = viewport.height;
+          canvas.width = viewport.width;
+
+          container.appendChild(canvas);
+
+          page.render({
+            canvasContext: context,
+            viewport: viewport
+          });
+        });
+      }
+    }).catch(err => {
+      container.innerText = 'PDF 로딩 실패: ' + err.message;
+    });
+  } else {
+    document.getElementById('pdf-viewer').innerText = 'PDF 파일명을 URL 파라미터로 전달하세요. 예: ?file=sample.pdf&header=문서제목';
+  }
+</script>
+
+</body>
+</html>

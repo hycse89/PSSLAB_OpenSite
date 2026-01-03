@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mermaid Viewer</title>
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ startOnLoad: false });
+
+    function getURLParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    async function loadMermaidData() {
+      const fileName = getURLParam("data");
+      const title = getURLParam("title") || "Mermaid Diagram Viewer";
+
+      document.getElementById("title-bar").textContent = title;
+
+      const container = document.getElementById("diagram");
+
+      if (!fileName) {
+        container.innerText = "Error: 'data' parameter missing in URL.";
+        return;
+      }
+
+      try {
+        const response = await fetch(fileName);
+        if (!response.ok) throw new Error(`HTTP error ${response.status}`);
+        const text = await response.text();
+
+        container.innerHTML = text;
+
+        setTimeout(() => {
+          mermaid.run({ nodes: [container] });
+        }, 100);
+
+      } catch (error) {
+        container.innerText = `Failed to load data: ${error}`;
+      }
+    }
+
+    window.onload = loadMermaidData;
+  </script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: sans-serif;
+    }
+
+    .layout {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .title-bar {
+      background-color: #004466;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .mermaid-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: white;
+      overflow: auto;
+    }
+
+    .mermaid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .mermaid svg {
+      display: block;
+      margin: auto;
+      width: auto !important;
+      height: auto !important;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <div class="title-bar" id="title-bar">Loading title...</div>
+    <div class="mermaid-container">
+      <div class="mermaid" id="diagram">Loading...</div>
+    </div>
+  </div>
+</body>
+</html>

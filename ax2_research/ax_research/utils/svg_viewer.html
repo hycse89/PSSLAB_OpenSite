@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>SVG Viewer</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+    #svgContainer {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <object id="svgContainer" type="image/svg+xml"></object>
+
+  <script>
+    // URL 파라미터에서 파일명 읽기
+    function getSVGFileName() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('file') || 'default.svg';  // default.svg는 기본 SVG 파일명입니다.
+    }
+
+    // SVG 로딩 함수
+    function loadSVG() {
+      const svgFile = getSVGFileName();
+      document.getElementById('svgContainer').data = svgFile;
+    }
+
+    // 페이지 로드 시 SVG 자동 로딩
+    window.onload = loadSVG;
+  </script>
+</body>
+</html>
+
