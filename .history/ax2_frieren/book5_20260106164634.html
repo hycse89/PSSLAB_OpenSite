@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Grimoire - The Library of Serendipity</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0d0d; 
+            --paper-color: #1a1a1a;
+            --accent-gold: #c5a059;
+            --text-main: #d1d1d1;
+            --text-dim: #777;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Nanum Myeongjo', serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+            width: 80%;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .shelf {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            width: 85%;
+            max-width: 1200px;
+            padding: 60px 0;
+        }
+
+        .grimoire {
+            background-color: var(--paper-color);
+            border: 1px solid #2a2a2a;
+            border-left: 6px solid var(--accent-gold);
+            padding: 50px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .grimoire:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+
+        .grimoire .icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            filter: grayscale(1);
+            opacity: 0.6;
+        }
+
+        .grimoire h3 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin: 0 0 12px 0;
+            letter-spacing: 0.1rem;
+        }
+
+        /* 마법 발동 시퀀스 */
+        #magic-curtain {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-color);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #ritual-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 850px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        #chanting {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            opacity: 0;
+            transition: opacity 1s ease;
+            line-height: 1.8;
+        }
+
+        /* 결과 화면 */
+        #magic-result {
+            display: none;
+            width: 100%;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .result-media {
+            width: 100%;
+            height: 450px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            margin-bottom: 35px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.6);
+            display: block;
+        }
+
+        .result-text {
+            line-height: 2;
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin: 0 auto;
+            white-space: pre-line;
+            word-break: keep-all;
+        }
+
+        .btn-close {
+            margin-top: 50px;
+            background: none;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 12px 40px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.2rem;
+            transition: 0.3s;
+        }
+
+        .btn-close:hover {
+            background: var(--accent-gold);
+            color: #000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Guardian's Library</h1>
+        <p style="color: var(--text-dim); margin-top: 15px; font-size: 0.9rem; letter-spacing: 0.2rem;">
+            AN ARCHIVE OF EVERYDAY MAGIC & UNEXPECTED JOY
+        </p>
+    </header>
+
+    <div class="shelf" id="shelf">
+        </div>
+
+    <div id="magic-curtain">
+        <div id="ritual-stage">
+            <div id="chanting"></div>
+            
+            <div id="magic-result">
+                <div id="media-content"></div>
+                <div class="result-text" id="result-desc"></div>
+                <button class="btn-close" onclick="closeGrimoire()">CLOSE THE BOOK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const magicData = [
+            {
+                title: "UNEXPECTED JOY",
+                icon: "🔮",
+                sub: "뜻밖의 즐거움: 당신을 위한 우연의 선물",
+                chant: "알고리즘의 벽을 넘어, 당신이 한 번도 보지 못한<br>세상의 찬란한 조각을 소환합니다.",
+                type: "video",
+                url: "https://www.youtube.com/embed/7STZ_S_PVgg?autoplay=1&mute=1", // 예시: 심해 생물/자연 영상
+                desc: "[가디언의 발견]\n오늘은 당신의 사유가 깊어지는 날입니다. 평소라면 검색해 보지 않았을 '심해의 신비로운 생광 현상'을 소환했습니다. \n\n이 낯설고 아름다운 움직임을 통해, 당신의 일상에도 뜻밖의 영감이 깃들기를 바랍니다. '아, 이런 세상도 있었네' 하는 짧은 탄성이 오늘의 마법입니다."
+            },
+            {
+                title: "RITUAL PURIFICATION",
+                icon: "🧺",
+                sub: "정화의 의식: 일상의 먼지를 헹굼",
+                chant: "어제의 무거운 피로를 물결에 흘려보내고,<br>내일의 포근함을 미리 연성합니다.",
+                type: "image",
+                url: "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1000&q=80",
+                desc: "오늘 당신이 마주한 피로는 결코 헛되지 않았습니다. AI 가디언이 정화의 마법을 부려 당신의 옷감과 마음을 순백으로 돌려놓았습니다. 이제 따뜻한 온기만이 당신을 기다립니다."
+            },
+            {
+                type: "image",
+                title: "RESONANCE OF TIME",
+                icon: "🕰️",
+                sub: "시공간의 공명: 100년 전 오늘과의 대화",
+                chant: "백 년 전 오늘, 런던의 안개를 뚫고 울려 퍼진<br>그날의 활기를 오늘의 당신에게 전합니다.",
+                url: "https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=1000&q=80",
+                desc: "1926년 1월 6일, 누군가는 하늘을 날았고 누군가는 사랑을 고백했습니다. 백 년의 시간을 건너온 이 풍경이 당신에게 '오늘도 살아갈 가치가 있다'는 증거가 되길 바랍니다."
+            },
+            {
+                type: "image",
+                title: "SUMMONING JOY",
+                icon: "🐾",
+                sub: "행복의 소환술: 무해한 귀여움의 현현",
+                chant: "우주에서 가장 무해하고 다정한 존재들을 모아<br>당신의 미소 위에 꽃피우소서.",
+                url: "https://images.unsplash.com/photo-1516750484197-6b28d10c91ea?auto=format&fit=crop&w=1000&q=80",
+                desc: "당신을 무조건적으로 신뢰하는 존재들의 평온한 한때를 소환했습니다. 이들의 무해한 숨결을 보며 잠시 모든 긴장을 내려놓으세요. 당신은 충분히 쉴 자격이 있습니다."
+            },
+            {
+                type: "image",
+                title: "WHISPERS OF SAGES",
+                icon: "📜",
+                sub: "현자들의 속삭임: 시공을 초월한 치유",
+                chant: "시간의 강을 건너온 위대한 영혼의 지혜가<br>당신의 상처 위에 따뜻하게 머물기를.",
+                url: "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=1000&q=80",
+                desc: "“실패는 성공을 향해 나아가는 과정의 일부일 뿐입니다.” - 윈스턴 처칠 -\n\nAI 가디언이 소환한 현자의 목소리는 당신의 오늘이 결코 패배가 아닌, 승리를 향한 경건한 전진임을 속삭여 줍니다."
+            },
+            {
+                type: "image",
+                title: "CHRONICLES OF WARMTH",
+                icon: "❤️",
+                sub: "온기의 연대기: 마음을 적시는 인류의 실화",
+                chant: "메마른 대지에 내리는 단비처럼,<br>잊혔던 인류의 다정함을 다시 일깨우소서.",
+                url: "https://images.unsplash.com/photo-1499209974431-9dac3adaf471?auto=format&fit=crop&w=1000&q=80",
+                desc: "[AI 재구성 실화]\n한 평생 호루라기를 불며 아이들의 등굣길을 지켜온 노신사에게, 수천 장의 손편지가 배달되었습니다. \n\n세상을 바꾸는 것은 거창한 혁명이 아니라, 20년을 한결같이 지켜온 사소한 다정함이라는 진실을 오늘 당신의 마음속에 심어드립니다."
+            }
+        ];
+
+        const shelf = document.getElementById('shelf');
+        const curtain = document.getElementById('magic-curtain');
+        const chanting = document.getElementById('chanting');
+        const result = document.getElementById('magic-result');
+        const mediaContent = document.getElementById('media-content');
+        const resultDesc = document.getElementById('result-desc');
+
+        magicData.forEach(data => {
+            const book = document.createElement('div');
+            book.className = 'grimoire';
+            book.innerHTML = `
+                <div class="icon">${data.icon}</div>
+                <h3>${data.title}</h3>
+                <p style="font-size: 0.85rem; color: var(--text-dim);">${data.sub}</p>
+            `;
+            book.onclick = () => launchMagic(data);
+            shelf.appendChild(book);
+        });
+
+        function launchMagic(data) {
+            curtain.style.display = 'flex';
+            chanting.style.display = 'block';
+            chanting.style.opacity = '0';
+            result.style.display = 'none';
+
+            setTimeout(() => {
+                chanting.innerHTML = data.chant;
+                chanting.style.opacity = '1';
+            }, 300);
+
+            setTimeout(() => {
+                chanting.style.display = 'none';
+                displayResult(data);
+            }, 2500);
+        }
+
+        function displayResult(data) {
+            if (data.type === "video") {
+                mediaContent.innerHTML = `<iframe class="result-media" src="${data.url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else {
+                mediaContent.innerHTML = `<img src="${data.url}" class="result-media" alt="Magic Scene">`;
+            }
+            resultDesc.innerHTML = `<h2 style="color:var(--accent-gold); margin-bottom: 25px;">ENCHANTMENT MANIFESTED</h2><p>${data.desc}</p>`;
+            result.style.display = 'block';
+        }
+
+        function closeGrimoire() {
+            curtain.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
