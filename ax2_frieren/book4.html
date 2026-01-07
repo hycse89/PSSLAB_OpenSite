@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Grimoire - The Complete Archive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a; 
+            --paper-color: #161616;
+            --accent-gold: #c5a059;
+            --text-main: #d1d1d1;
+            --text-dim: #666;
+            --magic-glow: rgba(197, 160, 89, 0.2);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Nanum Myeongjo', serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 서재 헤더 */
+        header {
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.1);
+            width: 85%;
+            max-width: 1000px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px var(--magic-glow);
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            margin-top: 15px;
+            font-size: 0.9rem;
+            letter-spacing: 0.15rem;
+        }
+
+        /* 마도서 진열장 */
+        .shelf {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            padding: 60px 0;
+        }
+
+        .grimoire {
+            background-color: var(--paper-color);
+            border: 1px solid #222;
+            border-left: 8px solid var(--accent-gold);
+            padding: 50px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+
+        .grimoire:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            background-color: #1c1c1c;
+        }
+
+        .grimoire .icon {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            filter: grayscale(1) brightness(0.8);
+            display: block;
+        }
+
+        .grimoire h3 {
+            font-size: 1.25rem;
+            color: var(--accent-gold);
+            margin: 0 0 15px 0;
+            font-weight: 700;
+        }
+
+        .grimoire p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* 마법 발동 오버레이 */
+        #magic-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-color);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #ritual-container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 영창 단계 */
+        #chanting-text {
+            font-size: 1.7rem;
+            color: var(--accent-gold);
+            line-height: 2;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        /* 결과 단계 */
+        #magic-content {
+            display: none;
+            width: 100%;
+            animation: fadeIn 2s forwards;
+        }
+
+        .magic-media {
+            width: 100%;
+            max-height: 450px;
+            object-fit: cover;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            margin-bottom: 35px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.6);
+        }
+
+        .magic-title {
+            color: var(--accent-gold);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            letter-spacing: 0.1rem;
+        }
+
+        .magic-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-main);
+            word-break: keep-all;
+            white-space: pre-line;
+        }
+
+        /* TTS 시뮬레이션 버튼 */
+        .tts-btn {
+            margin-top: 20px;
+            background: none;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            border-radius: 20px;
+        }
+
+        .btn-close {
+            margin-top: 60px;
+            background: none;
+            border: 1px solid var(--text-dim);
+            color: var(--text-dim);
+            padding: 12px 40px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.2rem;
+            transition: 0.3s;
+        }
+
+        .btn-close:hover {
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Guardian's Library</h1>
+        <p class="subtitle">AN ARCHIVE OF EVERYDAY MAGIC & WISDOM</p>
+    </header>
+
+    <div class="shelf" id="shelf">
+        </div>
+
+    <div id="magic-overlay">
+        <div id="ritual-container">
+            <div id="chanting-text"></div>
+            
+            <div id="magic-content">
+                <div id="media-area"></div>
+                <div class="magic-title" id="magic-title"></div>
+                <div class="magic-text" id="magic-desc"></div>
+                <div id="action-area"></div>
+                <button class="btn-close" onclick="closeGrimoire()">CLOSE THE BOOK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const libraryData = [
+            {
+                type: "ritual",
+                title: "RITUAL PURIFICATION",
+                icon: "🧺",
+                sub: "정화의 의식: 일상의 피로를 헹굼",
+                chant: "비단결에 맺힌 소란을 잠재우고,<br>본연의 순백을 되찾으소서.",
+                img: "https://images.unsplash.com/photo-1545173168-9f1947eebb7f?auto=format&fit=crop&w=1000&q=80",
+                desc: "오늘 당신의 하루는 유난히 무거웠을지도 모릅니다. 하지만 이 정화의 마법을 통해 옷감 사이사이 깃든 피로를 모두 흘려보냈습니다. 이제 당신 곁엔 오직 포근함만이 남았습니다."
+            },
+            {
+                type: "history",
+                title: "RESONANCE OF TIME",
+                icon: "🕰️",
+                sub: "시공간의 공명: 100년 전 오늘과 연결",
+                chant: "백 년의 시간을 건너온 북소리여,<br>오늘의 당신에게 지혜의 울림을 전하소서.",
+                img: "https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?auto=format&fit=crop&w=1000&q=80",
+                desc: "1926년 1월 6일의 런던은 안개 속에서도 활기찼습니다. 누군가는 하늘길을 열었고, 누군가는 사랑을 고백했죠. 그때의 용기를 담은 음악을 당신의 오늘에 덧붙입니다.",
+                action: '<a href="https://www.youtube.com/results?search_query=1920s+jazz+classic" target="_blank" style="color:var(--accent-gold); font-size:0.9rem;">[ 100년 전의 음악 소환하기 ]</a>'
+            },
+            {
+                type: "happiness",
+                title: "SUMMONING JOY",
+                icon: "🐾",
+                sub: "행복의 소환술: 무해한 즐거움의 소환",
+                chant: "세상의 모든 무해한 생명들이여,<br>당신의 미소를 위해 이곳에 현현하소서.",
+                img: "https://images.unsplash.com/photo-1516750484197-6b28d10c91ea?auto=format&fit=crop&w=1000&q=80", // 귀여운 코기/강아지류
+                desc: "우주에서 가장 귀여운 조각들을 모아 당신만을 위해 연성했습니다. 아무런 조건 없는 이들의 평온함을 보며, 잠시 마음의 짐을 내려놓으셔도 좋습니다."
+            },
+            {
+                type: "healing",
+                title: "WHISPERS OF SAGES",
+                icon: "📜",
+                sub: "현자들의 속삭임: 위인들이 건네는 치유",
+                chant: "시간의 강을 건너온 위대한 영혼이여,<br>지친 방랑자에게 지침의 목소리를 빌려주소서.",
+                img: "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=1000&q=80",
+                desc: "“실패는 성공을 향해 나아가는 과정의 일부일 뿐입니다.”\n- 윈스턴 처칠 -\n\nAI 가디언이 소환한 이 목소리는 당신의 오늘이 결코 헛되지 않았음을 증명합니다.",
+                action: '<button class="tts-btn" onclick="alert(\'현자의 목소리를 재생합니다...\')">▶ LISTEN TO WISDOM (TTS)</button>'
+            },
+            {
+                type: "emotion",
+                title: "CHRONICLES OF WARMTH",
+                icon: "❤️",
+                sub: "온기의 연대기: 세상의 다정한 실화",
+                chant: "메마른 대지에 내리는 단비처럼,<br>잊혔던 인류의 온기를 다시 피우소서.",
+                img: "https://images.unsplash.com/photo-1499209974431-9dac3adaf471?auto=format&fit=crop&w=1000&q=80",
+                desc: "[AI 재구성 실화: 20년의 호루라기]\n\n매일 아침 초등학교 앞 건널목을 지키던 노인이 있었습니다. 그가 은퇴하던 날, 아이들이 건넨 것은 값비싼 선물이 아닌 수천 장의 손편지였습니다. \n\n다정함은 결코 사라지지 않고 누군가의 마음속에 씨앗으로 남는다는 것, 그것이 오늘 당신에게 전하고 싶은 마법의 진실입니다."
+            }
+        ];
+
+        const shelf = document.getElementById('shelf');
+        const overlay = document.getElementById('magic-overlay');
+        const chantingEl = document.getElementById('chanting-text');
+        const contentEl = document.getElementById('magic-content');
+        const mediaArea = document.getElementById('media-area');
+        const titleEl = document.getElementById('magic-title');
+        const descEl = document.getElementById('magic-desc');
+        const actionArea = document.getElementById('action-area');
+
+        // 서재 배치
+        libraryData.forEach(book => {
+            const card = document.createElement('div');
+            card.className = 'grimoire';
+            card.innerHTML = `
+                <div class="icon">${book.icon}</div>
+                <h3>${book.title}</h3>
+                <p>${book.sub}</p>
+            `;
+            card.onclick = () => castMagic(book);
+            shelf.appendChild(card);
+        });
+
+        function castMagic(book) {
+            overlay.style.display = 'flex';
+            chantingEl.style.display = 'block';
+            chantingEl.style.opacity = '0';
+            contentEl.style.display = 'none';
+
+            // 1. 영창 (Chanting)
+            setTimeout(() => {
+                chantingEl.innerHTML = book.chant;
+                chantingEl.style.opacity = '1';
+            }, 300);
+
+            // 2. 결과 소환 (Manifestation)
+            setTimeout(() => {
+                chantingEl.style.display = 'none';
+                renderResult(book);
+            }, 2500);
+        }
+
+        function renderResult(book) {
+            mediaArea.innerHTML = `<img src="${book.img}" class="magic-media" alt="Magic Result">`;
+            titleEl.innerText = "ENCHANTMENT SUCCESS";
+            descEl.innerText = book.desc;
+            actionArea.innerHTML = book.action || "";
+            contentEl.style.display = 'block';
+        }
+
+        function closeGrimoire() {
+            overlay.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
