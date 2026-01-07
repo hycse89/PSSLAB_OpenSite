@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Grimoire - The Simulation Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #080808; 
+            --paper-color: #141414;
+            --accent-gold: #c5a059;
+            --text-main: #d1d1d1;
+            --text-dim: #666;
+            --warning-red: #8b2a2a;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Nanum Myeongjo', serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.15);
+            width: 80%;
+            max-width: 900px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            margin: 0;
+            letter-spacing: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .shelf {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            width: 85%;
+            max-width: 1200px;
+            padding: 60px 0;
+        }
+
+        .grimoire {
+            background-color: var(--paper-color);
+            border: 1px solid #222;
+            border-left: 8px solid var(--accent-gold);
+            padding: 50px 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .grimoire:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+
+        .grimoire .icon {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            opacity: 0.7;
+        }
+
+        .grimoire h3 {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        /* 마법 발동 오버레이 */
+        #magic-curtain {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-color);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #ritual-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 850px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        #chanting {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            opacity: 0;
+            transition: opacity 1s ease;
+            line-height: 2;
+        }
+
+        /* 시뮬레이터 UI 영역 */
+        #magic-result {
+            display: none;
+            width: 100%;
+            animation: fadeIn 1.5s forwards;
+        }
+
+        .simulator-box {
+            background: #1a1a1a;
+            border: 1px solid var(--accent-gold);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .input-group {
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            font-size: 0.9rem;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .status-display {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 4px;
+            background: #000;
+        }
+
+        .warning { color: #ff5f5f; border: 1px solid #ff5f5f; }
+        .safe { color: #5fff8f; border: 1px solid #5fff8f; }
+
+        .btn-action {
+            background: var(--accent-gold);
+            color: black;
+            border: none;
+            padding: 10px 25px;
+            font-family: inherit;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .btn-close {
+            margin-top: 50px;
+            background: none;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 12px 40px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 0.2rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>The Guardian's Library</h1>
+        <p style="color: var(--text-dim); margin-top: 15px; font-size: 0.9rem; letter-spacing: 0.2rem;">
+            INTELLIGENT SIMULATION & EVERYDAY MAGIC
+        </p>
+    </header>
+
+    <div class="shelf" id="shelf"></div>
+
+    <div id="magic-curtain">
+        <div id="ritual-stage">
+            <div id="chanting"></div>
+            
+            <div id="magic-result">
+                <div id="simulator-ui" class="simulator-box"></div>
+                <div id="result-text" style="line-height: 2; font-size: 1rem; margin-top: 20px;"></div>
+                <button class="btn-close" onclick="closeGrimoire()">CLOSE THE BOOK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const magicData = [
+            {
+                id: "realestate",
+                title: "SOVEREIGN DOMAIN",
+                icon: "🏠",
+                sub: "주권적 영지의 마도서: 시장 반응 시뮬레이션",
+                chant: "대지의 가치를 저울 위에 올리고,<br>군중의 심리가 그려내는 미래의 궤적을 소환합니다.",
+                type: "simulator_re",
+                desc: "[경제 시뮬레이션 완료]\n가상의 매수자 페르소나 1,000명이 당신의 가격 제안에 반응했습니다. \n\n이 마법은 단순히 가격을 매기는 것이 아니라, 당신의 자산이 시장이라는 거대한 바다에서 어떤 파동을 일으킬지 미리 보여주는 '예지'의 과정입니다."
+            },
+            {
+                id: "purify",
+                title: "RITUAL PURIFICATION",
+                icon: "🌀",
+                sub: "정화의 의식: 지능형 세탁 시뮬레이터",
+                chant: "옷감의 숨결과 색채의 조화를 감지하여,<br>실수 없는 완벽한 정화의 경로를 연성합니다.",
+                type: "simulator_laundry",
+                desc: "[지능형 분석 완료]\n미래의 세탁 마법은 수동적인 기계 동작을 넘어, 당신의 옷감을 이해하고 보살피는 가디언의 역할을 수행할 것입니다. \n\n시뮬레이션된 데이터는 미래 스마트 가전의 표준 명세서가 됩니다."
+            },
+            {
+                id: "archetype",
+                title: "MIRROR OF ARCHETYPES",
+                icon: "📜",
+                sub: "자아 발견의 마도서: 심리적 원형 분석",
+                chant: "칸트의 이성과 융의 심연을 지나,<br>당신의 문장 뒤에 숨은 진짜 자아의 형상을 비춥니다.",
+                type: "simulator_psych",
+                desc: "[자아 고고학적 발굴 완료]\n이 분석은 고정된 유형이 아니라, 당신의 오늘을 이루는 '심리적 원형'의 발현입니다. \n\n아날로그의 잣대를 넘어 디지털만이 보여줄 수 있는 당신의 무한한 확장성을 확인하세요."
+            },
+            {
+                id: "serendipity",
+                title: "UNEXPECTED JOY",
+                icon: "🔮",
+                sub: "뜻밖의 즐거움: 세렌디피티의 소환",
+                chant: "당신이 보지 못한 세상의 조각을 찾아,<br>우연이라는 이름의 선물을 건넵니다.",
+                type: "image",
+                img: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1000&q=80",
+                desc: "오늘 당신의 취향 너머에서 발견된 보석 같은 풍경입니다. '아, 이런 것도 있네' 하는 짧은 탄성이 당신의 뇌를 환기하고 새로운 영감을 불어넣을 것입니다."
+            }
+        ];
+
+        const shelf = document.getElementById('shelf');
+        const curtain = document.getElementById('magic-curtain');
+        const chanting = document.getElementById('chanting');
+        const result = document.getElementById('magic-result');
+        const simUI = document.getElementById('simulator-ui');
+        const resultText = document.getElementById('result-text');
+
+        // 서재 초기화
+        magicData.forEach(data => {
+            const book = document.createElement('div');
+            book.className = 'grimoire';
+            book.innerHTML = `
+                <div class="icon">${data.icon}</div>
+                <h3>${data.title}</h3>
+                <p style="font-size: 0.85rem; color: var(--text-dim);">${data.sub}</p>
+            `;
+            book.onclick = () => launchMagic(data);
+            shelf.appendChild(book);
+        });
+
+        function launchMagic(data) {
+            curtain.style.display = 'flex';
+            chanting.style.display = 'block';
+            chanting.style.opacity = '0';
+            result.style.display = 'none';
+
+            setTimeout(() => {
+                chanting.innerHTML = data.chant;
+                chanting.style.opacity = '1';
+            }, 300);
+
+            setTimeout(() => {
+                chanting.style.display = 'none';
+                renderSimulator(data);
+            }, 2500);
+        }
+
+        function renderSimulator(data) {
+            simUI.innerHTML = "";
+            resultText.innerHTML = data.desc;
+
+            if (data.type === "simulator_re") {
+                simUI.innerHTML = `
+                    <div class="input-group">
+                        <label>당신의 매물 가격 설정 (희망가: 10억 기준)</label>
+                        <input type="range" id="priceRange" min="8" max="12" step="0.1" value="10" oninput="updateRE(this.value)">
+                        <div style="text-align:right; margin-top:10px;">설정가: <span id="priceVal" style="color:var(--accent-gold); font-size:1.5rem;">10.0</span> 억</div>
+                    </div>
+                    <div id="reStatus" class="status-display safe">적절한 조화: 매수자들이 관심을 보이기 시작합니다.</div>
+                    <div id="reFeedback" style="font-size:0.9rem; color:var(--text-dim);">가상 매수자 1,000명 중 55%가 방문을 희망합니다.</div>
+                `;
+            } else if (data.type === "simulator_laundry") {
+                simUI.innerHTML = `
+                    <div style="display:flex; justify-content:space-around; margin-bottom:20px;">
+                        <button class="btn-action" onclick="toggleLaundry('white')">흰색 셔츠</button>
+                        <button class="btn-action" onclick="toggleLaundry('black')">검은 면티</button>
+                        <button class="btn-action" onclick="toggleLaundry('wool')">울 스웨터</button>
+                    </div>
+                    <div id="laundryStatus" class="status-display safe">의식을 거행할 준비가 되었습니다.</div>
+                    <div id="laundryAdvice" style="font-size:0.9rem; color:var(--text-dim);">세탁기에게 전할 최적의 알고리즘을 연성 중입니다.</div>
+                `;
+            } else if (data.type === "simulator_psych") {
+                simUI.innerHTML = `
+                    <div class="input-group">
+                        <label>오늘 당신의 마음 상태를 한 문장으로 영창하세요.</label>
+                        <input type="text" id="psychInput" placeholder="예: 무언가 새로운 일을 시작하고 싶어..." style="width:100%; background:#000; color:#fff; border:1px solid var(--accent-gold); padding:10px;">
+                        <button class="btn-action" style="width:100%;" onclick="runPsych()">자아 원형 발굴하기</button>
+                    </div>
+                    <div id="psychResult" style="margin-top:20px; font-style:italic;"></div>
+                `;
+            } else {
+                simUI.innerHTML = `<img src="${data.img}" style="width:100%; max-height:400px; object-fit:cover;">`;
+            }
+            result.style.display = 'block';
+        }
+
+        // --- 부동산 시뮬레이션 로직 ---
+        function updateRE(val) {
+            document.getElementById('priceVal').innerText = val;
+            const statusEl = document.getElementById('reStatus');
+            const feedbackEl = document.getElementById('reFeedback');
+            if (val > 10.5) {
+                statusEl.innerText = "고요한 침묵: 매수자들이 외면합니다.";
+                statusEl.className = "status-display warning";
+                feedbackEl.innerText = "가상 매수자 1,000명 중 12%만이 관심을 보입니다. 매각까지 약 6개월 예상.";
+            } else if (val < 9.5) {
+                statusEl.innerText = "격렬한 공명: 매수자들이 줄을 섭니다.";
+                statusEl.className = "status-display safe";
+                feedbackEl.innerText = "가상 매수자 1,000명 중 92%가 방문을 희망합니다. 1주일 내 계약 완료 예상.";
+            } else {
+                statusEl.innerText = "적절한 조화: 진지한 탐색자들이 모입니다.";
+                statusEl.className = "status-display safe";
+                feedbackEl.innerText = "가상 매수자 1,000명 중 55%가 관심을 보입니다. 약 1개월 내 매각 예상.";
+            }
+        }
+
+        // --- 세탁 시뮬레이션 로직 ---
+        let laundryItems = [];
+        function toggleLaundry(item) {
+            if (laundryItems.includes(item)) {
+                laundryItems = laundryItems.filter(i => i !== item);
+            } else {
+                laundryItems.push(item);
+            }
+            const statusEl = document.getElementById('laundryStatus');
+            const adviceEl = document.getElementById('laundryAdvice');
+            
+            if (laundryItems.includes('white') && laundryItems.includes('black')) {
+                statusEl.innerText = "⚠️ 경고: 이염의 위험이 감지됨";
+                statusEl.className = "status-display warning";
+                adviceEl.innerText = "흰색과 검은색 옷감을 함께 넣는 것은 '변색의 저주'를 부릅니다. 즉시 분리하십시오.";
+            } else if (laundryItems.includes('wool') && laundryItems.length > 1) {
+                statusEl.innerText = "⚠️ 주의: 섬세한 관리가 필요함";
+                statusEl.className = "status-display warning";
+                adviceEl.innerText = "울 소재는 다른 옷감과의 마찰에 취약합니다. 단독 정화를 권장합니다.";
+            } else {
+                statusEl.innerText = "✅ 안전: 조화로운 구성입니다.";
+                statusEl.className = "status-display safe";
+                adviceEl.innerText = `현재 구성(${laundryItems.join(', ')})에 최적화된 마력 세기를 연성했습니다.`;
+            }
+        }
+
+        // --- 심리 시뮬레이션 로직 ---
+        function runPsych() {
+            const input = document.getElementById('psychInput').value;
+            const resEl = document.getElementById('psychResult');
+            resEl.innerText = "AI 가디언이 당신의 문장에서 '지혜를 찾는 방랑자'의 원형을 발견했습니다. 오늘은 당신의 이성이 욕망을 통제하고 보편적 법칙을 따르려는 칸트적 의지가 돋보이는 날입니다.";
+        }
+
+        function closeGrimoire() {
+            curtain.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
