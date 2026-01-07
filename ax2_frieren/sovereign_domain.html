@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>주권적 영지의 마도서 - Sovereign Domain</title>
+    <style>
+        body { background: #0a0a0a; color: #e0e0e0; font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .module { width: 90%; max-width: 700px; background: #111; border: 1px solid #c5a059; padding: 50px; position: relative; }
+        h1 { color: #c5a059; text-align: center; letter-spacing: 5px; }
+        .input-section { margin: 30px 0; border-top: 1px solid #333; padding-top: 20px; }
+        .label-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; color: #c5a059; }
+        input[type="range"] { width: 100%; cursor: pointer; accent-color: #c5a059; }
+        .simulation-btn { width: 100%; padding: 15px; background: transparent; border: 1px solid #c5a059; color: #c5a059; cursor: pointer; font-size: 1rem; transition: 0.3s; margin-top: 20px; }
+        .simulation-btn:hover { background: #c5a059; color: #000; }
+        #result-panel { margin-top: 40px; display: none; animation: fadeIn 1s; }
+        .persona-feedback { background: #000; padding: 15px; margin: 10px 0; font-size: 0.85rem; border-left: 3px solid #c5a059; }
+        .probability-seal { font-size: 2rem; color: #c5a059; text-align: center; margin: 20px 0; border: 2px double #c5a059; padding: 10px; display: inline-block; width: 100%; box-sizing: border-box; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .back-link { position: absolute; top: 20px; left: 20px; color: #666; text-decoration: none; font-size: 0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="module">
+        <a href="#" class="back-link">← 도서관으로 돌아가기</a>
+        <h1>주권적 영지의 마도서</h1>
+        <p style="text-align: center; color: #888; font-size: 0.9rem;">시장의 흐름을 읽어 매매의 최적기를 예지합니다.</p>
+
+        <div class="input-section">
+            <div class="label-row"><span>영지의 가치(가격 지수)</span> <span id="price-val">100%</span></div>
+            <input type="range" id="price-slider" min="50" max="150" value="100" oninput="updateVal('price', this.value)">
+            
+            <div class="label-row" style="margin-top:20px;"><span>외부 마력(시장 유동성/금리)</span> <span id="mood-val">보통</span></div>
+            <input type="range" id="mood-slider" min="1" max="5" value="3" oninput="updateVal('mood', this.value)">
+        </div>
+
+        <button class="simulation-btn" onclick="startSim()">연성 시작 (시뮬레이션)</button>
+
+        <div id="result-panel">
+            <div class="probability-seal" id="prob-seal">성사 확률: --</div>
+            <div id="feedbacks"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateVal(type, v) {
+            if(type === 'price') document.getElementById('price-val').innerText = v + '%';
+            if(type === 'mood') {
+                const moods = ["매우 낮음", "침체", "보통", "활기", "과열"];
+                document.getElementById('mood-val').innerText = moods[v-1];
+            }
+        }
+
+        function startSim() {
+            const p = document.getElementById('price-slider').value;
+            const m = document.getElementById('mood-slider').value;
+            const panel = document.getElementById('result-panel');
+            const seal = document.getElementById('prob-seal');
+            const feeds = document.getElementById('feedbacks');
+
+            panel.style.display = 'block';
+            let prob = Math.max(0, 100 - (p - 100) * 1.5 + (m - 3) * 10);
+            if(prob > 100) prob = 100;
+
+            seal.innerText = `계약 성사 확률: ${Math.floor(prob)}%`;
+            
+            feeds.innerHTML = `
+                <div class="persona-feedback"><b>[실거주자]</b> ${p > 110 ? "이 가격이면 신축 분양을 기다리는 게 낫겠어요." : "가격이 합리적이네요. 대출 조건만 맞으면 당장 계약하고 싶습니다."}</div>
+                <div class="persona-feedback"><b>[투자자]</b> ${m < 3 ? "시장 자금이 말랐습니다. 더 하락할 때까지 기다려야 할 것 같네요." : "유동성이 풍부해지고 있습니다. 이 정도 프리미엄은 감수할만하죠."}</div>
+                <div class="persona-feedback"><b>[가디언의 조언]</b> ${prob < 40 ? "현재 가격은 시장의 공명을 얻기 어렵습니다. 인내하거나 가치를 재조정하십시오." : "시장의 기운이 모이고 있습니다. 곧 좋은 소식이 들릴 예조입니다."}</div>
+            `;
+        }
+    </script>
+</body>
+</html>

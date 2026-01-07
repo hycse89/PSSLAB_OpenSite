@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>자아 발견의 마도서 - Mirror of Archetypes</title>
+    <style>
+        body { background: #080808; color: #d1d1d1; font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .module { width: 90%; max-width: 650px; background: #121212; border: 1px solid #c5a059; padding: 60px; box-shadow: 0 0 50px rgba(0,0,0,1); }
+        h1 { color: #c5a059; text-align: center; letter-spacing: 7px; margin-bottom: 40px; }
+        textarea { width: 100%; height: 120px; background: #000; color: #fff; border: 1px solid #333; padding: 15px; font-family: inherit; font-size: 1rem; resize: none; outline: none; transition: 0.5s; }
+        textarea:focus { border-color: #c5a059; }
+        .analyze-btn { width: 100%; padding: 15px; background: transparent; border: 1px solid #c5a059; color: #c5a059; cursor: pointer; margin-top: 20px; letter-spacing: 2px; }
+        .analyze-btn:hover { background: #c5a059; color: #000; }
+        
+        #result-area { display: none; margin-top: 40px; text-align: center; border-top: 1px double #c5a059; padding-top: 30px; animation: fadeIn 2s; }
+        .archetype-title { font-size: 1.8rem; color: #c5a059; margin-bottom: 10px; }
+        .gauge-container { width: 100%; height: 4px; background: #222; margin: 20px 0; position: relative; }
+        .gauge-fill { height: 100%; background: #c5a059; width: 0%; transition: width 2s ease-in-out; }
+        .label { font-size: 0.75rem; color: #666; display: flex; justify-content: space-between; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="module">
+        <h1>자아 발견의 마도서</h1>
+        <p style="text-align: center; font-size: 0.85rem; color: #666; margin-bottom: 30px;">
+            당신의 문장 뒤에 숨겨진 정신적 원형을 소환합니다.
+        </p>
+        
+        <textarea id="userInput" placeholder="오늘 당신의 마음을 스쳐간 생각이나 고민을 자유롭게 적어보세요..."></textarea>
+        <button class="analyze-btn" onclick="analyzeSelf()">내면의 거울 비추기</button>
+
+        <div id="result-area">
+            <div id="loading" style="color:#c5a059; margin-bottom: 20px;">심연의 기록을 분석 중...</div>
+            <div id="final-content" style="display:none;">
+                <p style="font-size: 0.8rem; color: #888;">발견된 당신의 원형</p>
+                <div class="archetype-title" id="arch-name">지혜를 찾는 방랑자</div>
+                <div class="gauge-container">
+                    <div class="gauge-fill" id="will-gauge"></div>
+                </div>
+                <div class="label"><span>수동적 흐름</span><span>칸트적 자율 의지</span></div>
+                <p id="arch-desc" style="line-height: 1.8; margin-top: 20px; text-align: left; font-size: 0.95rem;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function analyzeSelf() {
+            const input = document.getElementById('userInput').value;
+            if(!input) return alert("문장을 영창하십시오.");
+
+            document.getElementById('result-area').style.display = 'block';
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('final-content').style.display = 'none';
+
+            setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('final-content').style.display = 'block';
+                
+                // 간단한 키워드 추론 로직 (Test-bed용)
+                let name = "고요한 사색가";
+                let desc = "당신의 언어에서는 평온함과 질서를 찾으려는 욕구가 강하게 읽힙니다. 외부의 소음보다는 내면의 정적을 선택한 당신의 의지는 오늘 하루를 견고하게 지탱했습니다.";
+                let will = 65;
+
+                if(input.includes("새로운") || input.includes("도전")) {
+                    name = "용감한 개척자";
+                    desc = "미지의 영역에 대한 두려움보다 호기심이 앞서고 있습니다. 당신은 지금 자신의 운명을 스스로 개척하려는 강력한 실존적 의지를 보이고 있습니다.";
+                    will = 85;
+                } else if(input.includes("슬픔") || input.includes("힘든")) {
+                    name = "치유하는 예술가";
+                    desc = "고통을 외면하지 않고 그 의미를 곱씹는 당신은, 슬픔을 승화시켜 새로운 생명력을 연성해낼 준비가 되어 있습니다. 잠시 쉬어가도 좋습니다.";
+                    will = 40;
+                }
+
+                document.getElementById('arch-name').innerText = name;
+                document.getElementById('arch-desc').innerHTML = desc;
+                setTimeout(() => { document.getElementById('will-gauge').style.width = will + '%'; }, 100);
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

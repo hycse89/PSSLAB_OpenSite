@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Grimoire: Complete Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505; 
+            --paper-color: #121212;
+            --accent-gold: #c5a059;
+            --text-main: #e0e0e0;
+            --text-dim: #888;
+            --border: rgba(197, 160, 89, 0.3);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Nanum Myeongjo', serif;
+            margin: 0; padding-bottom: 100px;
+        }
+
+        header {
+            padding: 100px 20px 60px;
+            text-align: center;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050505 100%);
+        }
+
+        h1 { font-size: 2.5rem; color: var(--accent-gold); letter-spacing: 0.6rem; margin: 0; }
+        .subtitle { color: var(--text-dim); margin-top: 20px; font-size: 0.9rem; letter-spacing: 0.3rem; }
+
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
+
+        /* 카테고리 섹션 */
+        .shelf-section { margin-top: 80px; }
+        .shelf-title { 
+            font-size: 1.5rem; color: var(--accent-gold); 
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px; margin-bottom: 40px;
+            display: flex; align-items: center;
+        }
+        .shelf-title span { font-size: 0.8rem; color: var(--text-dim); margin-left: 20px; letter-spacing: 0.1rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* 마도서 카드 디자인 */
+        .book {
+            background: var(--paper-color);
+            border: 1px solid #222;
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+            transition: 0.4s;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .book::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--accent-gold);
+        }
+        .book:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-gold);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+        }
+        .book .icon { font-size: 2rem; margin-bottom: 20px; opacity: 0.8; }
+        .book h3 { font-size: 1.1rem; color: var(--accent-gold); margin: 10px 0; }
+        .book p { font-size: 0.85rem; color: var(--text-dim); line-height: 1.6; }
+
+        /* 사소한 공명 전용 스타일 */
+        .simple-essence { border: 1px dashed var(--accent-gold) !important; background: transparent !important; }
+
+        /* 연성 오버레이 */
+        #ritual-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98); display: none; z-index: 9999;
+            justify-content: center; align-items: center; overflow-y: auto;
+        }
+        .ritual-content { width: 90%; max-width: 800px; padding: 50px; text-align: center; }
+        #chant { font-size: 1.6rem; color: var(--accent-gold); line-height: 2; margin-bottom: 40px; min-height: 100px; }
+        
+        .sim-ui { background: #111; border: 1px solid var(--accent-gold); padding: 30px; margin: 30px 0; border-radius: 4px; display: none; }
+        .btn-close { background: none; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 10px 40px; cursor: pointer; margin-top: 30px; }
+        
+        /* 유틸리티 */
+        .safe { color: #5fff8f; } .warn { color: #ff5f5f; }
+        input[type="range"] { width: 100%; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>The Guardian's Library</h1>
+    <div class="subtitle">AI GRIMOIRE COMPENDIUM v4.0</div>
+</header>
+
+<div class="container" id="library-root">
+    </div>
+
+<div id="ritual-overlay">
+    <div class="ritual-content">
+        <div id="chant"></div>
+        <div id="magic-body" class="sim-ui"></div>
+        <div id="magic-desc" style="color: var(--text-dim); line-height: 1.8; margin-bottom: 20px;"></div>
+        <button class="btn-close" onclick="closeRitual()">서재로 돌아가기</button>
+    </div>
+</div>
+
+<script>
+    const grimoires = [
+        // 3.1 실천과 지능
+        { category: "3.1 실천과 지능", catSub: "Practical & Intelligence", id: "re", title: "주권적 영지의 마도서", icon: "🏠", sub: "부동산 시장 반응 예지", chant: "대지의 가치를 저울 위에 올리고,<br>시장의 정령들이 속삭이는 미래를 봅니다.", type: "sim_re" },
+        { category: "3.1 실천과 지능", catSub: "Practical & Intelligence", id: "laundry", title: "정화의 의식", icon: "🌀", sub: "지능형 세탁 시뮬레이션", chant: "옷감의 숨결과 색채의 조화를 감지하여,<br>완벽한 정화의 경로를 연성합니다.", type: "sim_laundry" },
+        
+        // 3.2 자아와 지혜
+        { category: "3.2 자아와 지혜", catSub: "Self & Wisdom", id: "psych", title: "자아 발견의 마도서", icon: "📜", sub: "심리적 원형 및 본질 발굴", chant: "내면의 심연을 비추는 거울을 닦아,<br>당신의 진짜 형상을 소환합니다.", type: "sim_psych" },
+        { category: "3.2 자아와 지혜", catSub: "Self & Wisdom", id: "sages", title: "현자들의 속삭임", icon: "🗿", sub: "시공초월 지혜와 육성 소환", chant: "시간의 벽을 넘어 성현들의 목소리를 빌려와<br>당신의 방황에 나침반을 놓습니다.", type: "msg" },
+
+        // 3.3 공명과 감동
+        { category: "3.3 공명과 감동", catSub: "Resonance & Emotion", id: "seren", title: "뜻밖의 즐거움", icon: "🔮", sub: "세렌디피티 영상 큐레이션", chant: "당신이 보지 못한 세상의 조각을 찾아,<br>우연이라는 선물을 건넵니다.", type: "msg" },
+        { category: "3.3 공명과 감동", catSub: "Resonance & Emotion", id: "history", title: "시공간의 공명", icon: "⏳", sub: "100년 전 오늘과의 대화", chant: "100년의 시간을 잇는 실을 따라,<br>과거의 선율과 오늘의 감성을 섞습니다.", type: "msg" },
+        { category: "3.3 공명과 감동", catSub: "Resonance & Emotion", id: "joy", title: "행복의 소환술", icon: "🐾", sub: "무해한 존재들의 시각적 변주", chant: "세상의 가장 포근하고 무해한 형상들을 모아<br>당신의 지친 눈을 정화합니다.", type: "msg" },
+        { category: "3.3 공명과 감동", catSub: "Resonance & Emotion", id: "warmth", title: "온기의 연대기", icon: "📖", sub: "다정한 실화의 우화적 재구성", chant: "차가운 세상 속에서 피어난 온기의 조각들을<br>한 편의 아름다운 우화로 엮습니다.", type: "msg" },
+
+        // 3.4 사소한 공명
+        { category: "3.4 사소한 공명", catSub: "Simple Essence", id: "text", title: "영혼의 한 줄", icon: "✍️", sub: "맥락을 꿰뚫는 단 한 문장", chant: "수천 마디의 말 대신,<br>당신의 오늘을 정의할 단 하나의 이름을 부릅니다.", type: "msg", special: true },
+        { category: "3.4 사소한 공명", catSub: "Simple Essence", id: "image", title: "찰나의 환영", icon: "🖼️", sub: "마음을 대변하는 한 장의 풍경", chant: "눈에 보이는 것 너머,<br>당신의 심상을 비추는 단 하나의 이미지를 연성합니다.", type: "msg", special: true },
+        { category: "3.4 사소한 공명", catSub: "Simple Essence", id: "music", title: "공기 중의 선율", icon: "🎵", sub: "공간을 완성하는 완벽한 한 곡", chant: "정적 속에 숨어있는 당신의 주파수를 찾아<br>공기를 채울 단 하나의 선율을 소환합니다.", type: "msg", special: true }
+    ];
+
+    const root = document.getElementById('library-root');
+    const overlay = document.getElementById('ritual-overlay');
+    const chantBox = document.getElementById('chant');
+    const bodyBox = document.getElementById('magic-body');
+    const descBox = document.getElementById('magic-desc');
+
+    // 카테고리별 렌더링
+    const categories = [...new Set(grimoires.map(g => g.category))];
+    categories.forEach(cat => {
+        const section = document.createElement('div');
+        section.className = 'shelf-section';
+        const sub = grimoires.find(g => g.category === cat).catSub;
+        section.innerHTML = `<div class="shelf-title">${cat} <span>${sub}</span></div>`;
+        const grid = document.createElement('div');
+        grid.className = 'grid';
+        
+        grimoires.filter(g => g.category === cat).forEach(book => {
+            const el = document.createElement('div');
+            el.className = `book ${book.special ? 'simple-essence' : ''}`;
+            el.innerHTML = `<div class="icon">${book.icon}</div><h3>${book.title}</h3><p>${book.sub}</p>`;
+            el.onclick = () => openRitual(book);
+            grid.appendChild(el);
+        });
+        section.appendChild(grid);
+        root.appendChild(section);
+    });
+
+    function openRitual(book) {
+        overlay.style.display = 'flex';
+        chantBox.innerHTML = ""; bodyBox.style.display = 'none'; descBox.innerHTML = "";
+        
+        // 영창 애니메이션
+        setTimeout(() => { chantBox.innerHTML = book.chant; }, 500);
+        
+        // 시뮬레이션 발동
+        setTimeout(() => {
+            chantBox.innerHTML = "";
+            bodyBox.style.display = 'block';
+            renderContent(book);
+        }, 3000);
+    }
+
+    function renderContent(book) {
+        if (book.id === 're') {
+            bodyBox.innerHTML = `<h3>시장 반응 시뮬레이터</h3><input type="range" oninput="updateRE(this.value)"><div id="reRes" class="safe">적정 가격입니다. 1,000명의 매수자 중 55%가 관심을 보입니다.</div>`;
+        } else if (book.id === 'laundry') {
+            bodyBox.innerHTML = `<h3>지능형 세탁 처방</h3><button class="btn-close" style="margin:5px" onclick="this.className='btn-close warn'; alert('이염 주의!')">흰색 + 검은색 섞기</button><p>데이터 기반의 최적 경로를 계산 중...</p>`;
+        } else if (book.id === 'psych') {
+            bodyBox.innerHTML = `<h3>내면의 거울</h3><input type="text" placeholder="현재의 심경을 영창하세요" style="width:100%; padding:10px; background:black; color:white; border:1px solid #c5a059;"><br><br><p>분석 결과: [정언명령의 수호자] 원형 발굴됨.</p>`;
+        } else {
+            bodyBox.innerHTML = `<div class="icon" style="font-size:4rem">${book.icon}</div><p>${book.title}의 마력이 발현되었습니다.</p>`;
+        }
+        descBox.innerHTML = `[가디언의 기록]<br>이 마법은 당신의 삶을 더 가치 있게 만들기 위해 연성되었습니다. 사소한 순간에 깃든 의미를 발견하세요.`;
+    }
+
+    function updateRE(v) {
+        const res = document.getElementById('reRes');
+        if(v > 70) { res.innerText = "경고: 시장의 반응이 냉담합니다. 마력을 낮추십시오."; res.className = "warn"; }
+        else { res.innerText = "적정 가격: 시장의 정령들이 호응하고 있습니다."; res.className = "safe"; }
+    }
+
+    function closeRitual() { overlay.style.display = 'none'; }
+</script>
+
+</body>
+</html>

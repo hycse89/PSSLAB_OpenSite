@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>사소한 공명 - Simple Essence</title>
+    <style>
+        body { background: #000; color: #fff; font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        .essence-nav { display: flex; justify-content: center; gap: 30px; padding: 40px; border-bottom: 1px solid #111; }
+        .essence-nav span { cursor: pointer; color: #444; transition: 0.3s; font-size: 0.9rem; letter-spacing: 2px; }
+        .essence-nav span:hover, .essence-nav span.active { color: #c5a059; }
+        
+        .essence-display { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px; text-align: center; }
+        
+        /* Text 스타일 */
+        #text-essence { font-size: 2.5rem; letter-spacing: 10px; color: #c5a059; display: none; }
+        /* Image 스타일 */
+        #image-essence { max-width: 100%; max-height: 80vh; border: 1px solid #222; display: none; }
+        /* Music 스타일 */
+        #music-essence { display: none; }
+        .audio-wave { display: flex; align-items: center; gap: 8px; }
+        .audio-wave div { width: 5px; height: 30px; background: #c5a059; animation: wave 1s infinite alternate; }
+        @keyframes wave { from { height: 10px; opacity: 0.3; } to { height: 80px; opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="essence-nav">
+        <span onclick="switchEssence('text', this)" class="active">TEXT</span>
+        <span onclick="switchEssence('image', this)">IMAGE</span>
+        <span onclick="switchEssence('music', this)">MUSIC</span>
+    </div>
+
+    <div class="essence-display">
+        <div id="text-essence">정직한 피로</div>
+        <img id="image-essence" src="" alt="환영">
+        <div id="music-essence">
+            <div class="audio-wave">
+                <div style="animation-delay: 0.1s"></div>
+                <div style="animation-delay: 0.3s"></div>
+                <div style="animation-delay: 0.5s"></div>
+                <div style="animation-delay: 0.2s"></div>
+                <div style="animation-delay: 0.4s"></div>
+            </div>
+            <p style="margin-top: 30px; color: #c5a059; font-size: 0.8rem; letter-spacing: 3px;">공기 중의 선율을 수신 중...</p>
+        </div>
+    </div>
+
+    <script>
+        function switchEssence(type, el) {
+            document.querySelectorAll('.essence-nav span').forEach(s => s.classList.remove('active'));
+            el.classList.add('active');
+            
+            document.getElementById('text-essence').style.display = 'none';
+            document.getElementById('image-essence').style.display = 'none';
+            document.getElementById('music-essence').style.display = 'none';
+
+            if(type === 'text') {
+                const elT = document.getElementById('text-essence');
+                elT.style.display = 'block';
+                const words = ["고요한 투쟁", "빛나는 고립", "부드러운 결단", "정직한 피로", "따뜻한 경계"];
+                elT.innerText = words[Math.floor(Math.random() * words.length)];
+            } else if(type === 'image') {
+                const elI = document.getElementById('image-essence');
+                elI.style.display = 'block';
+                elI.src = `https://source.unsplash.com/featured/?minimalist,dark&t=${new Date().getTime()}`;
+            } else if(type === 'music') {
+                document.getElementById('music-essence').style.display = 'block';
+            }
+        }
+        // 초기 실행
+        window.onload = () => switchEssence('text', document.querySelector('.essence-nav span'));
+    </script>
+</body>
+</html>

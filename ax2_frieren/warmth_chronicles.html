@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>온기의 연대기 - Chronicles of Warmth</title>
+    <style>
+        body { background: #0f0f0f; color: #bca08d; font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; line-height: 2; }
+        .manuscript { width: 90%; max-width: 600px; background: #1a1714; padding: 60px; border: 1px solid #3d332d; box-shadow: 0 0 40px rgba(0,0,0,0.8); position: relative; }
+        h1 { font-size: 1.5rem; color: #c5a059; text-align: center; border-bottom: 1px solid #3d332d; padding-bottom: 20px; margin-bottom: 40px; }
+        .story-body { font-size: 1.1rem; text-align: justify; margin-bottom: 40px; min-height: 200px; }
+        .date-stamp { font-size: 0.8rem; color: #6d5d52; text-align: right; }
+        .ritual-seal { position: absolute; bottom: 40px; left: 60px; width: 60px; height: 60px; border: 2px solid #c5a059; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #c5a059; font-size: 0.7rem; opacity: 0.5; transform: rotate(-15deg); }
+        .next-btn { display: block; width: 100%; padding: 15px; background: none; border: 1px solid #c5a059; color: #c5a059; cursor: pointer; margin-top: 20px; font-family: inherit; }
+    </style>
+</head>
+<body>
+    <div class="manuscript">
+        <div class="ritual-seal">온기의<br>인장</div>
+        <h1>온기의 연대기</h1>
+        <div class="story-body" id="story-content">
+            세상의 다정한 조각들을 모으고 있습니다...<br>온기가 담긴 양피지를 펼치는 중입니다.
+        </div>
+        <div class="date-stamp" id="today-date">2026. 01. 07</div>
+        <button class="next-btn" onclick="nextStory()">다른 온기 읽기</button>
+    </div>
+
+    <script>
+        const stories = [
+            "어느 은퇴한 우체부의 가방 속에는 배달되지 못한 편지 대신, 동네 아이들에게 줄 사탕이 가득했습니다. 그는 이제 편지 대신 달콤한 웃음을 배달하는 마법사가 되었습니다.",
+            "폭우가 쏟아지던 날, 작은 우산 하나를 함께 쓴 두 낯선 이는 말없이 어깨를 맞대고 걸었습니다. 비는 차가웠지만, 그들이 지나간 자리엔 사람의 온기가 남았습니다.",
+            "20년 동안 길고양이들의 아버지가 되어준 노신사는 말합니다. '내가 그들을 돌보는 것이 아니라, 그들이 나의 외로움을 돌보는 것이라네.' 다정함은 언제나 상호적인 마법입니다."
+        ];
+
+        function nextStory() {
+            const content = document.getElementById('story-content');
+            content.style.opacity = 0;
+            setTimeout(() => {
+                content.innerText = stories[Math.floor(Math.random() * stories.length)];
+                content.style.opacity = 1;
+            }, 500);
+        }
+        window.onload = nextStory;
+    </script>
+</body>
+</html>

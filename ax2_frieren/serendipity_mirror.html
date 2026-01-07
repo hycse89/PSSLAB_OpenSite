@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>뜻밖의 즐거움 - Mirror of Serendipity</title>
+    <style>
+        body { background: #000; color: #d1d1d1; font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; }
+        .module { width: 90%; max-width: 800px; text-align: center; }
+        h1 { color: #c5a059; letter-spacing: 5px; margin-bottom: 10px; opacity: 0.8; }
+        .sub-txt { color: #666; font-size: 0.9rem; margin-bottom: 40px; }
+        
+        .video-frame { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border: 1px solid #333; box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
+        .video-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        
+        .summon-btn { margin-top: 40px; background: transparent; border: 1px solid #c5a059; color: #c5a059; padding: 15px 40px; cursor: pointer; font-size: 1rem; transition: 0.4s; letter-spacing: 2px; }
+        .summon-btn:hover { background: #c5a059; color: #000; box-shadow: 0 0 20px #c5a059; }
+        
+        .oracle-text { margin-top: 30px; font-style: italic; color: #888; min-height: 50px; transition: opacity 1s; }
+    </style>
+</head>
+<body>
+    <div class="module">
+        <h1>뜻밖의 즐거움의 마도서</h1>
+        <p class="sub-txt">알고리즘의 벽 너머, 당신이 미처 몰랐던 세상의 조각을 비춥니다.</p>
+
+        <div class="video-frame">
+            <iframe id="mainVideo" src="https://www.youtube.com/embed/8MgpE2D1f_U?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+
+        <div class="oracle-text" id="oracle">"이 광활한 우주의 침묵이 오늘 당신의 소란스러운 마음을 잠재우기를..."</div>
+        <button class="summon-btn" onclick="summonSerendipity()">새로운 세계 소환하기</button>
+    </div>
+
+    <script>
+        // 세렌디피티 영상 목록 (실제로는 DB나 API로 관리)
+        const videos = [
+            { id: "8MgpE2D1f_U", desc: "이 광활한 우주의 침묵이 오늘 당신의 소란스러운 마음을 잠재우기를..." }, // 우주
+            { id: "ysz5S6PUM-U", desc: "심해의 발광 생물들이 보여주는 낯선 아름다움에 경이로움을 느껴보세요." }, // 심해
+            { id: "hMgG64Y3Kk8", desc: "인간의 손길이 닿지 않은 태고의 숲, 그 생명력을 소환했습니다." }, // 자연
+            { id: "CFiq5n6eX1g", desc: "물감이 번지듯 퍼져나가는 색채의 향연이 당신의 영감을 자극합니다." } // 잉크 아트
+        ];
+
+        function summonSerendipity() {
+            const oracle = document.getElementById('oracle');
+            const iframe = document.getElementById('mainVideo');
+            
+            // 연출을 위한 잠시 멈춤
+            oracle.style.opacity = 0;
+            
+            setTimeout(() => {
+                // 랜덤 영상 선택 (실제로는 중복 방지 로직 필요)
+                const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+                iframe.src = `https://www.youtube.com/embed/${randomVideo.id}?autoplay=1&rel=0`;
+                oracle.innerText = `"${randomVideo.desc}"`;
+                oracle.style.opacity = 1;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

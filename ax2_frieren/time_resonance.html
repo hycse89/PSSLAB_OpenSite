@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>시공간의 공명 - Resonance of Time</title>
+    <style>
+        body { background: #0a0a0a; color: #c0c0c0; font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .module { width: 85%; max-width: 700px; border: 1px solid #333; padding: 50px; position: relative; background: radial-gradient(circle at center, #111 0%, #050505 100%); }
+        
+        .timeline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px; font-size: 1.2rem; color: #c5a059; }
+        .time-point { text-align: center; }
+        .time-bridge { flex: 1; height: 2px; background: linear-gradient(90deg, #c5a059, #333, #c5a059); margin: 0 20px; position: relative; }
+        .time-bridge::after { content: ''; position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; background: #c5a059; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 20px #c5a059; animation: pulse 2s infinite; }
+        
+        .history-content { text-align: center; line-height: 1.8; font-size: 1.1rem; margin-bottom: 40px; min-height: 120px; }
+        .music-ambiance { display: flex; justify-content: center; align-items: center; gap: 10px; color: #666; font-size: 0.9rem; }
+        .bar { width: 3px; height: 20px; background: #c5a059; animation: sound 0.8s infinite alternate; }
+        @keyframes pulse { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+        @keyframes sound { from { height: 10px; opacity: 0.5; } to { height: 30px; opacity: 1; } }
+    </style>
+</head>
+<body>
+    <div class="module">
+        <div class="timeline">
+            <div class="time-point"><div id="past-year">1926</div><span style="font-size:0.8rem; color:#666;">과거</span></div>
+            <div class="time-bridge"></div>
+            <div class="time-point"><div id="current-year">2026</div><span style="font-size:0.8rem; color:#666;">현재</span></div>
+        </div>
+
+        <div class="history-content" id="history-text">
+            시공간의 주파수를 맞추고 있습니다...<br>100년 전 오늘의 공기를 수신 중...
+        </div>
+
+        <div class="music-ambiance">
+            <div class="bar" style="animation-delay:0.1s"></div>
+            <div class="bar" style="animation-delay:0.3s"></div>
+            <div class="bar" style="animation-delay:0.5s"></div>
+            <span>1920년대 런던의 안개 낀 재즈 선율이 흐릅니다.</span>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 자동 실행
+        window.onload = function() {
+            const today = new Date();
+            document.getElementById('current-year').innerText = today.getFullYear();
+            document.getElementById('past-year').innerText = today.getFullYear() - 100;
+            
+            const historyText = document.getElementById('history-text');
+            
+            setTimeout(() => {
+                // 실제로는 날짜 기반 DB 조회 필요. 여기서는 시뮬레이션 데이터 사용.
+                const month = today.getMonth() + 1;
+                let content = "";
+                if(month >= 3 && month <= 5) { // 봄
+                     content = `"100년 전 오늘, 경성(서울)의 거리에는 모던 보이와 모던 걸들의 새로운 패션이 꽃피기 시작했습니다. 변화의 설렘이 가득했던 그날의 봄바람을 당신에게 전합니다."`;
+                } else if (month >= 6 && month <= 8) { // 여름
+                     content = `"1926년의 여름, 재즈 시대(Jazz Age)의 열기가 대서양을 건너 전 세계를 달구고 있었습니다. 그 뜨겁고 자유로운 낭만의 리듬에 귀 기울여 보세요."`;
+                } else { // 가을/겨울
+                     content = `"백 년 전 이맘때, 세계는 거대한 변화의 소용돌이 직전의 고요함 속에 있었습니다. 그 시대의 예술가들이 고뇌하며 남긴 깊고 푸른 사유의 조각들을 소환합니다."`;
+                }
+                historyText.innerHTML = content;
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

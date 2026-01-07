@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frieren's Grimoire: Milestone Test-bed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a; --card: #151515; --gold: #c5a059; --dim: #777; --text: #e0e0e0;
+        }
+        body { background: var(--bg); color: var(--text); font-family: 'Nanum Myeongjo', serif; margin: 0; display: flex; overflow: hidden; height: 100vh; }
+        
+        /* 사이드바 메뉴 */
+        nav { width: 300px; background: #111; border-right: 1px solid #222; overflow-y: auto; padding: 20px; }
+        .nav-cat { font-size: 0.75rem; color: var(--gold); margin: 25px 0 10px; letter-spacing: 2px; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        .nav-item { padding: 12px 15px; cursor: pointer; border-radius: 4px; font-size: 0.9rem; transition: 0.3s; color: var(--dim); display: flex; align-items: center; }
+        .nav-item:hover { background: #1a1a1a; color: var(--gold); }
+        .nav-item.active { background: #222; color: var(--gold); border-left: 3px solid var(--gold); }
+        .nav-item span { margin-right: 12px; font-size: 1.2rem; }
+
+        /* 메인 콘텐츠 영역 */
+        main { flex: 1; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 50px; background: radial-gradient(circle at center, #111 0%, #0a0a0a 100%); }
+        #display-area { width: 100%; max-width: 800px; text-align: center; }
+        
+        /* 마법 발현 UI 모듈 */
+        .module-card { background: var(--card); border: 1px solid #333; padding: 40px; border-radius: 2px; animation: fadeIn 0.8s ease; }
+        .module-title { font-size: 1.8rem; color: var(--gold); margin-bottom: 10px; }
+        .module-sub { font-size: 0.9rem; color: var(--dim); margin-bottom: 30px; letter-spacing: 1px; }
+        .sim-box { background: #000; padding: 30px; border: 1px dashed #444; margin-bottom: 20px; min-height: 150px; display: flex; flex-direction: column; justify-content: center; }
+        
+        /* 인터랙션 요소 */
+        input, select, button { background: #111; border: 1px solid var(--gold); color: #fff; padding: 10px; font-family: inherit; margin: 5px; cursor: pointer; }
+        input[type="range"] { width: 80%; }
+        .log-box { font-size: 0.85rem; color: var(--gold); margin-top: 15px; line-height: 1.6; border-top: 1px solid #222; padding-top: 15px; text-align: left; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div style="text-align: center; padding-bottom: 20px;">
+        <h2 style="color:var(--gold); letter-spacing: 3px;">GRIMOIRE</h2>
+        <p style="font-size:0.7rem; color:var(--dim);">Milestone v1.0 Test-bed</p>
+    </div>
+
+    <div class="nav-cat">3.1 PRACTICAL</div>
+    <div class="nav-item" onclick="loadModule('re')"><span>🏠</span> 주권적 영지</div>
+    <div class="nav-item" onclick="loadModule('laundry')"><span>🌀</span> 정화의 의식</div>
+
+    <div class="nav-cat">3.2 WISDOM</div>
+    <div class="nav-item" onclick="loadModule('psych')"><span>📜</span> 자아 발견</div>
+    <div class="nav-item" onclick="loadModule('sages')"><span>🗿</span> 현자의 속삭임</div>
+
+    <div class="nav-cat">3.3 EMOTION</div>
+    <div class="nav-item" onclick="loadModule('seren')"><span>🔮</span> 뜻밖의 즐거움</div>
+    <div class="nav-item" onclick="loadModule('history')"><span>⏳</span> 시공간 공명</div>
+    <div class="nav-item" onclick="loadModule('joy')"><span>🐾</span> 행복 소환</div>
+    <div class="nav-item" onclick="loadModule('warmth')"><span>📖</span> 온기 연대기</div>
+
+    <div class="nav-cat">3.4 ESSENCE</div>
+    <div class="nav-item" onclick="loadModule('text')"><span>✍️</span> 영혼의 한 줄</div>
+    <div class="nav-item" onclick="loadModule('image')"><span>🖼️</span> 찰나의 환영</div>
+    <div class="nav-item" onclick="loadModule('music')"><span>🎵</span> 공기 중 선율</div>
+</nav>
+
+<main>
+    <div id="display-area">
+        <div style="opacity: 0.3; font-size: 1.2rem;">왼쪽 선반에서 마도서를 선택하여 연성을 시작하십시오.</div>
+    </div>
+</main>
+
+<script>
+    const display = document.getElementById('display-area');
+
+    function loadModule(id) {
+        let html = '';
+        switch(id) {
+            case 're':
+                html = createModule("주권적 영지의 마도서", "Real Estate Simulation", 
+                    `<div>설정가 대비 시장 반응: <input type="range" id="reRange" oninput="runRE(this.value)"></div>
+                     <div id="reOut" class="log-box">슬라이더를 움직여 가격에 따른 시장의 반응을 시뮬레이션하세요.</div>`);
+                break;
+            case 'laundry':
+                html = createModule("정화의 의식", "Intelligent Laundry", 
+                    `<div><button onclick="runLaundry('conflict')">색상 충돌 테스트</button> <button onclick="runLaundry('material')">소재 민감도 테스트</button></div>
+                     <div id="laOut" class="log-box">세탁 조건을 선택하여 최적의 경로를 추론합니다.</div>`);
+                break;
+            case 'psych':
+                html = createModule("자아 발견의 마도서", "Archetype Analysis", 
+                    `<input type="text" id="psyIn" placeholder="현재 심경을 입력..." style="width:80%"> <button onclick="runPsych()">분석</button>
+                     <div id="psyOut" class="log-box">AI가 당신의 문장에서 심리적 원형을 발굴합니다.</div>`);
+                break;
+            case 'text':
+                html = createModule("영혼의 한 줄", "Simple Essence: Text", 
+                    `<button onclick="runSimple('text')">오늘의 이름 연성</button>
+                     <div id="textOut" class="log-box" style="text-align:center; font-size:1.2rem;">...</div>`);
+                break;
+            // 나머지 모듈들에 대한 케이스들도 동일한 구조로 확장 가능
+            default:
+                html = createModule("미완성 마도서", "Under Development", 
+                    `<div class="log-box">현재 아이디어를 수집 중인 영역입니다. <br>이곳에 새로운 테스트베드 로직을 추가할 수 있습니다.</div>`);
+        }
+        display.innerHTML = html;
+    }
+
+    function createModule(title, sub, content) {
+        return `
+            <div class="module-card">
+                <div class="module-title">${title}</div>
+                <div class="module-sub">${sub}</div>
+                <div class="sim-box">${content}</div>
+                <div style="font-size:0.7rem; color:var(--dim); text-align:right;">Milestone v1.0 | AI Guardian Engine</div>
+            </div>
+        `;
+    }
+
+    // --- 개별 로직 테스트베드 ---
+    function runRE(v) {
+        const out = document.getElementById('reOut');
+        const prob = 100 - (v - 50);
+        out.innerHTML = `[예지 결과] 가격 지수 ${v}% 설정 시:<br>가상 매수자 1,000명 중 약 ${prob * 8}명이 관심을 보입니다. <br>성사 확률: ${prob}% | 예상 기간: ${Math.floor((100-prob)/10)}주`;
+    }
+
+    function runLaundry(type) {
+        const out = document.getElementById('laOut');
+        if(type === 'conflict') out.innerHTML = `⚠️ [경고] 검은색 면티와 흰색 셔츠의 혼합이 감지되었습니다. '변색의 저주' 위험도 높음.`;
+        else out.innerHTML = `✅ [추론] 울 소재 감지. 30도 미온수와 마력 거품 세정을 권장합니다.`;
+    }
+
+    function runPsych() {
+        const input = document.getElementById('psyIn').value;
+        const out = document.getElementById('psyOut');
+        out.innerHTML = `[분석] "${input}" 로부터 <b>'지혜로운 방랑자'</b>의 원형을 발견했습니다. <br>사회적 페르소나보다 내면의 진실을 쫓는 칸트적 의지가 강하게 나타납니다.`;
+    }
+
+    function runSimple(type) {
+        const out = document.getElementById('textOut');
+        const sayings = ["정직한 피로", "고요한 투쟁", "부드러운 결단", "빛나는 고립"];
+        out.innerHTML = sayings[Math.floor(Math.random() * sayings.length)];
+    }
+</script>
+
+</body>
+</html>

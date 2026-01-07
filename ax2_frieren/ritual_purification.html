@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>정화의 의식 - Ritual Purification</title>
+    <style>
+        body { background: #050505; color: #d1d1d1; font-family: 'Nanum Myeongjo', serif; margin: 0; padding: 40px; }
+        .container { max-width: 800px; margin: 0 auto; border: 1px solid #333; padding: 40px; background: #0a0a0a; }
+        h1 { color: #c5a059; text-align: center; border-bottom: 2px solid #c5a059; padding-bottom: 20px; }
+        .fabric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0; }
+        .select-box { background: #111; border: 1px solid #444; padding: 20px; }
+        .select-box h3 { font-size: 0.9rem; color: #c5a059; margin-top: 0; }
+        label { display: block; margin: 10px 0; font-size: 0.85rem; cursor: pointer; }
+        .cast-btn { width: 100%; padding: 20px; background: #c5a059; color: #000; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        #magic-output { margin-top: 40px; border-top: 1px double #c5a059; padding-top: 30px; display: none; }
+        .warning-seal { color: #ff4d4d; border: 1px solid #ff4d4d; padding: 15px; text-align: center; margin-bottom: 20px; background: rgba(255, 77, 77, 0.1); }
+        .prescription { line-height: 1.8; font-size: 0.95rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>정화의 의식</h1>
+        <div class="fabric-grid">
+            <div class="select-box">
+                <h3>옷감 성분 감지</h3>
+                <label><input type="checkbox" value="cotton" id="c1"> 천연 면 (Cotton)</label>
+                <label><input type="checkbox" value="wool" id="c2"> 섬세한 울 (Wool)</label>
+                <label><input type="checkbox" value="silk" id="c3"> 성스러운 실크 (Silk)</label>
+                <label><input type="checkbox" value="dark" id="c4"> 칠흑의 어두운 옷</label>
+                <label><input type="checkbox" value="white" id="c5"> 순백의 밝은 옷</label>
+            </div>
+            <div class="select-box">
+                <h3>오염의 흔적 판별</h3>
+                <label><input type="radio" name="stain" value="normal" checked> 일상의 먼지</label>
+                <label><input type="radio" name="stain" value="oil"> 탐욕스러운 기름때</label>
+                <label><input type="radio" name="stain" value="coffee"> 짙은 커피의 얼룩</label>
+                <label><input type="radio" name="stain" value="sweat"> 고단한 노동의 땀</label>
+            </div>
+        </div>
+
+        <button class="cast-btn" onclick="castPurification()">정화 알고리즘 연성</button>
+
+        <div id="magic-output">
+            <div id="hazard-alert"></div>
+            <div class="prescription" id="presc-text"></div>
+        </div>
+    </div>
+
+    <script>
+        function castPurification() {
+            const output = document.getElementById('magic-output');
+            const alert = document.getElementById('hazard-alert');
+            const presc = document.getElementById('presc-text');
+            
+            output.style.display = 'block';
+            let isConflict = document.getElementById('c4').checked && document.getElementById('c5').checked;
+            let isDelicate = document.getElementById('c2').checked || document.getElementById('c3').checked;
+            let stainType = document.querySelector('input[name="stain"]:checked').value;
+
+            alert.innerHTML = isConflict ? '<div class="warning-seal">⚠️ [변색의 저주 감지] 밝은 옷과 어두운 옷이 혼재되어 있습니다. 즉시 분리하십시오.</div>' : '';
+            
+            let advice = `<strong>[정화 처방전]</strong><br>`;
+            advice += isDelicate ? `냉수(20°C 이하)와 중성 마력을 사용하여 섬유의 영혼을 보호하십시오. 회전력은 최소로 유지합니다.<br>` : `상온의 물(30°C)과 표준 마력 세정으로 충분합니다.<br>`;
+            
+            if(stainType === 'oil') advice += `<strong>[특수 비책]</strong> 기름때는 정화 전 국소 부위에 알코올 성분의 전처리 마법을 권장합니다.<br>`;
+            if(stainType === 'coffee') advice += `<strong>[특수 비책]</strong> 탄닌 얼룩은 산성 세정제(식초 마법)가 효과적입니다.<br>`;
+
+            presc.innerHTML = advice + `<br><p style="color:#c5a059; font-size:0.8rem;">* 이 명세는 미래 스마트 세탁기의 제어 규격으로 활용될 수 있습니다.</p>`;
+        }
+    </script>
+</body>
+</html>
