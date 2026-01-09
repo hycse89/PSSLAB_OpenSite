@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² SYSTEM V2 : The New Era</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        /* --- CSS 수정: 슬라이드 높이 유연화 --- */
+        :root { 
+            --bg-color: #050505; 
+            --accent-color: #00e5ff; 
+            --text-main: #ffffff; 
+            --text-dim: #888;
+            --font-heavy: 900; 
+            /* 슬라이드 1개의 충분한 높이 확보 (설명이 길어질 것에 대비) */
+            --slide-height: 280px; 
+        }
+
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; line-height: 1.6; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 40px; }
+        
+        header { padding: 40px 0; display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--accent-color); font-weight: 700; border-bottom: 1px solid #222; }
+        
+        #main-page, #detail-page { display: none; }
+        #main-page.active, #detail-page.active { display: block; }
+
+        /* --- 상단 메시지 슬라이드 애니메이션 --- */
+        .hero-slider {
+            min-height: 450px; /* 전체 슬라이더 영역 높이 */
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            margin: 40px 0;
+        }
+
+        .slide-window { 
+            height: var(--slide-height); 
+            overflow: hidden; 
+        }
+
+        .slide-list {
+            margin: 0; padding: 0; list-style: none;
+            animation: sync_slide 15s infinite cubic-bezier(0.85, 0, 0.15, 1);
+        }
+
+        .slide-group { 
+            height: var(--slide-height); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            box-sizing: border-box;
+        }
+
+        .slide-title { 
+            font-size: 5rem; 
+            font-weight: var(--font-heavy); 
+            letter-spacing: -4px; 
+            margin: 0; 
+            line-height: 1.1; 
+            text-transform: uppercase; 
+        }
+
+        .slide-desc { 
+            font-size: 1.4rem; 
+            color: var(--text-dim); 
+            margin-top: 20px; 
+            font-weight: 500;
+            line-height: 1.6; /* 줄 간격을 넓혀 여러 줄이어도 가독성 확보 */
+            max-width: 900px; /* 너무 길게 늘어지지 않도록 폭 제한 */
+            word-break: keep-all; /* 한글 단어 단위 끊김 방지 */
+        }
+
+        /* 애니메이션 슬라이드 거리 계산 (수정된 높이 기준) */
+        @keyframes sync_slide {
+            0%, 28% { transform: translateY(0); }
+            33%, 61% { transform: translateY(calc(var(--slide-height) * -1)); }
+            66%, 94% { transform: translateY(calc(var(--slide-height) * -2)); }
+            100% { transform: translateY(0); }
+        }
+
+        /* --- 그리드 레이아웃 --- */
+        .section-title { font-size: 0.9rem; color: var(--accent-color); text-transform: uppercase; letter-spacing: 4px; margin: 80px 0 20px 0; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background-color: #222; border: 2px solid #222; }
+        .card { background-color: var(--bg-color); padding: 40px; cursor: pointer; transition: 0.3s; height: 100%; box-sizing: border-box; }
+        .card:hover { background-color: #111; }
+        .card h3 { font-size: 1.6rem; font-weight: var(--font-heavy); margin: 0 0 10px 0; word-break: keep-all; }
+        .card p { color: #888; margin: 0; font-size: 0.95rem; }
+
+        /* --- 상세 페이지 --- */
+        .md-content { padding: 40px 0; min-height: 600px; }
+        .md-content h1 { font-size: 3.5rem; font-weight: var(--font-heavy); color: var(--accent-color); letter-spacing: -2px; }
+        .md-content h2 { font-size: 2rem; margin-top: 50px; border-left: 5px solid var(--accent-color); padding-left: 15px; }
+        .md-content pre { background: #111; padding: 20px; border: 1px solid #333; overflow-x: auto; color: var(--accent-color); }
+        
+        .back-btn { background: none; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 10px 20px; cursor: pointer; margin: 40px 0; font-weight: 700; transition: 0.3s; }
+        .back-btn:hover { background: var(--accent-color); color: #000; }
+
+        /* --- Footer --- */
+        footer { margin-top: 120px; padding: 80px 0; border-top: 1px solid #222; text-align: left; }
+        .footer-logo { font-size: 2.5rem; font-weight: var(--font-heavy); letter-spacing: -1px; margin-bottom: 20px; }
+        .footer-contact-link { font-size: 1.2rem; color: var(--accent-color); text-decoration: none; font-weight: 700; border-bottom: 2px solid var(--accent-color); }
+        .footer-info { margin-top: 40px; color: #444; font-size: 0.8rem; letter-spacing: 1px; }
+
+        @media (max-width: 900px) {
+            .grid { grid-template-columns: 1fr; }
+            .slide-title { font-size: 2.8rem; }
+            .slide-desc { font-size: 1.1rem; }
+            .hero-slider { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>AX² SYSTEM V2.0</div>
+        <div>STABLE ACCESS GRANTED</div>
+    </header>
+
+    <main id="main-page">
+
+        <section class="hero-slider">
+            <div class="slide-window">
+                <ul class="slide-list">
+                    <li class="slide-group">
+                        <h1 class="slide-title">BEYOND AI, AX² ERA.</h1>
+                        <p class="slide-desc">
+                            단순한 기술적 지능을 넘어, 인간의 경험과 사유 체계를 디지털로 전이하는 대전환의 시대를 선언합니다.
+                            AX²는 생활과 업무 전반에 걸쳐 AI와 사람이 협업하는 새로운 공간이자 인간을 증강하는 최적의 환경을 구축합니다.
+                            이것은 도구의 사용을 넘어선 삶의 방식에 대한 혁신입니다.
+                        </p>
+                    </li>
+                    <li class="slide-group">
+                        <h1 class="slide-title">THE NEW AX OS.</h1>
+                        <p class="slide-desc">
+                            AX OS는 단일 솔루션이 아닌 다양한 도구와 방법론을 최적화하여 오케스트레이션하는 시스템의 총합을 의미합니다.
+                            LLM 기술에 의존하지 않고 인간과 AI 플랫폼을 아우르는 운영체제로서 AI 시대의 진정한 생존 도구가 될 것입니다.
+                        </p>
+                    </li>
+                    <li class="slide-group">
+                        <h1 class="slide-title">HUMAN AUGMENT.</h1>
+                        <p class="slide-desc">
+                            기술자연주의와 미시적 기술경영(Micro MOT)을 이론적 배경으로 하여, 인간의 생존을 위한 공기 같은 기술 생태계를 지향합니다.
+                            나를 보호하고, 발전시키며, 혁신시키는 나만의 플랫폼이자 친구로서의 AX²를 지금 경험하십시오.
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <div id="category-sections"></div>
+    </main>
+
+    <article id="detail-page">
+        <button class="back-btn" onclick="location.hash=''">← BACK TO ARCHIVE</button>
+        <div id="md-render-area" class="md-content"></div>
+    </article>
+
+    <footer>
+        <div class="footer-logo">PSSSLAB Inc.</div>
+        <div style="margin-bottom: 30px;">
+            <p style="color: #888; margin-bottom: 10px;">For inquiries regarding AX² Technology and Licenses:</p>
+            <a href="mailto:contact@pssslab.com?subject=[AX2 Inquiry]" class="footer-contact-link">contact@pssslab.com</a>
+        </div>
+        <div class="footer-info">
+            © 2026 PSSLAB Inc. ALL RIGHTS RESERVED. <br>
+            NO DATA STORED. NO COOKIES. NO TRACKING. JUST INTELLIGENCE.
+        </div>
+    </footer>
+</div>
+
+<script>
+    let globalProducts = [];
+
+    async function init() {
+        try {
+            const res = await fetch('./products.json');
+            if (!res.ok) throw new Error('JSON load failed');
+            globalProducts = await res.json();
+            
+            const container = document.getElementById('category-sections');
+            const categories = [...new Set(globalProducts.map(p => p.category))];
+
+            categories.forEach(cat => {
+                const section = document.createElement('div');
+                section.innerHTML = `<h2 class="section-title">${cat}</h2>`;
+                const grid = document.createElement('div');
+                grid.className = 'grid';
+                
+                globalProducts.filter(p => p.category === cat).forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.onclick = () => location.hash = p.id;
+                    card.innerHTML = `<h3>${p.title}</h3><p>${p.summary}</p>`;
+                    grid.appendChild(card);
+                });
+                section.appendChild(grid);
+                container.appendChild(section);
+            });
+            handleRoute();
+        } catch (e) {
+            console.error(e);
+            document.getElementById('category-sections').innerHTML = "<p>데이터를 불러오는 중 오류가 발생했습니다.</p>";
+        }
+    }
+
+    async function handleRoute() {
+        const hash = location.hash.replace('#', '');
+        const main = document.getElementById('main-page');
+        const detail = document.getElementById('detail-page');
+        const renderArea = document.getElementById('md-render-area');
+
+        if (hash) {
+            const product = globalProducts.find(p => p.id === hash);
+            if (product) {
+                main.classList.remove('active');
+                detail.classList.add('active');
+                renderArea.innerHTML = "<p style='color:var(--accent-color)'>ACCESSING DATA...</p>";
+                
+                try {
+                    const response = await fetch(`./contents/${product.file}`);
+                    if (!response.ok) throw new Error('MD file not found');
+                    const text = await response.text();
+                    renderArea.innerHTML = marked.parse(text);
+                } catch (e) {
+                    renderArea.innerHTML = `<h1>404 ERROR</h1><p>Resource not found: ${product.file}</p>`;
+                }
+                window.scrollTo(0,0);
+            }
+        } else {
+            detail.classList.remove('active');
+            main.classList.add('active');
+            window.scrollTo(0,0);
+        }
+    }
+
+    window.addEventListener('hashchange', handleRoute);
+    init();
+</script>
+</body>
+</html>

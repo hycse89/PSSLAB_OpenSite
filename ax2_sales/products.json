@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ax2-solution1",
+    "category": "Solution",
+    "title": "AX² System V2.0 Platform",
+    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "file": "ax2_os_v2.md"
+  },
+  {
+    "id": "ax2-solution2",
+    "category": "Solution",
+    "title": "AX² System V2.0 - Lake",
+    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "file": "ax2_os_v2.md"
+  },
+  {
+    "id": "ax2-solution3",
+    "category": "Solution",
+    "title": "AX² System V2.0 - Model",
+    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "file": "ax2_os_v2.md"
+  },  
+  {
+    "id": "ax2-solution4",
+    "category": "Solution",
+    "title": "AX² System V2.0 - Agent",
+    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "file": "ax2_os_v2.md"
+  },
+  {
+    "id": "ax2-solution5",
+    "category": "Solution",
+    "title": "AX² System V2.0 - System",
+    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "file": "ax2_os_v2.md"
+  },    
+  {
+    "id": "ax2-methodology1",
+    "category": "Methodology",
+    "title": "AX² 연구 방법론",
+    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "file": "micro_mot.md"
+  },
+  {
+    "id": "ax2-methodology2",
+    "category": "Methodology",
+    "title": "AX² 개발 방법론",
+    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "file": "micro_mot.md"
+  },
+  {
+    "id": "ax2-methodology3",
+    "category": "Methodology",
+    "title": "AX² 관리 방법론",
+    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "file": "micro_mot.md"
+  },
+  {
+    "id": "ax2-methodology4",
+    "category": "Methodology",
+    "title": "AX² 생성 방법론",
+    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "file": "micro_mot.md"
+  },
+  {
+    "id": "ax2-methodology5",
+    "category": "Methodology",
+    "title": "AX² 통사 방법론",
+    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "file": "micro_mot.md"
+  },
+  {
+    "id": "ax2-methodology6",
+    "category": "Methodology",
+    "title": "AX² 할용 방법론",
+    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "file": "micro_mot.md"
+  },  
+  {
+    "id": "ax2-paper1",
+    "category": "Paper",
+    "title": "기술자연주의 (Tech-Naturalism)",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-paper2",
+    "category": "Paper",
+    "title": "미시적 기술경영",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-paper3",
+    "category": "Paper",
+    "title": "논문1. To be defined",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-paper4",
+    "category": "Paper",
+    "title": "논문2. To be defined",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },  
+  {
+    "id": "ax2-paper5",
+    "category": "Paper",
+    "title": "논문3. To be defined",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },    
+  {
+    "id": "ax2-paper5",
+    "category": "Paper",
+    "title": "논문4. To be defined",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  }
+
+]
