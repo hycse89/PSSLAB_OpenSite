@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".gitignore",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1768129585913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1768129585913,
+            "name": "Commit-0",
+            "content": "backup\r\ntest_html\r\ntemp\r\nbackup"
+        }
+    ]
+}
