@@ -2,3 +2,5 @@ backup
 test_html
 temp
 backup/
+.history/
+.lh/
