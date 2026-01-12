@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>핵심 주제 인포그래픽</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .infographic-container {
+            width: 600px;
+            height: 600px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 텍스트 스타일 */
+        .core-text {
+            font-weight: bold;
+            font-size: 18px;
+            fill: #ffffff;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .label-text {
+            font-size: 14px;
+            font-weight: 600;
+            fill: #333;
+            text-anchor: middle;
+        }
+
+        /* 화살표 애니메이션 효과 */
+        .arrow-line {
+            transition: all 0.3s ease;
+        }
+        
+        .arrow-line:hover {
+            filter: brightness(1.2);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="infographic-container">
+    <svg viewBox="0 0 600 600" width="100%" height="100%">
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#4A90E2" />
+            </marker>
+        </defs>
+
+        <line x1="300" y1="240" x2="300" y2="100" stroke="#4A90E2" stroke-width="6" marker-end="url(#arrowhead)" class="arrow-line" />
+        <text x="300" y="80" class="label-text">전략적 확장</text>
+
+        <line x1="360" y1="300" x2="520" y2="300" stroke="#F5A623" stroke-width="12" marker-end="url(#arrowhead)" class="arrow-line" />
+        <text x="520" y="280" class="label-text">데이터 성장</text>
+
+        <line x1="300" y1="360" x2="300" y2="500" stroke="#7ED321" stroke-width="3" marker-end="url(#arrowhead)" class="arrow-line" />
+        <text x="300" y="530" class="label-text">운영 효율성</text>
+
+        <line x1="240" y1="300" x2="100" y2="300" stroke="#D0021B" stroke-width="8" marker-end="url(#arrowhead)" class="arrow-line" />
+        <text x="80" y="300" class="label-text">리스크 관리</text>
+
+        <circle cx="300" cy="300" r="60" fill="#2C3E50" filter="drop-shadow(0 4px 6px rgba(0,0,0,0.2))" />
+        <text x="300" y="300" class="core-text">AI 비즈니스</text>
+    </svg>
+</div>
+
+</body>
+</html>
