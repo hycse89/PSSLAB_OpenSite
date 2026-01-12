@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 4,
+            "activePatchIndex": 5,
             "patches": [
                 {
                     "date": 1768129204608,
@@ -24,6 +24,10 @@
                 {
                     "date": 1768129400514,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -103,9 +103,9 @@\n         }\r\n \r\n         /* 비중(Size) 클래스 */\r\n         .size-lg { grid-column: span 2; grid-row: span 1; font-weight: bold; font-size: 18px; } /* 큰 사각형 */\r\n-        .size-wide { grid-column: span 2; grid-row: span 1;} /* 가로로 긴 형태 */\r\n+        .size-wide { grid-column: span 2; grid-row: span 1 ;} /* 가로로 긴 형태 */\r\n         .size-tall { grid-row: span 2; }   /* 세로로 긴 형태 */\r\n \r\n         /* 색상 (기본 유지) */\r\n         .color-1 { background-color: #0F254B; }\r\n"
+                },
+                {
+                    "date": 1768133478631,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -217,10 +217,11 @@\n             <a href=\"http://localhost:8001/utils/markdown_viewer.html?file=/ax_research/doc/doc_ax_techno_naturalism_v5.md\" class=\"link-button color-3 h-1\">AX² Techno Naturalism [TBD]</a>\r\n             \r\n             <a href=\"http://localhost:8001/utils/markdown_viewer.html?file=/ax_research/doc/doc_ax_micro_mot_v2.md\" class=\"link-button color-3 h-1\">AX² Micro MOT [TBD]</a>\r\n \r\n-            \r\n+            <a href=\"https://hycse89.github.io/PSSLAB_OpenSite/ax2_research_lab/\" class=\"link-button color-1 h-2\">AX² Research Laboratory Site [Limited]</a>\r\n \r\n+\r\n             <a href=\"http://www.psslab.co.kr\" class=\"link-button color-3 w-3 h-1\">PSSLAB Digital Homepage [Open]</a>            \r\n         </div>\r\n     </main>\r\n \r\n"
                 }
             ],
             "date": 1768129204608,
