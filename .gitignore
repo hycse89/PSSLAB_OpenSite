@@ -4,3 +4,5 @@ temp
 backup/
 .history/
 .lh/
+.history
+.lh
