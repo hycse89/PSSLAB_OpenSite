@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSSLAB MultiVerse Campus</title>
+
+    <!-- Favicon 설정 -->
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">    
+    
+    <style>
+        /* 전체 페이지 스타일 */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* 이미지 스타일 */
+        .campus-map {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 링크 목록 스타일 */
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+
+        .link-button {
+            display: block;
+            padding: 12px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            width: 350px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 상단 타이틀 -->
+    <h1>PSSLAB MultiVerse Campus</h1>
+
+    <!-- 캠퍼스 지도 이미지 -->
+    <img src="campus.png" usemap="#campusmap" alt="Campus Map" class="campus-map" width=400, height=400>
+    
+    <!-- 이미지 맵 -->
+    <map name="campusmap">
+        <!-- PSSLAB Web Home Page -->
+        <area shape="rect" coords="100,100,200,200" href="http://www.psslab.co.kr" alt="Building 1" title="PSSLAB Web Home Page">
+        <!-- PSSLAB Digital Lab -->
+        <area shape="rect" coords="50,50,150,150" href="https://github.com/hycse89" alt="Building 2" title="PSSLAB Digital Laboratory">
+        <!-- PSSLAB Project Dashboard -->
+        <area shape="rect" coords="0,200,100,300" href="https://github.com/users/hycse89/projects/1" alt="Building 3" title="PSSLAB Project Dashboard">
+        <!--PSSLAB AX Vision to Strategy -->
+        <area shape="rect" coords="300,100,400,200" href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" alt="Building 4" title="PSSLAB AX Vision to Strategy">
+        <!--PSSLAB Digital MultiVerse Architectur -->
+        <area shape="rect" coords="100,300,200,400" href="https://hycse89.github.io/PSSLAB_OpenSite/ax_flow.html" alt="Building 4" title="PSSLAB Digital AX System">        
+    </map>
+
+    <!-- 하단 링크 목록 -->
+    <div class="link-container">
+        <a href="http://www.psslab.co.kr" class="link-button">PSSLAB Web Home Page</a>
+        <a href="https://github.com/hycse89" class="link-button">PSSLAB Digital Laboratory</a>
+        <a href="https://github.com/users/hycse89/projects/1" class="link-button">PSSLAB Project Dashboard</a>
+        <a href="http://localhost:8001/ax_flow.html" class="link-button">PSSLAB AX Vision to Strategy</a>
+        <a href="http://localhost:8001/dx_class.html" class="link-button">PSSLAB DX Class</a>       
+        <a href="http://localhost:8001/ax_nclc_ux.html" class="link-button">PSSLAB AX UX Workflow</a> 
+        <a href="http://localhost:5173" class="link-button">PSSLAB Digital AX System (To be opened)</a>
+    </div>
+
+</body>
+</html>

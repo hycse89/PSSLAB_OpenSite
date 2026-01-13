@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSSLAB MultiVerse Campus</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png">    
+    
+    <style>
+        /* General Page Styles */
+        body {
+            margin: 0;
+            background-color: #1a1a2e;;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        /* Fixed Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #1a1a2e;
+            color: #ffffff;            
+            z-index: 1000;
+            padding: 15px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #ffffff;
+            margin: 0;
+            text-align: center;
+        }
+
+        /* Main content container */
+        .main-content {
+            margin-top: 100px;
+            width: 100%;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            flex-grow: 1; /* Make main content grow to push footer down */
+        }
+
+        /* Image Slider Container */
+        .slider-container {
+            width: 100%;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-wrapper {
+            display: flex;
+            /* 이미지 너비 500px * 전체 이미지 개수 13개 */
+            width: calc(500px * 13); 
+            animation: scroll 60s linear infinite;
+        }
+
+        .slider-image {
+            width: 500px;
+            height: 280px; /* Set a fixed height for the container */
+            flex-shrink: 0;
+            box-sizing: border-box;
+            padding: 0 8px;
+        }
+        
+        .slider-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+        }
+        
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            /* --- CORRECTED VALUE --- */
+            /* 원본 이미지 11개의 너비만큼 이동 */
+            100% { transform: translateX(calc(-500px * 11)); } 
+        }
+        
+        .slider-container:hover .slider-wrapper {
+            animation-play-state: paused;
+        }
+
+        /* Link Grid Container */
+        .link-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            width: 100%;
+        }
+        
+        .link-column {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+        }
+
+        /* Link Button Base Style */
+        .link-button {
+            display: block;
+            padding: 12px 20px;
+            font-size: 16px;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: transform 0.2s, background-color 0.3s;
+            text-align: center;
+        }
+
+        .link-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Button Colors */
+        .color-1 { background-color: #0F254B; } .color-1:hover { background-color: #00b0e0; }
+        .color-2 { background-color: #800020; } .color-2:hover { background-color: #000000; }
+        .color-3 { background-color: #806a37; } .color-3:hover { background-color: #000000; }
+        .color-4 { background-color: #013c18; } .color-4:hover { background-color: #000000; }
+
+        /* Footer Styles */
+        footer {
+            width: 100%;
+            padding: 0;
+            text-align: center;
+            background-color: #1a1a2e;
+            color: #ffffff;
+            border-top: 1px solid #1a1a2e;
+            box-sizing: border-box;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 24px; }
+            .link-container { flex-direction: column; }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 { font-size: 20px; }
+            .main-content { margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>AX² MultiVerse - Research Portal</h1>
+    </header>
+
+    <main class="main-content">
+        <div class="slider-container">
+            <div class="slider-wrapper">
+                <div class="slider-image"><img src="./images/Image2.png" alt="Image 2"></div>                
+                <div class="slider-image"><img src="./images/Image21.png" alt="Image 21"></div>                
+                <div class="slider-image"><img src="./images/Image22.png" alt="Image 22"></div>
+                <div class="slider-image"><img src="./images/Image31.png" alt="Image 31"></div>                
+                <div class="slider-image"><img src="./images/Image32.png" alt="Image 31"></div>                  
+                <div class="slider-image"><img src="./images/Image11.png" alt="Image 11"></div>                
+                <div class="slider-image"><img src="./images/Image3.png" alt="Image 3"></div>
+                <div class="slider-image"><img src="./images/Image4.png" alt="Image 4"></div>
+                <div class="slider-image"><img src="./images/Image5.png" alt="Image 5"></div>
+                <div class="slider-image"><img src="./images/Image6.png" alt="Image 6"></div>
+                <div class="slider-image"><img src="./images/Image7.png" alt="Image 7"></div>
+                <div class="slider-image"><img src="./images/Image8.png" alt="Image 8"></div>
+                <div class="slider-image"><img src="./images/Image9.png" alt="Image 9"></div>
+                <div class="slider-image"><img src="./images/Image10.png" alt="Image 10"></div>
+                <div class="slider-image"><img src="./images/Image11.png" alt="Image 11"></div>
+                <div class="slider-image"><img src="./images/Image1.png" alt="Image 1"></div>  
+                <div class="slider-image"><img src="./images/Image2.png" alt="Image 2"></div>                                    
+            </div>
+        </div>
+
+        <div class="link-container">
+            <div class="link-column">
+                <a href="https://github.com/hycse89" class="link-button color-1">PSSLAB Research Laboratory Repository [Restricted]</a>
+                <a href="https://hycse89.github.io/PSSLAB_OpenSite/ax2_research_lab/" class="link-button color-1">AX² Research Laboratory Repository Site [Limited]</a>                
+                <a href="ax2_v1_20260101/index.html" class="link-button color-1">AX² System V2 Open Research Category 1 [Open]</a>
+                <a href="ax2_v2_20260101/index.html" class="link-button color-1">AX² System V2 Open Research Category 2 [Open]</a>                
+                <a href="ax2_v3_20260101/index.html" class="link-button color-1">AX² System V2 Open Research Category 3 [TBD]</a>                   
+                <a href="ax2_sales/index.html" class="link-button color-1">AX² System V2 Sales Site [TBD]</a>                   
+            </div>
+
+            <div class="link-column">
+                <a href="http://localhost:8008" class="link-button color-2">AX² System V2 [Restricted]</a>
+                <a href="http://localhost:8004" class="link-button color-2">AX² Lake System [Restricted]</a>            
+                <a href="http://localhost:8002" class="link-button color-2">AX² AI-Ware [Restricted]</a>
+                <a href="http://localhost:8003" class="link-button color-2">AX² Agent System [Restricted]</a>
+                <a href="http://localhost:8006" class="link-button color-2">AX² Strategic Change [Restricted]</a>            
+                <a href="http://localhost:8007" class="link-button color-2">AX² Team Workplace [Restricted]</a>
+                <a href="http://localhost:8005" class="link-button color-2">AX² Trust Server [Restricted]</a>                
+            </div>
+            
+            <div class="link-column">
+                <a href="http://www.psslab.co.kr" class="link-button color-3">PSSLAB Digital Site [Open]</a>                                
+                <a href="ax2_v1_concept/ax2_homepage.html" class="link-button color-3">Introduction to AX² System V1 Concept [Open]</a>                    
+                <a href="ax2_v1_concept/solution_book/index.html" class="link-button color-3">AX² System V1 Solution Book [Open]</a>
+                <a href="http://localhost:8001/ax_site/ax2_life_123/index.html" class="link-button color-3">AX² LIFE-123 [Open]</a>
+                <a href="http://localhost:8001/ax_site/ax2_coffee/index.html" class="link-button color-3">AX² COFFEE [Open]</a>
+                <a href="http://localhost:8001/ax_site/ax2_frieren/index.html" class="link-button color-3">AX² 프리렌의 마도서 [TEST]</a>
+                <a href="http://localhost:8001/utils/markdown_viewer.html?file=/ax_research/doc/doc_ax_techno_naturalism_v5.md" class="link-button color-3">AX² Techno Naturalism (기술자연주의) [TBD]</a>
+                <a href="http://localhost:8001/utils/markdown_viewer.html?file=/ax_research/doc/doc_ax_micro_mot_v2.md" class="link-button color-3">AX² Micro MOT (미시적 기술경영) [TBD]</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024-2026 PSSLAB. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
+
+
+
+
