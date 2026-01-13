@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AX² Project Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        
+        :root {
+            --bg-color: #05020a;
+            --text-color: #f0f0f0;
+            --primary-color: #c0b0ff; /* 연보라 */
+            --secondary-color: #00d1ff; /* 사이언 */
+            --dim-color: #888;
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Noto Sans KR', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section (메인) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        
+        .hero-logo {
+            font-family: var(--font-display);
+            font-size: 12vw;
+            font-weight: 900;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+            margin: 0;
+        }
+
+        .hero-tagline {
+            font-size: 2vw;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 10px;
+        }
+
+        /* Main Content Section */
+        .content-section {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+        }
+
+        .content-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 3vw;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .intro-text {
+            font-size: 1.5vw;
+            line-height: 1.8;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px auto;
+        }
+
+        /* Portal Grid */
+        .portal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .portal-card {
+            background: linear-gradient(145deg, #100a1f, #0a0215);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(192, 176, 255, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-number {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--dim-color);
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin: 0;
+        }
+
+        .card-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            min-height: 80px;
+            font-weight: 300;
+        }
+        
+        .card-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .card-link:hover {
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 0.9rem;
+            color: var(--dim-color);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-logo { font-size: 25vw; }
+            .hero-tagline { font-size: 4vw; letter-spacing: 1px; }
+            h2 { font-size: 7vw; }
+            .intro-text { font-size: 4vw; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <canvas id="particle-canvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-logo">AX² V2</h1>
+            <p class="hero-tagline">AX as key for AI</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section" id="introduction">
+            <h2>Welcome to the AX² System V2</h2>
+            <p class="intro-text">AX란  AI Experience (originated from UX) 또는 AI Transformation (originated from DX)의 약자입니다. 더불어 AX²는 두 가지 개념을 합쳐놓은 브랜드명입니다. </p>            
+        </section>
+
+        <section class="content-section" id="portal-section">
+            <h2>Explore the Infographics</h2>
+            <div class="portal-grid">
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">01</span><h3 class="card-title">AX² Direction</h3></div>
+                    <p class="card-description">AX2 System의 정의와 방향성을 설명합니다.</p>
+                    <a href="ax2_v2_typing_text1.html" class="card-link">View Infographic →</a>
+                </div>                
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">02</span><h3 class="card-title">AX² V2 Scope</h3></div>
+                    <p class="card-description">AX² System V2는 기술, 전략, 방법론, 문화 및 이론 등 다양한 관심분야를 다루고 있습니다.</p>
+                    <a href="ax2_v2_business_scope_v2.html" class="card-link">View Infographic →</a>
+                </div>
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">03</span><h3 class="card-title">AX² OS</h3></div>
+                    <p class="card-description">AX² System은 생체체계, 운영체제이자 공정체제로써의 종합적인 플랫폼을 지향합니다.</p>
+                    <a href="article2_web_infographic.html" class="card-link">View Infographic →</a>
+                </div>
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">04</span><h3 class="card-title">AX² AI-WARE</h3></div>
+                    <p class="card-description">복잡한 데이터를 명쾌한 통찰력으로. 전문가의 역량을 모두에게 제공하는 지능화된 도구를 만나보세요.</p>
+                    <a href="article4_web_infographic.html" class="card-link">View Infographic →</a>
+                </div>
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">05</span><h3 class="card-title">AI CANCER</h3></div>
+                    <p class="card-description">[충격] AI의 작은 불확실성이 어떻게 프로젝트 전체를 파괴하는 '암'이 되는지, 그 위험성을 진단합니다.</p>
+                    <a href="article5_web_infographic.html" class="card-link">View Infographic →</a>
+                </div>
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">06</span><h3 class="card-title">ZERO SOFTWARE</h3></div>
+                    <p class="card-description">코딩 없는 세상의 도래. 당신의 '말'이 '소프트웨어'가 되는 미래의 패러다임을 제시합니다.</p>
+                    <a href="article6_web_infographic.html" class="card-link">View Infographic →</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024-2026 AX² Project. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 배경 파티클 애니메이션
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray;
+
+        const particleCount = 100;
+        const primaryColor = 'rgba(192, 176, 255, 0.7)';
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x;
+                this.y = y;
+                this.directionX = directionX;
+                this.directionY = directionY;
+                this.size = size;
+                this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) {
+                    this.directionX = -this.directionX;
+                }
+                if (this.y > canvas.height || this.y < 0) {
+                    this.directionY = -this.directionY;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < particleCount; i++) {
+                let size = Math.random() * 2 + 1;
+                let x = Math.random() * (innerWidth - size * 2) + size;
+                let y = Math.random() * (innerHeight - size * 2) + size;
+                let directionX = (Math.random() - 0.5) * 0.2;
+                let directionY = (Math.random() - 0.5) * 0.2;
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, primaryColor));
+            }
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
+                                 ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = `rgba(192, 176, 255, ${opacityValue})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        window.addEventListener('resize', () => {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        init();
+        animate();
+
+        // 스크롤 시 섹션 나타나는 효과
+        const sections = document.querySelectorAll('.content-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+
+    </script>
+</body>
+</html>

@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AX² Project Portal</title>
+    <title>AX² Project Portal V2</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Noto+Sans+KR:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+KR:wght@300;400;700&display=swap');
         
         :root {
-            --bg-color: #05020a;
-            --text-color: #f0f0f0;
-            --primary-color: #c0b0ff; /* 연보라 */
-            --secondary-color: #00d1ff; /* 사이언 */
-            --dim-color: #888;
-            --font-display: 'Cinzel', serif;
+            /* V2 라이트 테마 변수 */
+            --bg-color: #f8f9fa; /* 밝은 배경 */
+            --container-bg: #ffffff;
+            --text-color: #212529; /* 짙은 텍스트 */
+            --primary-color: #5e35b1; /* 깊은 보라 */
+            --secondary-color: #007bff; /* 신뢰감 있는 블루 */
+            --dim-color: #6c757d;
+            --border-color: rgba(0, 0, 0, 0.08);
+            /* 2. 디스플레이용 폰트 변수 변경 */
+            --font-display: 'Montserrat', sans-serif;
             --font-body: 'Noto Sans KR', sans-serif;
         }
 
@@ -24,9 +28,10 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            word-break: keep-all;
         }
 
-        /* Hero Section (메인) */
+        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -35,6 +40,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            background: radial-gradient(circle at center, #ffffff 0%, #f0eff5 100%);
         }
         
         #particle-canvas {
@@ -44,39 +50,46 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            opacity: 0.6; /* 라이트 모드에 맞춰 투명도 조절 */
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             padding: 20px;
-            animation: fadeIn 2s ease-in-out;
+            animation: fadeIn 1.5s ease-out;
         }
         
+        /* 3. 로고 스타일 미세 조정 (현대적인 느낌을 위해 자간과 그림자 수정) */
         .hero-logo {
             font-family: var(--font-display);
-            font-size: 12vw;
+            font-size: 10vw;
             font-weight: 900;
             color: var(--primary-color);
-            text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+            /* 자간을 좁혀서 더 단단하고 현대적인 인상을 줌 */
+            letter-spacing: -5px; 
+            filter: drop-shadow(0 2px 10px rgba(94, 53, 177, 0.1));
             margin: 0;
+            text-transform: uppercase;
         }
 
         .hero-tagline {
-            font-size: 2vw;
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-size: 1.8vw;
+            font-weight: 400;
+            letter-spacing: 4px;
             margin-top: 10px;
+            color: var(--dim-color);
+            text-transform: uppercase;
         }
 
-        /* Main Content Section */
+        /* Content Section */
         .content-section {
-            padding: 100px 20px;
+            padding: 120px 20px;
             max-width: 1200px;
             margin: 0 auto;
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .content-section.visible {
@@ -85,104 +98,120 @@
         }
 
         h2 {
-            font-size: 3vw;
+            font-size: 2.8rem;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             font-weight: 700;
+            color: var(--primary-color);
         }
         
         .intro-text {
-            font-size: 1.5vw;
+            font-size: 1.3rem;
             line-height: 1.8;
             text-align: center;
-            max-width: 900px;
+            max-width: 850px;
             margin: 0 auto 80px auto;
+            color: #495057;
         }
 
         /* Portal Grid */
         .portal-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
+            gap: 40px;
         }
+/* Portal Card 디자인 강화 */
+.portal-card {
+    background: var(--container-bg);
+    /* 1. 테두리를 조금 더 명확하게 변경 */
+    border: 1px solid rgba(0, 0, 0, 0.05); 
+    border-radius: 24px;
+    padding: 45px 40px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    
+    /* 2. 다중 레이어 그림자로 깊이감(Depth) 부여 */
+    box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+        0 10px 20px -5px rgba(0, 0, 0, 0.08);
+    }
 
-        .portal-card {
-            background: linear-gradient(145deg, #100a1f, #0a0215);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+    /* 3. 상단에 브랜드 컬러 포인트 라인 추가 (박스 존재감 강화) */
+    .portal-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        opacity: 0.7;
+    }
 
-        .portal-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(192, 176, 255, 0.1);
-        }
+    /* 4. Hover 시 효과 강화: 위로 솟아오르는 느낌과 그림자 확장 */
+    .portal-card:hover {
+        transform: translateY(-15px);
+        border-color: var(--primary-color);
+        box-shadow: 
+            0 20px 40px -10px rgba(94, 53, 177, 0.15),
+            0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
+    /* 5. 내부 요소 간격 조정 */
+    .card-header {
+        border-bottom: 1px solid #edf2f7; /* 선 두께와 색상 최적화 */
+        padding-bottom: 25px;
+        margin-bottom: 30px;
+    }
 
-        .card-number {
-            font-family: var(--font-display);
-            font-size: 1.2rem;
-            color: var(--dim-color);
-        }
+    .card-title {
+        font-size: 1.7rem;
+        letter-spacing: -0.5px;
+        color: #1a202c; /* 조금 더 짙은 색으로 대비 향상 */
+    }
 
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin: 0;
-        }
+    .card-description {
+        font-size: 1.1rem;
+        color: #4a5568;
+        line-height: 1.8;
+    }
 
-        .card-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            min-height: 80px;
-            font-weight: 300;
-        }
-        
-        .card-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            border: 1px solid var(--secondary-color);
-            border-radius: 5px;
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 700;
-            transition: background-color 0.3s, color 0.3s;
-        }
+    /* 카드 내 링크 버튼도 박스에 맞춰 더 견고하게 변경 */
+    .card-link {
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        width: 100%; /* 버튼을 꽉 차게 만들어 박스 형태 강조 */
+        text-align: center;
+        box-sizing: border-box;
+    }
 
-        .card-link:hover {
-            background-color: var(--secondary-color);
-            color: var(--bg-color);
-        }
-        
+    .card-link:hover {
+        background-color: var(--secondary-color);
+        border-color: var(--secondary-color);
+        transform: scale(1.02);
+    }        
         footer {
             text-align: center;
-            padding: 40px 20px;
-            font-size: 0.9rem;
+            padding: 60px 20px;
+            font-size: 0.95rem;
             color: var(--dim-color);
+            border-top: 1px solid var(--border-color);
+            background: #fff;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
-            .hero-logo { font-size: 25vw; }
-            .hero-tagline { font-size: 4vw; letter-spacing: 1px; }
-            h2 { font-size: 7vw; }
-            .intro-text { font-size: 4vw; }
+            .hero-logo { font-size: 20vw; }
+            .hero-tagline { font-size: 4vw; }
+            h2 { font-size: 2rem; }
+            .intro-text { font-size: 1.1rem; }
         }
 
     </style>
@@ -193,68 +222,57 @@
         <canvas id="particle-canvas"></canvas>
         <div class="hero-content">
             <h1 class="hero-logo">AX² V2</h1>
-            <p class="hero-tagline">AX as key for AI</p>
+            <p class="hero-tagline">Evolution of AI Experience & Transformation</p>
         </div>
     </header>
 
     <main>
         <section class="content-section" id="introduction">
-            <h2>Welcome to the AX² System V2</h2>
-            <p class="intro-text">AX란  AI Experience (originated from UX) 또는 AI Transformation (originated from DX)의 약자입니다. 더불어 AX²는 두 가지 개념을 합쳐놓은 브랜드명입니다. </p>            
+            <h2>Welcome to AX² System V2</h2>
+            <p class="intro-text">
+                AX란  <strong>AI Experience</strong>(originated from UX) 또는 <strong>AI Transformation</strong>(originated from DX)의 약자입니다. 
+                더불어 AX²는 두 가지 개념을 합쳐놓은 일종의 브랜드명입니다.
+            </p>            
         </section>
 
         <section class="content-section" id="portal-section">
-            <h2>Explore the Infographics</h2>
+            <h2>Explore the V2 Framework</h2>
             <div class="portal-grid">
                 <div class="portal-card">
                     <div class="card-header"><span class="card-number">01</span><h3 class="card-title">AX² Direction</h3></div>
-                    <p class="card-description">AX2 System의 정의와 방향성을 설명합니다.</p>
-                    <a href="ax2_v2_typing_text1.html" class="card-link">View Infographic →</a>
+                    <p class="card-description">AX² System의 정의와 미래 방향성, 그리고 AI의 놀이터로서의 가치를 제시합니다.</p>
+                    <a href="#" class="card-link">View Details →</a>
                 </div>                
                 <div class="portal-card">
                     <div class="card-header"><span class="card-number">02</span><h3 class="card-title">AX² V2 Scope</h3></div>
-                    <p class="card-description">AX² System V2는 기술, 전략, 방법론, 문화 및 이론 등 다양한 관심분야를 다루고 있습니다.</p>
-                    <a href="ax2_v2_business_scope_v2.html" class="card-link">View Infographic →</a>
+                    <p class="card-description">기술과 전략을 넘어 문화와 이론까지 아우르는 포괄적인 AI 비즈니스 범위를 다룹니다.</p>
+                    <a href="#" class="card-link">Explore Scope →</a>
                 </div>
                 <div class="portal-card">
                     <div class="card-header"><span class="card-number">03</span><h3 class="card-title">AX² OS</h3></div>
-                    <p class="card-description">AX² System은 생체체계, 운영체제이자 공정체제로써의 종합적인 플랫폼을 지향합니다.</p>
-                    <a href="article2_web_infographic.html" class="card-link">View Infographic →</a>
-                </div>
-                <div class="portal-card">
-                    <div class="card-header"><span class="card-number">04</span><h3 class="card-title">AX² AI-WARE</h3></div>
-                    <p class="card-description">복잡한 데이터를 명쾌한 통찰력으로. 전문가의 역량을 모두에게 제공하는 지능화된 도구를 만나보세요.</p>
-                    <a href="article4_web_infographic.html" class="card-link">View Infographic →</a>
-                </div>
-                <div class="portal-card">
-                    <div class="card-header"><span class="card-number">05</span><h3 class="card-title">AI CANCER</h3></div>
-                    <p class="card-description">[충격] AI의 작은 불확실성이 어떻게 프로젝트 전체를 파괴하는 '암'이 되는지, 그 위험성을 진단합니다.</p>
-                    <a href="article5_web_infographic.html" class="card-link">View Infographic →</a>
-                </div>
-                <div class="portal-card">
-                    <div class="card-header"><span class="card-number">06</span><h3 class="card-title">ZERO SOFTWARE</h3></div>
-                    <p class="card-description">코딩 없는 세상의 도래. 당신의 '말'이 '소프트웨어'가 되는 미래의 패러다임을 제시합니다.</p>
-                    <a href="article6_web_infographic.html" class="card-link">View Infographic →</a>
+                    <p class="card-description">운영체제이자 공정체제로서의 AX² 플랫폼. 인간과 AI의 조화로운 워크플로우를 설계합니다.</p>
+                    <a href="#" class="card-link">System Architecture →</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024-2026 AX² Project. All rights reserved.</p>
+        <p>&copy; 2024-2026 AX² Project. Developed by AI Thought Partner. All rights reserved.</p>
     </footer>
 
     <script>
-        // 배경 파티클 애니메이션
+        // 배경 파티클 애니메이션 (라이트 모드 최적화)
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
         let particlesArray;
-
-        const particleCount = 100;
-        const primaryColor = 'rgba(192, 176, 255, 0.7)';
+        const particleCount = 80;
+        // 밝은 배경에 어울리는 부드러운 보라색/블루 계열 파티클
+        const particleColor = 'rgba(94, 53, 177, 0.15)'; 
+        const lineColor = 'rgba(94, 53, 177, 0.08)';
 
         class Particle {
             constructor(x, y, directionX, directionY, size, color) {
@@ -272,12 +290,8 @@
                 ctx.fill();
             }
             update() {
-                if (this.x > canvas.width || this.x < 0) {
-                    this.directionX = -this.directionX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.directionY = -this.directionY;
-                }
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
                 this.x += this.directionX;
                 this.y += this.directionY;
                 this.draw();
@@ -287,24 +301,22 @@
         function init() {
             particlesArray = [];
             for (let i = 0; i < particleCount; i++) {
-                let size = Math.random() * 2 + 1;
-                let x = Math.random() * (innerWidth - size * 2) + size;
-                let y = Math.random() * (innerHeight - size * 2) + size;
-                let directionX = (Math.random() - 0.5) * 0.2;
-                let directionY = (Math.random() - 0.5) * 0.2;
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, primaryColor));
+                let size = Math.random() * 3 + 1;
+                let x = Math.random() * innerWidth;
+                let y = Math.random() * innerHeight;
+                let directionX = (Math.random() - 0.5) * 0.4;
+                let directionY = (Math.random() - 0.5) * 0.4;
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, particleColor));
             }
         }
 
         function connect() {
-            let opacityValue = 1;
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
-                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) +
-                                 ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-                    if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-                        opacityValue = 1 - (distance / 20000);
-                        ctx.strokeStyle = `rgba(192, 176, 255, ${opacityValue})`;
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) ** 2) +
+                                 ((particlesArray[a].y - particlesArray[b].y) ** 2);
+                    if (distance < (canvas.width / 8) * (canvas.height / 8)) {
+                        ctx.strokeStyle = lineColor;
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -333,17 +345,13 @@
         init();
         animate();
 
-        // 스크롤 시 섹션 나타나는 효과
-        const sections = document.querySelectorAll('.content-section');
+        // 스크롤 감지 인터랙션
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+                if (entry.isIntersecting) entry.target.classList.add('visible');
             });
         }, { threshold: 0.1 });
-        sections.forEach(section => observer.observe(section));
-
+        document.querySelectorAll('.content-section').forEach(section => observer.observe(section));
     </script>
 </body>
 </html>
