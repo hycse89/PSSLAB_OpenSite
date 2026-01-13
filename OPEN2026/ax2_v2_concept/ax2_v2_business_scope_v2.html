@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커스텀 레이아웃 인포그래픽</title>
+    <style>
+        :root {
+            --bg-color: #f1f5f9;
+            --card-bg: #ffffff;
+            --primary-dark: #0f172a;
+            --accent-blue: #2563eb;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            background-color: var(--bg-color);
+            font-family: 'Pretendard', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.5rem; color: var(--primary-dark); margin: 0; font-weight: 800; }
+        
+        .infographic-container {
+            width: 100%;
+            max-width: 1100px;
+            background: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        /* 텍스트 링크 호버 효과 */
+        .clickable-label { cursor: pointer; transition: 0.2s; }
+        .clickable-label:hover .label-text { fill: var(--accent-blue); font-weight: bold; }
+
+        .core-circle { fill: var(--primary-dark); }
+        .core-text { 
+            fill: #ffffff; 
+            font-size: 20px; 
+            font-weight: 700; 
+            text-anchor: middle; 
+            dominant-baseline: middle; 
+            pointer-events: none; /* 클릭 방해 금지 */
+        }
+        
+        .data-line { stroke-linecap: round; pointer-events: none; }
+        .label-text { font-size: 15px; fill: #334155; transition: fill 0.2s; }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>2026 AX2 Project V2 Progress Infographic</h1>
+    </header>
+
+    <main class="infographic-container">
+        <svg id="chart" viewBox="0 0 1000 600" width="100%" height="100%">
+            <g id="drawing-layer"></g>
+        </svg>
+    </main>
+
+<script>
+    // ----------------------------------------------------------------
+    // 1. 데이터 및 위치 설정 영역
+    // ----------------------------------------------------------------
+    const config = {
+        coreTitle: "AX² SYSTEM", // 중앙 원 텍스트
+        
+        // [중앙 텍스트 좌표 미세 조절]
+        // 0은 정중앙입니다. 양수는 오른쪽/아래, 음수는 왼쪽/위로 이동합니다.
+        coreXOffset: 0,  
+        coreYOffset: 2, 
+ 
+        items: [
+            { title: "AX OS", color: "#3b82f6", length: 250, thickness: 20, url: "https://example.com/ai" },
+                { title: "Tool&Technique", color: "#3b82f6", length: 230, thickness: 5, url: "https://example.com/ai" },
+                { title: "AX LAKE", color: "#3b82f6", length: 180, thickness: 5, url: "https://example.com/ai" },
+                { title: "AX MODEL", color: "#3b82f6", length: 100, thickness: 5, url: "https://example.com/ai" },
+                { title: "AX AGENT", color: "#3b82f6", length: 120, thickness: 5, url: "https://example.com/ai" },
+                { title: "AX AI-WARE", color: "#3b82f6", length: 150, thickness: 5, url: "https://example.com/ai" },
+            { title: "AX 전략&철학", color: "#ef4444", length: 250, thickness: 20, url: "https://example.com/ai" }, 
+                { title: "AX2 SYSTEM", color: "#ef4444", length: 200, thickness: 5, url: "https://example.com/ai" }, 
+                { title: "기술자연주의", color: "#ef4444", length: 250, thickness: 5, url: "https://example.com/ai" },
+                { title: "미시적 기술경영", color: "#ef4444", length: 200, thickness: 5, url: "https://example.com/ai" }, 
+            { title: "AX 방법론", color: "#10b981", length: 250, thickness: 20, url: "https://example.com/ai" }, 
+                { title: "생성방법론", color: "#10b981", length: 150, thickness: 5, url: "https://example.com/ai" },
+                { title: "관리방법론", color: "#10b981", length: 150, thickness: 5, url: "https://example.com/ai" },
+                { title: "개발방법론", color: "#10b981", length: 150, thickness: 5, url: "https://example.com/ai" },
+                { title: "활용방법론", color: "#10b981", length: 150, thickness: 5, url: "https://example.com/ai" },
+                { title: "통섭방법론", color: "#10b981", length: 150, thickness: 5, url: "https://example.com/ai" },                
+            { title: "AX 문화", color: "#f59e0b", length: 250, thickness: 20, url: "https://example.com/ai" }, 
+                { title: "LIFE-123", color: "#f59e0b", length: 220, thickness: 5, url: "https://example.com/ai" }, 
+                { title: "COFFEE", color: "#f59e0b", length: 150, thickness: 5, url: "https://example.com/ai" }, 
+                { title: "프리렌의 마도서", color: "#f59e0b", length: 100, thickness: 5, url: "https://example.com/ai" },                 
+            { title: "AX 논문&이론", color: "#8b5cf6", length: 250, thickness: 20, url: "https://example.com/ai" },
+                { title: "Intelligent Keyword", color: "#8b5cf6", length: 120, thickness: 5, url: "https://example.com/ai" },
+                { title: "Literature Review", color: "#8b5cf6", length: 170, thickness: 5, url: "https://example.com/ai" },
+                { title: "Anti-attention", color: "#8b5cf6", length: 220, thickness: 5, url: "https://example.com/ai" }
+        ]
+    };
+
+    const layer = document.getElementById('drawing-layer');
+    const cx = 500; // 중심 X
+    const cy = 300; // 중심 Y
+    const coreRadius = 75;
+
+    function render() {
+        const total = config.items.length;
+        
+        config.items.forEach((item, i) => {
+            const angle = (i * (360 / total) - 90) * (Math.PI / 180);
+            const x1 = cx + coreRadius * Math.cos(angle);
+            const y1 = cy + coreRadius * Math.sin(angle);
+            const x2 = cx + item.length * Math.cos(angle);
+            const y2 = cy + item.length * Math.sin(angle);
+            const tx = cx + (item.length + 35) * Math.cos(angle);
+            const ty = cy + (item.length + 35) * Math.sin(angle);
+
+            // 선(막대) 그리기
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1); line.setAttribute("y1", y1);
+            line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+            line.setAttribute("stroke", item.color);
+            line.setAttribute("stroke-width", item.thickness);
+            line.setAttribute("class", "data-line");
+            layer.appendChild(line);
+
+            // 링크 텍스트 추가
+            const anchor = document.createElementNS("http://www.w3.org/2000/svg", "a");
+            anchor.setAttribute("href", item.url);
+            anchor.setAttribute("target", "_blank");
+            anchor.setAttribute("class", "clickable-label");
+
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", tx);
+            text.setAttribute("y", ty);
+            text.setAttribute("class", "label-text");
+            text.setAttribute("dominant-baseline", "middle");
+            
+            if (tx > cx + 10) text.setAttribute("text-anchor", "start");
+            else if (tx < cx - 10) text.setAttribute("text-anchor", "end");
+            else text.setAttribute("text-anchor", "middle");
+
+            text.textContent = item.title;
+            anchor.appendChild(text);
+            layer.appendChild(anchor);
+        });
+
+        // 중앙 원
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", cx); circle.setAttribute("cy", cy);
+        circle.setAttribute("r", coreRadius);
+        circle.setAttribute("class", "core-circle");
+        layer.appendChild(circle);
+
+        // [핵심] 중앙 텍스트 배치 (Offset 값 반영)
+        const coreText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        coreText.setAttribute("x", cx + config.coreXOffset);
+        coreText.setAttribute("y", cy + config.coreYOffset);
+        coreText.setAttribute("class", "core-text");
+        coreText.textContent = config.coreTitle;
+        layer.appendChild(coreText);
+    }
+
+    render();
+</script>
+
+</body>
+</html>
