@@ -81,7 +81,7 @@
     "category": "Methodology",
     "title": "AX² FineDev 방법론",
     "summary": "저용량 SLM 기반 소프트웨어 개발 방법론",
-    "file": "ax_finedev_v1.md"
+    "file": "ax2-methodology7.md"
   },    
   {
     "id": "ax2-paper1",
@@ -100,21 +100,21 @@
   {
     "id": "ax2-paper3",
     "category": "Paper",
-    "title": "논문1. A Study on the Literature Review of AX",
-    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "title": "논문1. AX 문헌 연구",
+    "summary": "A Study on the Literature Review of AX",
     "file": "tech_naturalism.md"
   },
   {
     "id": "ax2-paper4",
     "category": "Paper",
-    "title": "논문2. To be defined",
-    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "title": "논문2. 역설 어텐션",
+    "summary": "매개적 역설 어텐션을 이용한 지능의 시공간 도약 모델 연구",
     "file": "tech_naturalism.md"
   },  
   {
     "id": "ax2-paper5",
     "category": "Paper",
-    "title": "논문3. To be defined",
+    "title": "논문3. 자가 학습형 키워드 검색",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "tech_naturalism.md"
   },    
@@ -122,7 +122,7 @@
     "id": "ax2-paper5",
     "category": "Paper",
     "title": "논문4. To be defined",
-    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "summary": "To be defined",
     "file": "tech_naturalism.md"
   },
   {
