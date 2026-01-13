@@ -93,14 +93,14 @@
   {
     "id": "ax2-paper2",
     "category": "Paper",
-    "title": "미시적 기술경영",
+    "title": "미시적 기술경영 (Micro MOT)",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "tech_naturalism.md"
   },
   {
     "id": "ax2-paper3",
     "category": "Paper",
-    "title": "논문1. To be defined",
+    "title": "논문1. A Study on the Literature Review of AX",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "tech_naturalism.md"
   },
@@ -124,6 +124,20 @@
     "title": "논문4. To be defined",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "tech_naturalism.md"
-  }
+  },
+  {
+    "id": "ax2-article1",
+    "category": "Article",
+    "title": "프리렌의 마도서",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-article2",
+    "category": "Article",
+    "title": "제4의 대학(학위), 통사",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
 
 ]
