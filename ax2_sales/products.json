@@ -81,7 +81,7 @@
     "category": "Methodology",
     "title": "AX² FineDev 방법론",
     "summary": "저용량 SLM 기반 소프트웨어 개발 방법론",
-    "file": "finedev.md"
+    "file": "ax_finedev_v1.md"
   },    
   {
     "id": "ax2-paper1",
