@@ -2,50 +2,59 @@
   {
     "id": "ax2-solution1",
     "category": "Solution",
-    "title": "AX² System V2.0 Platform",
-    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "title": "AX² System V2.0 OS/Platform",
+    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 동작체제/운영체제/공정체제 엔진",
     "file": "ax2_os_v2.md"
   },
   {
     "id": "ax2-solution2",
     "category": "Solution",
     "title": "AX² System V2.0 - Lake",
-    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "summary": "AI가 동작하게 하는 연로서의 Data, 즉 AI-Ready Data 구축 방법을 제시함",
     "file": "ax2_os_v2.md"
   },
   {
     "id": "ax2-solution3",
     "category": "Solution",
     "title": "AX² System V2.0 - Model",
-    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "summary": "다양한 형태의 AI 모델을 제시하고 특히 Hybrid 및 Deterministic한 모델에 Insight를 제공함",
     "file": "ax2_os_v2.md"
   },  
   {
     "id": "ax2-solution4",
     "category": "Solution",
     "title": "AX² System V2.0 - Agent",
-    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "summary": "문제해결의 기준으로서의 Agent의 역할, 구조를 제시함",
     "file": "ax2_os_v2.md"
   },
   {
     "id": "ax2-solution5",
     "category": "Solution",
-    "title": "AX² System V2.0 - System",
-    "summary": "AI 도구와 방법론을 최적화하여 조율하는 차세대 운영체제 엔진",
+    "title": "AX² System V2.0 - AI-Ware",
+    "summary": "인간과 AI가 같이 사용하는 도구, 인간을 AI Augmentation하는 도구",
     "file": "ax2_os_v2.md"
   },    
+  {
+    "id": "ax2-solution6",
+    "category": "Solution",
+    "title": "다양한 AX 솔루션 모음",
+    "summary": "다양한 이슈와 문제를 해결하는 AX² 솔루션 모음",
+    "file": "ax2_os_v2.md"
+  },   
+
+  
   {
     "id": "ax2-methodology1",
     "category": "Methodology",
     "title": "AX² 연구 방법론",
-    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "summary": "연구가로써의 개인이 연구에 AI를 활용하는 방법론 ",
     "file": "micro_mot.md"
   },
   {
     "id": "ax2-methodology2",
     "category": "Methodology",
     "title": "AX² 개발 방법론",
-    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "summary": "AI를 이용한 개발 방법론 [소형, 중형, 대형]",
     "file": "micro_mot.md"
   },
   {
@@ -59,30 +68,25 @@
     "id": "ax2-methodology4",
     "category": "Methodology",
     "title": "AX² 생성 방법론",
-    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "summary": "다양한 콘텐츠를 생성하는 새로운 결정론적 방법론",
     "file": "micro_mot.md"
   },
   {
     "id": "ax2-methodology5",
     "category": "Methodology",
-    "title": "AX² 통사 방법론",
-    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
-    "file": "micro_mot.md"
-  },
-  {
-    "id": "ax2-methodology6",
-    "category": "Methodology",
     "title": "AX² 할용 방법론",
-    "summary": "개인의 생존 스킬로서 기술을 관리하는 미시적 기술경영 전략",
+    "summary": "삶과 문화에 AI 기술과 솔루션을 적용하는 방법론",
     "file": "micro_mot.md"
   },  
   {
-    "id": "ax2-methodology7",
+    "id": "ax2-methodology6",
     "category": "Methodology",
-    "title": "AX² FineDev 방법론",
-    "summary": "저용량 SLM 기반 소프트웨어 개발 방법론",
+    "title": "다양한 미시 방법론 모음",
+    "summary": "다야한 미시적 주제를 대상으로 하는 방법론 모음",
     "file": "ax2-methodology7.md"
-  },    
+  },     
+
+
   {
     "id": "ax2-paper1",
     "category": "Paper",
@@ -119,12 +123,14 @@
     "file": "tech_naturalism.md"
   },    
   {
-    "id": "ax2-paper5",
+    "id": "ax2-paper6",
     "category": "Paper",
-    "title": "논문4. To be defined",
-    "summary": "To be defined",
+    "title": "다양한 보고서 및 논문",
+    "summary": "다양한 AX 보고서 및 논문 목록" ,
     "file": "tech_naturalism.md"
   },
+
+
   {
     "id": "ax2-article1",
     "category": "Article",
@@ -138,6 +144,34 @@
     "title": "제4의 대학(학위), 통사",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "tech_naturalism.md"
-  }
+  },
+  {
+    "id": "ax2-article3",
+    "category": "Article",
+    "title": "프리렌의 마도서",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-article4",
+    "category": "Article",
+    "title": "제4의 대학(학위), 통사",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-article5",
+    "category": "Article",
+    "title": "프리렌의 마도서",
+    "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
+    "file": "tech_naturalism.md"
+  },
+  {
+    "id": "ax2-article6",
+    "category": "Article",
+    "title": "다양한 기사/게시글 모음",
+    "summary": "다양한 AX관련 기사/게시글 모음",
+    "file": "tech_naturalism.md"
+  }    
 
 ]
