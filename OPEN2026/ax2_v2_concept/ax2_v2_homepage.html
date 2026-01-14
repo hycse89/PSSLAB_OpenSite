@@ -120,79 +120,81 @@
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 40px;
         }
-/* Portal Card 디자인 강화 */
-.portal-card {
-    background: var(--container-bg);
-    /* 1. 테두리를 조금 더 명확하게 변경 */
-    border: 1px solid rgba(0, 0, 0, 0.05); 
-    border-radius: 24px;
-    padding: 45px 40px;
-    text-align: left;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    
-    /* 2. 다중 레이어 그림자로 깊이감(Depth) 부여 */
-    box-shadow: 
-        0 4px 6px -1px rgba(0, 0, 0, 0.05), 
-        0 10px 20px -5px rgba(0, 0, 0, 0.08);
-    }
 
-    /* 3. 상단에 브랜드 컬러 포인트 라인 추가 (박스 존재감 강화) */
-    .portal-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        opacity: 0.7;
-    }
+        /* Portal Card 디자인 강화 */
+        .portal-card {
+            background: var(--container-bg);
+            /* 1. 테두리를 조금 더 명확하게 변경 */
+            border: 1px solid rgba(0, 0, 0, 0.05); 
+            border-radius: 24px;
+            padding: 45px 40px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            
+            /* 2. 다중 레이어 그림자로 깊이감(Depth) 부여 */
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.05), 
+                0 10px 20px -5px rgba(0, 0, 0, 0.08);
+        }
 
-    /* 4. Hover 시 효과 강화: 위로 솟아오르는 느낌과 그림자 확장 */
-    .portal-card:hover {
-        transform: translateY(-15px);
-        border-color: var(--primary-color);
-        box-shadow: 
-            0 20px 40px -10px rgba(94, 53, 177, 0.15),
-            0 10px 15px -3px rgba(0, 0, 0, 0.05);
-    }
+        /* 3. 상단에 브랜드 컬러 포인트 라인 추가 (박스 존재감 강화) */
+        .portal-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            opacity: 0.7;
+        }
 
-    /* 5. 내부 요소 간격 조정 */
-    .card-header {
-        border-bottom: 1px solid #edf2f7; /* 선 두께와 색상 최적화 */
-        padding-bottom: 25px;
-        margin-bottom: 30px;
-    }
+        /* 4. Hover 시 효과 강화: 위로 솟아오르는 느낌과 그림자 확장 */
+        .portal-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--primary-color);
+            box-shadow: 
+                0 20px 40px -10px rgba(94, 53, 177, 0.15),
+                0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
 
-    .card-title {
-        font-size: 1.7rem;
-        letter-spacing: -0.5px;
-        color: #1a202c; /* 조금 더 짙은 색으로 대비 향상 */
-    }
+        /* 5. 내부 요소 간격 조정 */
+        .card-header {
+            border-bottom: 1px solid #edf2f7; /* 선 두께와 색상 최적화 */
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
 
-    .card-description {
-        font-size: 1.1rem;
-        color: #4a5568;
-        line-height: 1.8;
-    }
+        .card-title {
+            font-size: 1.7rem;
+            letter-spacing: -0.5px;
+            color: #1a202c; /* 조금 더 짙은 색으로 대비 향상 */
+        }
 
-    /* 카드 내 링크 버튼도 박스에 맞춰 더 견고하게 변경 */
-    .card-link {
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        width: 100%; /* 버튼을 꽉 차게 만들어 박스 형태 강조 */
-        text-align: center;
-        box-sizing: border-box;
-    }
+        .card-description {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
 
-    .card-link:hover {
-        background-color: var(--secondary-color);
-        border-color: var(--secondary-color);
-        transform: scale(1.02);
-    }        
+        /* 카드 내 링크 버튼도 박스에 맞춰 더 견고하게 변경 */
+        .card-link {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            width: 100%; /* 버튼을 꽉 차게 만들어 박스 형태 강조 */
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        .card-link:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            transform: scale(1.02);
+        }       
+
         footer {
             text-align: center;
             padding: 60px 20px;
@@ -234,7 +236,7 @@
                 더불어 AX²는 두 가지 개념을 합쳐놓은 일종의 브랜드명입니다.
             </p>            
             <p class="intro-text">
-                AI시대는 LLM AI가 만들고 열었지만, 그 공간을 채우는 것은 AX가 하게될 것입니다. AX는 AI시대의 실질적인 열쇠가 될 것입니다.
+                AI시대는 LLM AI가 만들고 열었지만, 그 공간을 채우는 것은 AX가 하게될 것입니다. AX는 <strong>AI시대의 실질적인 열쇠</strong>가 될 것입니다.
             </p>            
         </section>
 
@@ -249,28 +251,53 @@
                 <div class="portal-card">
                     <div class="card-header"><span class="card-number">02</span><h3 class="card-title">AX² V2 Scope</h3></div>
                     <p class="card-description">AX² System이 관심을 갖고 연구, 구현하는 영역을 설명합니다.</p>
-                    <a href="ax2_v2_business_scope.html" class="card-link">Explore Scope →</a>
+                    <a href="ax2_v2_business_scope.html" class="card-link">View Details →</a>
                 </div>
                 <div class="portal-card">
                     <div class="card-header"><span class="card-number">03</span><h3 class="card-title">AX² OS</h3></div>
-                    <p class="card-description">운영체제이자 공정체제로서의 AX² 플랫폼을 설명합니다.</p>
-                    <a href="#" class="card-link">System Architecture →</a>
+                    <p class="card-description">AI와 인간의 하모니를 위한 운영체제이자 공정체제로서의 AX² OS, 플랫폼을 설명합니다.</p>
+                    <a href="ax2_v2_os.html" class="card-link">View Details →</a>
                 </div>
                 <div class="portal-card">
-                    <div class="card-header"><span class="card-number">04</span><h3 class="card-title">AX² Direction</h3></div>
-                    <p class="card-description">AX² System의 정의와 미래 방향성, 그리고 AI의 놀이터로서의 가치를 제시합니다.</p>
-                    <a href="#" class="card-link">View Details →</a>
+                    <div class="card-header"><span class="card-number">04</span><h3 class="card-title">AX² System - Lake</h3></div>
+                    <p class="card-description">AX² System이 동작할 수 있도록 Data 연료를 제공합니다. 그리고 Data가 AI-Ready되도록 합니다.</p>
+                    <a href="ax2_v2_lake.html" class="card-link">View Details →</a>
                 </div>                
                 <div class="portal-card">
-                    <div class="card-header"><span class="card-number">05</span><h3 class="card-title">AX² V2 Scope</h3></div>
-                    <p class="card-description">기술과 전략을 넘어 문화와 이론까지 아우르는 포괄적인 AI 비즈니스 범위를 다룹니다.</p>
-                    <a href="#" class="card-link">Explore Scope →</a>
+                    <div class="card-header"><span class="card-number">05</span><h3 class="card-title">AX² System - Model</h3></div>
+                    <p class="card-description">1000b, 2000b 모델이 전부인가? 돈을 벌고 싶다면 Deterministic Model과 4b 모델에 집중하라!</p>
+                    <a href="ax2_v2_model.html" class="card-link">View Details →</a>
+                </div>                              
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">06</span><h3 class="card-title">AX² System - Agent</h3></div>
+                    <p class="card-description">AI시대 AI로 풀어야할 문제의 정의 및 해결의 공간입니다. 실질적인 AX이자 역량의 공간입니다.</p>
+                    <a href="ax2_v2_agent.html" class="card-link">View Details →</a>
                 </div>
                 <div class="portal-card">
-                    <div class="card-header"><span class="card-number">06</span><h3 class="card-title">AX² OS</h3></div>
-                    <p class="card-description">운영체제이자 공정체제로서의 AX² 플랫폼. 인간과 AI의 조화로운 워크플로우를 설계합니다.</p>
-                    <a href="#" class="card-link">System Architecture →</a>
-                </div>                
+                    <div class="card-header"><span class="card-number">07</span><h3 class="card-title">AX² System - AI-Ware</h3></div>
+                    <p class="card-description">AI와 인간이 같이 쓰는 도구로 인간을 아이언맨으로 만들고, AI를 로봇으로 만들어라.</p>
+                    <a href="ax2_v2_aiware.html" class="card-link">View Details →</a>
+                </div>                                 
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">08</span><h3 class="card-title">AX² System Methodology</h3></div>
+                    <p class="card-description">AI는 전자동 커피 머신이라기 보다는 반자동 커피메이커입니다. HITL, AITL에 주목하세요.</p>
+                    <a href="/ax2_sales/" class="card-link">View Details →</a>
+                </div> 
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">09</span><h3 class="card-title">AX² System Research</h3></div>
+                    <p class="card-description">AI시대 세상을 다르게 보는 혁신적인 연구를 하고자 합니다.</p>
+                    <a href="/ax2_sales/" class="card-link">View Details →</a>
+                </div>                                   
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">10</span><h3 class="card-title">AX² Culture</h3></div>
+                    <p class="card-description">AI와 AX를 이용한 삶과 문화에는 어떤 것이 있을까요?</p>
+                    <a href="ax2_v2_culture.html" class="card-link">View Details →</a>
+                </div>
+                <div class="portal-card">
+                    <div class="card-header"><span class="card-number">11</span><h3 class="card-title">AX² Article</h3></div>
+                    <p class="card-description">이런 저런 AX 사는 이야기입니다. 영감을 얻고 싶다면 이 이야기를 읽어보세요.</p>
+                    <a href="/ax2_sales/" class="card-link">View Details →</a>
+                </div>                  
             </div>
         </section>
     </main>
