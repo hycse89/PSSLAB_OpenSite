@@ -42,7 +42,7 @@
     "file": "ax2_os_v2.md"
   },   
 
-  
+
   {
     "id": "ax2-methodology1",
     "category": "Methodology",
@@ -148,7 +148,7 @@
   {
     "id": "ax2-article3",
     "category": "Article",
-    "title": "프리렌의 마도서",
+    "title": "LIFE-123",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "tech_naturalism.md"
   },
@@ -169,7 +169,7 @@
   {
     "id": "ax2-article6",
     "category": "Article",
-    "title": "다양한 기사/게시글 모음",
+    "title": "다양한 책/기사/게시글 모음",
     "summary": "다양한 AX관련 기사/게시글 모음",
     "file": "tech_naturalism.md"
   }    
