@@ -1,26 +1,12 @@
 # AX² System Article List
 
-## Major Solution
-- AX² System AX OS
-```text
+## Released Article
+- AX² System AX OS (http://www.google.com)
+- AX² System Lake (http://www.google.com)
+- AX² System AX OS (http://localhost:8001/)
+- AX² System Lake (http://localhost:8001/)
 
-This is a sample sentence.
-
-```
-
-- AX² System Lake
-```text
-
-This is a sample sentence.
-
-```
-
-- AX² System Model
-```text
-
-This is a sample sentence.
-
-```
+## COming Soon Article
 
 - AX² System Agent
 ```text
@@ -36,7 +22,7 @@ This is a sample sentence.
 
 ```
 
-## Theme Solution
+
 
 
 
