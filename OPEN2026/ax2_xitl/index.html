@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xITL | Overview</title>
+  <style>
+    :root{
+      --bg0:#070A12; --bg1:#0B1020; --card:#0E1733;
+      --txt:#EAF0FF; --muted:#AAB6D6;
+      --line:rgba(255,255,255,.12);
+      --a:#6EE7F5; --b:#A78BFA; --c:#34D399; --d:#FBBF24;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --r:18px;
+      --max:1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, Helvetica, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:var(--sans); color:var(--txt);
+      background:
+        radial-gradient(900px 500px at 20% -10%, rgba(167,139,250,.35), transparent 55%),
+        radial-gradient(900px 500px at 80% 0%, rgba(110,231,245,.25), transparent 55%),
+        radial-gradient(700px 700px at 70% 120%, rgba(52,211,153,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 96px 20px 56px;}
+    .nav{
+      position:fixed; top:12px; left:12px; right:12px; z-index:50;
+      max-width:calc(var(--max) + 24px); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 12px; border:1px solid var(--line); border-radius:16px;
+      background: rgba(7,10,18,.55); backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand{display:flex; align-items:center; gap:10px}
+    .dot{width:10px; height:10px; border-radius:50%;
+      background: conic-gradient(from 180deg, var(--a), var(--b), var(--c), var(--a));
+      box-shadow: 0 0 18px rgba(110,231,245,.25);
+    }
+    .brand b{letter-spacing:.2px}
+    .tabs{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .tab{
+      font-size:13px; padding:8px 10px; border-radius:12px;
+      border:1px solid var(--line);
+      color:var(--muted); background: rgba(255,255,255,.03);
+    }
+    .tab.active{color:var(--txt); border-color: rgba(110,231,245,.45); background: rgba(110,231,245,.08)}
+    .hero{
+      display:grid; grid-template-columns: 1.35fr .65fr; gap:18px; align-items:stretch;
+      margin-bottom:18px;
+    }
+    @media (max-width: 940px){ .hero{grid-template-columns: 1fr} }
+    .card{
+      background: rgba(14,23,51,.72);
+      border:1px solid var(--line);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+    }
+    .hero .left{padding:26px 22px}
+    .hero .right{padding:18px}
+    h1{margin:0 0 8px; font-size:40px; letter-spacing:-.6px}
+    .sub{color:var(--muted); line-height:1.45; font-size:15px; margin:0}
+    .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+    .chip{
+      font-size:12px; padding:7px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+    }
+    .chip b{color:var(--txt)}
+    .toc{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .toc a{
+      padding:10px 12px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--muted);
+      display:flex; justify-content:space-between; gap:8px;
+    }
+    .toc a:hover{border-color: rgba(167,139,250,.45)}
+    .toc span{color:var(--txt)}
+    section{margin-top:16px}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
+    @media (max-width: 940px){ .grid2,.grid3{grid-template-columns:1fr} }
+    .block{padding:18px 18px 16px}
+    .kicker{
+      display:flex; align-items:center; gap:10px; margin-bottom:12px
+    }
+    .kicker .tag{
+      font-family:var(--mono); font-size:12px; letter-spacing:.3px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(110,231,245,.35);
+      background: rgba(110,231,245,.08);
+      color: var(--txt);
+    }
+    .kicker .title{font-weight:700}
+    .kicker .hint{color:var(--muted); font-size:13px}
+    ul{margin:10px 0 0 18px; color:var(--muted); line-height:1.5}
+    li{margin:6px 0}
+    .callout{
+      border-radius: 16px; border:1px solid rgba(110,231,245,.25);
+      background: linear-gradient(180deg, rgba(110,231,245,.10), rgba(167,139,250,.06));
+      padding:14px 14px;
+      color: var(--txt);
+    }
+    .callout p{margin:0; color:var(--muted); line-height:1.5}
+    .callout b{color:var(--txt)}
+    .mini{
+      font-size:12px; color:var(--muted); line-height:1.45
+    }
+    .divider{height:1px; background: var(--line); margin:12px 0}
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px}
+    .pill{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px; border-radius:14px; min-width: 220px; flex:1;
+    }
+    .pill h3{margin:0 0 6px; font-size:14px}
+    .pill p{margin:0; color:var(--muted); font-size:13px; line-height:1.45}
+    .svgbox{padding:14px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.02)}
+    .foot{
+      margin-top:22px; padding:14px 16px; border:1px solid var(--line);
+      border-radius:16px; background: rgba(255,255,255,.03); color:var(--muted);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    }
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(110,231,245,.35);
+      background: rgba(110,231,245,.08);
+      color:var(--txt);
+    }
+    .btn:hover{background: rgba(110,231,245,.12)}
+    .muted{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">
+      <div class="dot"></div>
+      <b>xITL Methodology</b>
+      <span class="muted" style="font-size:12px">One-page deck</span>
+    </div>
+    <nav class="tabs">
+      <a class="tab active" href="index.html">Overview</a>
+      <a class="tab" href="hitl.html">HITL</a>
+      <a class="tab" href="aitl.html">AITL & Verifier</a>
+      <a class="tab" href="ops.html">Ops & Safety</a>
+      <a class="tab" href="toolkit.html">Toolkit</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div class="card left">
+        <h1>xITL: AI를 “운영”하는 방법론</h1>
+        <p class="sub">
+          AI를 믿는 법(신뢰)이 아니라, <b>검증(Verifier)</b>과 <b>예외·운영·안전장치</b>로
+          반복 가능한 성과를 만드는 프레임.
+        </p>
+        <div class="chips">
+          <span class="chip"><b>HITL</b> = 효율화</span>
+          <span class="chip"><b>AITL</b> = 통제된 자동화</span>
+          <span class="chip"><b>핵심</b> = Trust → Verification</span>
+          <span class="chip"><b>운영</b> = 예외/중단/롤백/관찰가능성</span>
+        </div>
+      </div>
+      <div class="card right">
+        <div class="kicker">
+          <span class="tag">TOC</span>
+          <span class="title">이 페이지에서</span>
+          <span class="hint">핵심 주장만 한 번에</span>
+        </div>
+        <div class="toc">
+          <a href="#problem"><span>01 문제</span><span>→</span></a>
+          <a href="#definition"><span>02 정의</span><span>→</span></a>
+          <a href="#core"><span>03 핵심 전환</span><span>→</span></a>
+          <a href="#guard"><span>04 안전장치</span><span>→</span></a>
+          <a href="#roadmap"><span>05 도입 로드맵</span><span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <section id="problem" class="card block">
+      <div class="kicker">
+        <span class="tag">01</span>
+        <span class="title">문제 정의(현실)</span>
+        <span class="hint">“AI+전수 재검증” 함정 방지</span>
+      </div>
+      <div class="grid2">
+        <div class="callout">
+          <b>기대</b>
+          <p>전면 자동화, 높은 정확도, 즉시 생산성 폭증</p>
+        </div>
+        <div class="callout" style="border-color: rgba(251,191,36,.25); background: linear-gradient(180deg, rgba(251,191,36,.10), rgba(167,139,250,.04));">
+          <b>현실</b>
+          <p>불확실/환각 가능 + 검증 비용이 사람에게 전가 → “이중 비용”</p>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="mini">
+        핵심 공격 포인트는 “AI 결과를 사람이 처음부터 다시 점검하는 구조(전수 재검증 지옥)”입니다.
+        xITL은 이를 <b>Verifier/예외/운영</b>으로 구조적으로 제거합니다.
+      </div>
+    </section>
+
+    <section id="definition" class="grid2">
+      <div class="card block">
+        <div class="kicker">
+          <span class="tag">02</span>
+          <span class="title">xITL 한 줄 정의</span>
+          <span class="hint">업무 루프 기반</span>
+        </div>
+        <div class="pillrow">
+          <div class="pill">
+            <h3>업무 루프</h3>
+            <p>입력→처리→검증→결정→실행→피드백</p>
+          </div>
+          <div class="pill">
+            <h3>역할 배치</h3>
+            <p>HITL(효율화) / AITL(통제된 자동화)</p>
+          </div>
+          <div class="pill">
+            <h3>운영 가능성</h3>
+            <p>검증·예외·중단·롤백·관찰가능성</p>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="callout">
+          <p><b>xITL</b>은 모델 성능 논쟁이 아니라, <b>운영 가능한 자동화</b>를 만드는 방법론입니다.</p>
+        </div>
+      </div>
+
+      <div class="card block">
+        <div class="kicker">
+          <span class="tag">02-1</span>
+          <span class="title">HITL vs AITL</span>
+          <span class="hint">간단 비교</span>
+        </div>
+        <div class="grid2">
+          <div class="svgbox">
+            <b>HITL</b>
+            <ul>
+              <li>효율화 중심</li>
+              <li>인간이 의도·검증·결정</li>
+              <li>비정형/반정형에 강함</li>
+            </ul>
+          </div>
+          <div class="svgbox">
+            <b>AITL</b>
+            <ul>
+              <li>통제된 자동화</li>
+              <li>PASS/REVIEW/FAIL 기반</li>
+              <li>예외/운영이 핵심</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="core" class="card block">
+      <div class="kicker">
+        <span class="tag">03</span>
+        <span class="title">핵심 전환: 신뢰 → 검증</span>
+        <span class="hint">AITL의 성립 조건</span>
+      </div>
+      <div class="grid2">
+        <div class="svgbox">
+          <b>Trust(신뢰)</b>
+          <ul>
+            <li>주관적 인식</li>
+            <li>“믿을만해 보임”</li>
+            <li>운영/감사 근거로 취약</li>
+          </ul>
+        </div>
+        <div class="svgbox" style="border-color: rgba(110,231,245,.25)">
+          <b>Verification(검증)</b>
+          <ul>
+            <li>객관적 판정</li>
+            <li>PASS/REVIEW/FAIL</li>
+            <li>지표·로그·사유코드로 운영</li>
+          </ul>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+      <div class="svgbox">
+        <b>메시지</b>
+        <div class="mini">
+          “AI가 맞다/틀리다”가 아니라, “<b>자동 실행을 허용할 만큼 검증/통제가 되는가</b>”로 프레임을 바꾼다.
+        </div>
+      </div>
+    </section>
+
+    <section id="guard" class="grid3">
+      <div class="card block">
+        <div class="kicker"><span class="tag">04</span><span class="title">Verifier</span><span class="hint">판정 엔진</span></div>
+        <ul>
+          <li>PASS/REVIEW/FAIL</li>
+          <li>사유 코드(Reason Code)</li>
+          <li>스키마/정합/정책/품질</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag">04</span><span class="title">예외 처리</span><span class="hint">운영 루프</span></div>
+        <ul>
+          <li>예외 큐/담당/SLA</li>
+          <li>에스컬레이션</li>
+          <li>환류(개선 데이터)</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag">04</span><span class="title">중단·롤백·관찰</span><span class="hint">Fail-safe</span></div>
+        <ul>
+          <li>Kill-switch</li>
+          <li>Rollback/격리</li>
+          <li>로그/지표/트레이스</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="roadmap" class="card block">
+      <div class="kicker">
+        <span class="tag">05</span>
+        <span class="title">도입 로드맵(파일럿 → 확장)</span>
+        <span class="hint">지표 기반 확장</span>
+      </div>
+
+      <div class="svgbox">
+        <!-- 간단 도식 -->
+        <svg width="100%" viewBox="0 0 1100 160" role="img" aria-label="Pilot to Scale roadmap">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1">
+              <stop offset="0" stop-color="#6EE7F5" stop-opacity=".65"/>
+              <stop offset=".5" stop-color="#A78BFA" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#34D399" stop-opacity=".55"/>
+            </linearGradient>
+          </defs>
+          <rect x="20" y="55" width="1060" height="6" rx="3" fill="url(#g)" opacity=".55"/>
+          <!-- nodes -->
+          <g fill="rgba(255,255,255,.9)" font-family="system-ui" font-size="14">
+            <circle cx="90" cy="58" r="10" fill="#6EE7F5"/>
+            <text x="70" y="30" fill="rgba(255,255,255,.9)">업무선정</text>
+
+            <circle cx="330" cy="58" r="10" fill="#A78BFA"/>
+            <text x="290" y="30" fill="rgba(255,255,255,.9)">파일럿</text>
+
+            <circle cx="570" cy="58" r="10" fill="#A78BFA"/>
+            <text x="520" y="30" fill="rgba(255,255,255,.9)">운영화</text>
+
+            <circle cx="810" cy="58" r="10" fill="#34D399"/>
+            <text x="760" y="30" fill="rgba(255,255,255,.9)">확장</text>
+
+            <circle cx="1030" cy="58" r="10" fill="#34D399"/>
+            <text x="975" y="30" fill="rgba(255,255,255,.9)">표준화</text>
+          </g>
+          <g fill="rgba(170,182,214,.95)" font-family="system-ui" font-size="12">
+            <text x="40" y="120">리스크/가역성/검증용이성</text>
+            <text x="250" y="120">Verifier·예외·로그·중단/롤백</text>
+            <text x="500" y="120">버전·리그레션·경보·런북</text>
+            <text x="760" y="120">한 축만 확대 + 확장 게이트</text>
+            <text x="970" y="120">RACI·정책·템플릿/체크리스트</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="divider"></div>
+      <div class="callout">
+        <p><b>AITL은 “되더라”가 아니라 “운영된다”가 성공 조건</b>입니다. 따라서 확장은 항상 지표(PASS/REVIEW/FAIL, 예외 리드타임, 롤백, 드리프트)로 결정합니다.</p>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div>
+        <b>Next:</b> HITL 워크플로우 상세
+        <span class="muted">— 효율화를 표준 루프로 만들기</span>
+      </div>
+      <a class="btn" href="hitl.html">HITL 페이지로 이동 →</a>
+    </div>
+  </main>
+</body>
+</html>

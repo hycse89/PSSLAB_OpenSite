@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xITL | Toolkit</title>
+  <style>
+    :root{
+      --bg0:#070A12; --bg1:#0B1020; --card:#0E1733;
+      --txt:#EAF0FF; --muted:#AAB6D6; --line:rgba(255,255,255,.12);
+      --a:#6EE7F5; --b:#A78BFA; --c:#34D399; --d:#F472B6;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --r:18px; --max:1100px; --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, Helvetica, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--txt);
+      background:
+        radial-gradient(900px 520px at 10% -10%, rgba(244,114,182,.18), transparent 55%),
+        radial-gradient(900px 520px at 85% 0%, rgba(167,139,250,.26), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+    a{color:inherit; text-decoration:none}
+    .nav{
+      position:fixed; top:12px; left:12px; right:12px; z-index:50;
+      max-width:calc(var(--max) + 24px); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 12px; border:1px solid var(--line); border-radius:16px;
+      background: rgba(7,10,18,.55); backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand{display:flex; align-items:center; gap:10px}
+    .dot{width:10px; height:10px; border-radius:50%;
+      background: conic-gradient(from 180deg, var(--a), var(--b), var(--d), var(--a));
+      box-shadow: 0 0 18px rgba(244,114,182,.20);
+    }
+    .tabs{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .tab{font-size:13px; padding:8px 10px; border-radius:12px; border:1px solid var(--line);
+      color:var(--muted); background: rgba(255,255,255,.03);}
+    .tab.active{color:var(--txt); border-color: rgba(244,114,182,.45); background: rgba(244,114,182,.08)}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 96px 20px 56px;}
+    .card{background: rgba(14,23,51,.72); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+    .hero{padding:26px 22px; margin-bottom:14px}
+    h1{margin:0 0 8px; font-size:34px; letter-spacing:-.5px}
+    .sub{margin:0; color:var(--muted); line-height:1.45}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
+    @media (max-width: 940px){ .grid2,.grid3{grid-template-columns:1fr} }
+    .block{padding:18px}
+    .kicker{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+    .tag{font-family:var(--mono); font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(244,114,182,.35); background: rgba(244,114,182,.08);}
+    .tag.alt{border-color: rgba(167,139,250,.35); background: rgba(167,139,250,.08)}
+    .title{font-weight:800}
+    .hint{font-size:13px; color:var(--muted)}
+    ul{margin:10px 0 0 18px; color:var(--muted); line-height:1.55}
+    li{margin:6px 0}
+    .callout{border-radius:16px; border:1px solid rgba(244,114,182,.25);
+      background: linear-gradient(180deg, rgba(244,114,182,.10), rgba(167,139,250,.06));
+      padding:14px;}
+    .callout p{margin:0; color:var(--muted); line-height:1.5}
+    .callout b{color:var(--txt)}
+    .pill{padding:12px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.02)}
+    .pill b{color:var(--txt)}
+    .foot{margin-top:18px; padding:14px 16px; border:1px solid var(--line); border-radius:16px; background: rgba(255,255,255,.03); color:var(--muted);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(244,114,182,.35); background: rgba(244,114,182,.08);}
+    .btn:hover{background: rgba(244,114,182,.12)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><div class="dot"></div><b>xITL</b><span class="hint">Toolkit One-pager</span></div>
+    <nav class="tabs">
+      <a class="tab" href="index.html">Overview</a>
+      <a class="tab" href="hitl.html">HITL</a>
+      <a class="tab" href="aitl.html">AITL & Verifier</a>
+      <a class="tab" href="ops.html">Ops & Safety</a>
+      <a class="tab active" href="toolkit.html">Toolkit</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card hero">
+      <h1>Toolkit: 현장에서 바로 쓰는 xITL 레시피</h1>
+      <p class="sub">패턴(성공 구조) + 안티패턴(실패 구조) + 템플릿/체크리스트(실행 도구) + 용어집(공용어)로 “방법론을 운영 가능한 표준”으로 만든다.</p>
+    </section>
+
+    <section class="grid2">
+      <div class="card block">
+        <div class="kicker"><span class="tag">PATTERNS</span><span class="title">대표 패턴(16장)</span><span class="hint">재사용 가능한 레시피</span></div>
+        <div class="pill"><b>A/B HITL</b><br><span class="hint">초안→비평→개선 / 대안 비교 / 체크리스트 검토</span></div>
+        <div style="height:10px"></div>
+        <div class="pill"><b>C/D AITL</b><br><span class="hint">스키마 추출·정규화 / 분류·라우팅 / 예외 중심 운영 / 샘플링 감사</span></div>
+        <div style="height:10px"></div>
+        <div class="pill"><b>E 운영/진화</b><br><span class="hint">안전모드 / 리그레션 게이트 / 사유 코드 기반 개선</span></div>
+      </div>
+
+      <div class="card block">
+        <div class="kicker"><span class="tag alt">ANTI</span><span class="title">안티패턴 TOP(17장)</span><span class="hint">조기 차단</span></div>
+        <ul>
+          <li>Verifier 없는 자동 실행</li>
+          <li>전수 재검증 지옥(이중 비용)</li>
+          <li>예외 큐 부재</li>
+          <li>Kill-switch/롤백 부재</li>
+          <li>관찰가능성 부재</li>
+          <li>파일럿 성공 후 빅뱅 확장</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="grid3" style="margin-top:14px">
+      <div class="card block">
+        <div class="kicker"><span class="tag">TEMPL</span><span class="title">템플릿(18장)</span><span class="hint">문서 표준</span></div>
+        <ul>
+          <li>T1 의도 정의</li>
+          <li>T2 컨텍스트 패킷</li>
+          <li>T9 업무 명세</li>
+          <li>T11 Verifier 설계</li>
+          <li>T12 예외 런북</li>
+          <li>T14 관찰가능성 스펙</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag alt">CHECK</span><span class="title">체크리스트(19장)</span><span class="hint">실행 스위치</span></div>
+        <ul>
+          <li>HITL: 의도/검토/기록</li>
+          <li>AITL: 최소요건</li>
+          <li>Verifier: 3상태+사유코드</li>
+          <li>Ops: 큐/중단/롤백</li>
+          <li>Scale: 확장 게이트</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag">GLOSS</span><span class="title">용어집(20장)</span><span class="hint">논쟁 방지</span></div>
+        <ul>
+          <li>신뢰 vs 검증</li>
+          <li>자동화 vs 무검증 실행</li>
+          <li>예외 vs 버그</li>
+          <li>SRE/QA/리스크 프레임 매핑</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card block" style="margin-top:14px">
+      <div class="kicker"><span class="tag">MESSAGE</span><span class="title">최종 5문장(공식 메시지)</span><span class="hint">조직 공유용</span></div>
+      <div class="callout">
+        <p>
+          1) HITL은 효율화, AITL은 검증 가능한 자동화다.<br/>
+          2) AITL의 기반은 신뢰가 아니라 Verifier(PASS/REVIEW/FAIL)다.<br/>
+          3) 자동 실행은 예외/중단/롤백/관찰가능성이 있을 때만 허용한다.<br/>
+          4) 레벨 다운은 실패가 아니라 안전장치의 정상 동작이다.<br/>
+          5) AI는 R이 될 수 있지만 A가 될 수 없고, 책임은 인간이 가진다.
+        </p>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div><b>Back to start:</b> Overview</div>
+      <a class="btn" href="index.html">Overview로 이동 →</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>xITL | Ops & Safety</title>
+  <style>
+    :root{
+      --bg0:#070A12; --bg1:#0B1020; --card:#0E1733;
+      --txt:#EAF0FF; --muted:#AAB6D6; --line:rgba(255,255,255,.12);
+      --a:#6EE7F5; --b:#A78BFA; --c:#34D399; --d:#FBBF24;
+      --shadow: 0 20px 60px rgba(0,0,0,.55);
+      --r:18px; --max:1100px; --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: system-ui, -apple-system, Segoe UI, Roboto, Noto Sans KR, Apple SD Gothic Neo, Helvetica, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:var(--sans); color:var(--txt);
+      background:
+        radial-gradient(900px 520px at 20% -10%, rgba(251,191,36,.14), transparent 55%),
+        radial-gradient(900px 520px at 85% 0%, rgba(110,231,245,.22), transparent 55%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
+    }
+    a{color:inherit; text-decoration:none}
+    .nav{
+      position:fixed; top:12px; left:12px; right:12px; z-index:50;
+      max-width:calc(var(--max) + 24px); margin:0 auto;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:10px 12px; border:1px solid var(--line); border-radius:16px;
+      background: rgba(7,10,18,.55); backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand{display:flex; align-items:center; gap:10px}
+    .dot{width:10px; height:10px; border-radius:50%;
+      background: conic-gradient(from 180deg, var(--a), var(--b), var(--c), var(--a));
+      box-shadow: 0 0 18px rgba(110,231,245,.25);
+    }
+    .tabs{display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end}
+    .tab{font-size:13px; padding:8px 10px; border-radius:12px; border:1px solid var(--line);
+      color:var(--muted); background: rgba(255,255,255,.03);}
+    .tab.active{color:var(--txt); border-color: rgba(110,231,245,.45); background: rgba(110,231,245,.08)}
+    .wrap{max-width:var(--max); margin:0 auto; padding: 96px 20px 56px;}
+    .card{background: rgba(14,23,51,.72); border:1px solid var(--line); border-radius:var(--r); box-shadow:var(--shadow)}
+    .hero{padding:26px 22px; margin-bottom:14px}
+    h1{margin:0 0 8px; font-size:34px; letter-spacing:-.5px}
+    .sub{margin:0; color:var(--muted); line-height:1.45}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    .grid3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px}
+    @media (max-width: 940px){ .grid2,.grid3{grid-template-columns:1fr} }
+    .block{padding:18px}
+    .kicker{display:flex; align-items:center; gap:10px; margin-bottom:12px}
+    .tag{font-family:var(--mono); font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid rgba(251,191,36,.35); background: rgba(251,191,36,.08);}
+    .tag.alt{border-color: rgba(110,231,245,.35); background: rgba(110,231,245,.08)}
+    .title{font-weight:800}
+    .hint{font-size:13px; color:var(--muted)}
+    ul{margin:10px 0 0 18px; color:var(--muted); line-height:1.55}
+    li{margin:6px 0}
+    .callout{border-radius:16px; border:1px solid rgba(251,191,36,.25);
+      background: linear-gradient(180deg, rgba(251,191,36,.10), rgba(110,231,245,.05));
+      padding:14px;}
+    .callout p{margin:0; color:var(--muted); line-height:1.5}
+    .callout b{color:var(--txt)}
+    .svgbox{padding:14px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.02)}
+    .foot{margin-top:18px; padding:14px 16px; border:1px solid var(--line); border-radius:16px; background: rgba(255,255,255,.03); color:var(--muted);
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+    .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:14px;
+      border:1px solid rgba(110,231,245,.35); background: rgba(110,231,245,.08);}
+    .btn:hover{background: rgba(110,231,245,.12)}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand"><div class="dot"></div><b>xITL</b><span class="hint">Ops & Safety One-pager</span></div>
+    <nav class="tabs">
+      <a class="tab" href="index.html">Overview</a>
+      <a class="tab" href="hitl.html">HITL</a>
+      <a class="tab" href="aitl.html">AITL & Verifier</a>
+      <a class="tab active" href="ops.html">Ops & Safety</a>
+      <a class="tab" href="toolkit.html">Toolkit</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="card hero">
+      <h1>Ops & Safety: 운영이 AITL의 본체</h1>
+      <p class="sub">정상 케이스가 아니라 <b>예외</b>에서 성공/실패가 갈립니다. 예외를 다루는 체계(큐/중단/롤백/관찰/드리프트)가 없으면 AITL은 곧 금지됩니다.</p>
+    </section>
+
+    <section class="grid3">
+      <div class="card block">
+        <div class="kicker"><span class="tag">EX</span><span class="title">예외 분류</span><span class="hint">운영 언어</span></div>
+        <ul>
+          <li>Input(누락/오염)</li>
+          <li>Policy(민감/권한)</li>
+          <li>Model(불확실/모순)</li>
+          <li>Execution(API/DB)</li>
+          <li>Operational(드리프트)</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag alt">SAFE</span><span class="title">안전장치 4종</span><span class="hint">Fail-safe</span></div>
+        <ul>
+          <li>에스컬레이션</li>
+          <li>Kill-switch(중단)</li>
+          <li>Rollback(되돌림)</li>
+          <li>Safe Mode(레벨 다운)</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag">OBS</span><span class="title">관찰가능성</span><span class="hint">감사/재현</span></div>
+        <ul>
+          <li>trace_id</li>
+          <li>version_set</li>
+          <li>reason_code</li>
+          <li>트랜잭션/실행 로그</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card block" style="margin-top:14px">
+      <div class="kicker"><span class="tag">PIPE</span><span class="title">예외 처리 파이프라인(7단계)</span><span class="hint">Detect → Feedback</span></div>
+      <div class="svgbox">
+        <svg width="100%" viewBox="0 0 1100 170" role="img" aria-label="Exception pipeline">
+          <defs>
+            <linearGradient id="pg" x1="0" x2="1">
+              <stop offset="0" stop-color="#FBBF24" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#6EE7F5" stop-opacity=".55"/>
+            </linearGradient>
+          </defs>
+          <g font-family="system-ui" font-size="12" fill="rgba(234,240,255,.92)">
+            <!-- nodes -->
+            <g>
+              <rect x="35" y="55" width="120" height="46" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="63" y="83">Detect</text>
+            </g>
+            <g>
+              <rect x="175" y="55" width="120" height="46" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="205" y="83">Classify</text>
+            </g>
+            <g>
+              <rect x="315" y="55" width="120" height="46" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="350" y="83">Isolate</text>
+            </g>
+            <g>
+              <rect x="455" y="55" width="120" height="46" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="492" y="83">Route</text>
+            </g>
+            <g>
+              <rect x="595" y="55" width="120" height="46" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="630" y="83">Resolve</text>
+            </g>
+            <g>
+              <rect x="735" y="55" width="120" height="46" rx="14" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.14)"/>
+              <text x="773" y="83">Record</text>
+            </g>
+            <g>
+              <rect x="875" y="55" width="190" height="46" rx="14" fill="rgba(110,231,245,.08)" stroke="rgba(110,231,245,.30)"/>
+              <text x="905" y="83">Feedback (Improve)</text>
+            </g>
+          </g>
+
+          <g stroke="url(#pg)" stroke-width="4" opacity=".85" fill="none" stroke-linecap="round">
+            <path d="M155 78 L175 78"/>
+            <path d="M295 78 L315 78"/>
+            <path d="M435 78 L455 78"/>
+            <path d="M575 78 L595 78"/>
+            <path d="M715 78 L735 78"/>
+            <path d="M855 78 L875 78"/>
+          </g>
+
+          <g font-family="system-ui" font-size="12" fill="rgba(170,182,214,.95)">
+            <text x="35" y="135">사유 코드/유형 분리</text>
+            <text x="330" y="135">확산 방지(자동 실행 차단)</text>
+            <text x="600" y="135">사람/재시도/대체</text>
+            <text x="890" y="135">규칙/게이트/정책 업데이트</text>
+          </g>
+        </svg>
+      </div>
+      <div class="callout" style="margin-top:12px">
+        <p><b>예외는 버그가 아니다.</b> 예외는 운영 설계의 일부이며, 예외 처리 결과가 Verifier/정책/입력 게이트로 환류될 때 성숙도가 올라간다.</p>
+      </div>
+    </section>
+
+    <section class="grid2" style="margin-top:14px">
+      <div class="card block">
+        <div class="kicker"><span class="tag">METRICS</span><span class="title">핵심 운영지표</span><span class="hint">대시보드 최소셋</span></div>
+        <ul>
+          <li>PASS/REVIEW/FAIL 비율</li>
+          <li>예외 처리 리드타임</li>
+          <li>치명 오류율/롤백 빈도</li>
+          <li>사유 코드 TOP N 추이</li>
+          <li>안전모드 전환 횟수</li>
+        </ul>
+      </div>
+      <div class="card block">
+        <div class="kicker"><span class="tag alt">LEVEL</span><span class="title">레벨 업/다운 규칙</span><span class="hint">감이 아니라 지표</span></div>
+        <ul>
+          <li>안정 → 범위 확장(Guarded Scope) 또는 레벨 업</li>
+          <li>급변/사고/드리프트 → Kill-switch + 안전모드(L3→L2)</li>
+          <li>관찰가능성 상실 → 자동 실행 금지(즉시 다운)</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="foot">
+      <div><b>Next:</b> Toolkit — 패턴/안티패턴/템플릿/체크리스트</div>
+      <a class="btn" href="toolkit.html">Toolkit 페이지로 이동 →</a>
+    </div>
+  </main>
+</body>
+</html>
