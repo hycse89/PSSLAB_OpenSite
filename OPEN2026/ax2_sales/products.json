@@ -39,7 +39,7 @@
     "category": "Solution",
     "title": "다양한 AX 솔루션 모음",
     "summary": "다양한 이슈와 문제를 해결하는 AX² 솔루션 모음",
-    "file": "ax2_sol_etc.md"
+    "file": "ax2_solution_etc.md"
   },   
 
 
@@ -83,7 +83,7 @@
     "category": "Methodology",
     "title": "다양한 미시 방법론 모음",
     "summary": "다야한 미시적 주제를 대상으로 하는 방법론 모음",
-    "file": "ax2-methodology7.md"
+    "file": "ax2_paper_etc.md"
   },     
 
 
@@ -127,7 +127,7 @@
     "category": "Paper",
     "title": "다양한 보고서 및 논문",
     "summary": "다양한 AX 보고서 및 논문 목록" ,
-    "file": "tech_naturalism.md"
+    "file": "ax2_paper_etc.md"
   },
 
 
@@ -171,7 +171,7 @@
     "category": "Article",
     "title": "다양한 책/기사/게시글 모음",
     "summary": "다양한 AX관련 기사/게시글 모음",
-    "file": "tech_naturalism.md"
+    "file": "ax2_article_etc.md"
   }    
 
 ]
