@@ -18,8 +18,14 @@
   - 통섭/통사 방법론
 - AX² 활용 방법론 (http://localhost:8001/ax2_methodology5/)
   - xITL(HITL, AITL) 방법론
+  - SLM을 이용한 AITL 방법론
 
 ## Theme Methodology
 
-- FineDev 방법론 (https://hycse89.github.io/PSSLAB_OpenSite/OPEN2026/ax2_finedev/)
-- xITL 방법론 (https://hycse89.github.io/PSSLAB_OpenSite/OPEN2026/ax2_xitl/)
+- FineDev 방법론 1 (https://hycse89.github.io/PSSLAB_OpenSite/OPEN2026/ax2_finedev/)
+- FineDev 방법론 2 (https://hycse89.github.io/PSSLAB_OpenSite/OPEN2026/ax2_finedev/)
+- FineDev 방법론 3 (https://hycse89.github.io/PSSLAB_OpenSite/OPEN2026/ax2_finedev/)
+
+- xITL 방법론 1 (http://localhost:8001/ax2_xitl/ax2_xitl_v1.md)
+- xITL 방법론 2 (http://localhost:8001/ax2_xitl/)
+- xITL 방법론 3 (http://localhost:8001/ax2_xitl/)
