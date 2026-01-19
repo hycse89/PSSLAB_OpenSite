@@ -37,7 +37,7 @@
   {
     "id": "ax2-solution6",
     "category": "Solution",
-    "title": "다양한 AX 솔루션 모음",
+    "title": "다양한 솔루션 모음",
     "summary": "다양한 이슈와 문제를 해결하는 AX² 솔루션 모음",
     "file": "ax2_solution_etc.md"
   },   
@@ -81,7 +81,7 @@
   {
     "id": "ax2-methodology6",
     "category": "Methodology",
-    "title": "다양한 미시 방법론 모음",
+    "title": "다양한 방법론 모음",
     "summary": "다야한 미시적 주제를 대상으로 하는 방법론 모음",
     "file": "ax2_meth_etc.md"
   },     
@@ -125,8 +125,8 @@
   {
     "id": "ax2-paper6",
     "category": "Paper",
-    "title": "다양한 보고서 및 논문",
-    "summary": "다양한 AX 보고서 및 논문 목록" ,
+    "title": "다양한 보고서 및 논문 모음",
+    "summary": "다양한 AI/AX 보고서 및 논문 모음" ,
     "file": "ax2_paper_etc.md"
   },
 
@@ -162,7 +162,7 @@
   {
     "id": "ax2-article5",
     "category": "Article",
-    "title": "프리렌의 마도서",
+    "title": "LifeDive",
     "summary": "기술이 인간 생존을 위한 공기임을 증명하는 철학적 연구 논문",
     "file": "ax2_article_etc.md"
   },
