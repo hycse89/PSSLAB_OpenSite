@@ -31,8 +31,19 @@
 
 ### AX AI-Ware Category
 - AX² Small-scale AI-Ware Dev Automation
+```text
+AI의 코딩, 개발 능력을 이용해서 빠르게 Prototyping하여 AI-Ware의 적시성, 다양성, 신뢰성을 가능케 합니다.
+```
+
 - AX² Medium-scale AI-Ware Dev Automation
+```text
+검증된 AI 모듈을 적극 활용하여 중형 크기의 AI-Ware도 AI에 의해서 빠르게 개발이 가능하도록 합니다.
+```
+
 - AX² Large-scale AI-Ware Dev Automation 
+```text
+AI Orchestration, AI FineDev등 다양한 개발 방법론을 적용해서 대형 AI-Ware도 안정적으로 개발합니다.
+```
 
 ### AX Life Category
 - AX² LifeDive for Fun
